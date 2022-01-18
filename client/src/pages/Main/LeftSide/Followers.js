@@ -34,9 +34,9 @@ const Followers = () => {
   ];
   return (
     <div className="w-80 h-auto mt-4 pb-3 rounded bg-neutral-800 shadow-sm">
-      <div className="flex justify-between p-4">
-        <h3 className="font-main text-violet-600">Followers</h3>
-        <button className="text-violet-600 text-xl">
+      <div className="flex justify-between p-4 bg-gradient-to-l from-violet-800 to-violet-900">
+        <h3 className="font-main text-white">Followers</h3>
+        <button className="text-white text-xl">
           <BsThreeDots />
         </button>
       </div>

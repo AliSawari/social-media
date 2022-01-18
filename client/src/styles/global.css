@@ -17,6 +17,10 @@ body {
   }
 
   .navbar-item {
-    @apply w-7 h-7 rounded flex justify-center items-center text-violet-800 cursor-pointer text-xl  ;
+    @apply w-7 h-7 rounded flex justify-center items-center text-violet-800 cursor-pointer text-xl;
+  }
+
+  .left-sides-header {
+    @apply px-4 my-3 w-full flex justify-between cursor-pointer border-l-2 border-l-transparent hover:border-violet-800 transition py-3;
   }
 }

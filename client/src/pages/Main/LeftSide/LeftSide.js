@@ -1,10 +1,10 @@
 import React from "react";
 import Followers from "./Followers";
-import LastChatUsers from "./LastChatUsers";
+import LastUserChats from "./LastUserChats";
 const LeftSide = () => {
   return (
     <div>
-      <LastChatUsers />
+      <LastUserChats />
       <Followers />
     </div>
   );

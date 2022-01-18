@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 const UserItem = ({ id, profile, fullname, chat, online }) => {
   return (
     <Link to="/chat/id">
-      <div className="px-4 mb-2 w-full flex justify-between cursor-pointer border-l-2 border-l-transparent hover:border-violet-800 transition py-3">
+      <div className="left-sides-header">
         <div className="justify-center flex gap-3">
           <div>
             <img
