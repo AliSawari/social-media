@@ -1,11 +1,11 @@
-import logo from './logo.svg';
-import './App.css';
+import { Route, Routes } from "react-router";
+import MainPage from "./pages/Main/MainPage";
 
 function App() {
   return (
-    <div>
-
-    </div>
+    <Routes>
+      <Route index element={<MainPage />} />
+    </Routes>
   );
 }
 

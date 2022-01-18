@@ -1,0 +1,22 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  background: #222;
+}
+
+@layer components {
+  .user-option-item {
+    @apply w-full  text-center py-2 text-white text-sm cursor-pointer;
+  }
+
+  .active-navbar-item {
+    @apply navbar-item text-white bg-violet-800 hover:bg-violet-900;
+  }
+
+  .navbar-item {
+    @apply w-7 h-7 rounded flex justify-center items-center text-violet-800 cursor-pointer text-xl  ;
+  }
+}
