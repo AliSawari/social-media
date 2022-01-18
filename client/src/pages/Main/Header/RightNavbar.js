@@ -1,6 +1,6 @@
 import React from "react";
-import Notifications from "../../components/Notifications/Notifications";
-import UserOptions from "../../components/UserOptions/UserOptions";
+import Notifications from "../../../components/Notifications/Notifications";
+import UserOptions from "../../../components/UserOptions/UserOptions";
 const RightNavbar = () => {
   const data = [
     { id: 1, title: "Profile", link: "/user/profile" },

@@ -1,10 +1,15 @@
 import React from "react";
-import Header from "./Header";
+import MainLayout from "../../components/MainLayout";
+import Header from "./Header/Header";
+import LeftSide from "./LeftSide/LeftSide";
 
 const MainPage = () => {
   return (
     <>
       <Header />
+      <MainLayout>
+        <LeftSide />
+      </MainLayout>
     </>
   );
 };

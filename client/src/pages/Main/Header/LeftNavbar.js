@@ -5,8 +5,8 @@ import { FiUsers  } from "react-icons/fi";
 import NavbarItem from "./NavbarItem";
 const LeftNavbar = () => {
   return (
-    <div className="flex items-center">
-      <ul className="flex justify-center gap-6">
+    <div className="flex py-2">
+      <ul className="flex justify-center gap-5">
         <NavbarItem link="/">
           <IoHomeOutline />
         </NavbarItem>
