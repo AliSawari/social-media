@@ -3,9 +3,11 @@ import Followers from "./Followers";
 import LastUserChats from "./LastUserChats";
 const LeftSide = () => {
   return (
-    <div className="w-1/6">
-      <LastUserChats />
-      <Followers />
+    <div className="w-1/6 relative">
+      <div className="flex fixed w-1/6 flex-col">
+        <LastUserChats />
+        <Followers />
+      </div>
     </div>
   );
 };

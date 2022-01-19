@@ -3,6 +3,7 @@ import MainLayout from "../../components/MainLayout";
 import Header from "./Header/Header";
 import LeftSide from "./LeftSide/LeftSide";
 import Posts from "./Posts/Posts";
+import Profile from "./Profile/Profile";
 import Stories from "./Stories/Stories";
 
 const MainPage = () => {
@@ -15,9 +16,7 @@ const MainPage = () => {
           <Stories />
           <Posts />
         </div>
-        <div className="w-1/6">
-
-        </div>
+        <Profile />
       </MainLayout>
     </>
   );
