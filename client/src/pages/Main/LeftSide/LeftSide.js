@@ -3,7 +3,7 @@ import Followers from "./Followers";
 import LastUserChats from "./LastUserChats";
 const LeftSide = () => {
   return (
-    <div>
+    <div className="w-1/6">
       <LastUserChats />
       <Followers />
     </div>

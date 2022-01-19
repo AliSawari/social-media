@@ -23,4 +23,8 @@ body {
   .left-sides-header {
     @apply px-4 my-3 w-full flex justify-between cursor-pointer border-l-2 border-l-transparent hover:border-violet-800 transition py-3;
   }
+
+  .post-operation-button {
+    @apply text-xl text-violet-600 border p-1 rounded border-violet-700 hover:bg-violet-900;
+  }
 }

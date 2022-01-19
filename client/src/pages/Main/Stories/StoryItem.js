@@ -17,7 +17,7 @@ const StoryItem = () => {
         </div>
         <div className="h-96 rounded overflow-hidden absolute left-0 top-0 z-0">
           <img
-            src="https://picsum.photos/600/500"
+            src="https://picsum.photos/600/500?grayscale"
             alt="story"
             className="h-full  blur-sm"
           />
