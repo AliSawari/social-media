@@ -1,5 +1,5 @@
-import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import React, { useContext, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -10,7 +10,11 @@ import httpClient from "../../api/client";
 import { UserContext } from "../../context/providers/UserProvider";
 import { loginUser } from "../../context/actions/UserActions";
 const LoginPage = () => {
-  const { dispatch } = useContext(UserContext);
+  const { state, dispatch } = useContext(UserContext);
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (state.auth) navigate("/");
+  }, [navigate, state.auth]);
   const schema = yup.object().shape({
     username: yup
       .string()

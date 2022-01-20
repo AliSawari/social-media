@@ -16,7 +16,7 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  profile: String,
+  profile: { type: String, default: "" },
 });
 
 const UserModel = mongoose.model("users", UserSchema);

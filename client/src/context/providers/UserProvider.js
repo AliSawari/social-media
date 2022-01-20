@@ -3,9 +3,10 @@ import reducer from "../reducers/UserReducer";
 export const UserContext = createContext();
 
 const UserProvider = ({ children }) => {
+  const user = JSON.parse(localStorage.getItem("social-media-hamidreza"));
   const initialState = {
-    auth: false,
-    user: {},
+    auth: user !== null,
+    user: user,
   };
   const [state, dispatch] = useReducer(reducer, initialState);
   return (

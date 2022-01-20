@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import UserInfo from "./UserInfo";
 import UserOptionItem from "./UserOptionItem";
 
-const UserOptions = ({ profile, username, items }) => {
+const UserOptions = ({ data, items }) => {
   const [state, setState] = useState(false);
 
   const handleClickOpenDropdown = () => {
@@ -10,14 +10,19 @@ const UserOptions = ({ profile, username, items }) => {
   };
 
   return (
-    <div>
-      <UserInfo
-        profile={profile}
-        username={username}
-        onClick={handleClickOpenDropdown}
-      />
+    <div className="relative z-10">
+      {data ? (
+        <UserInfo
+          profile={data.profile}
+          fullname={data.fullname}
+          onClick={handleClickOpenDropdown}
+        />
+      ) : (
+        []
+      )}
+
       <ul
-        className={`bg-violet-700 rounded animation-spin ${
+        className={`bg-violet-700 rounded animation-spin absolute w-full ${
           state ? "flex flex-col" : "hidden"
         }`}
       >
