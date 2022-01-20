@@ -10,8 +10,14 @@ import swal from "sweetalert2";
 const RegisterPage = () => {
   const schema = yup.object().shape({
     fullname: yup.string().required("it can not be empty"),
-    username: yup.string().required("it can not be empty"),
-    password: yup.string().required("it can not be empty"),
+    username: yup
+      .string()
+      .required("it can not be empty")
+      .min(3, "you must provide at 3 least characters for username"),
+    password: yup
+      .string()
+      .required("it can not be empty")
+      .min(6, "you must provide at 3 least characters for password"),
   });
   const {
     handleSubmit,

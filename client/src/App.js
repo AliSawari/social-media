@@ -1,20 +1,23 @@
+import { lazy, Suspense } from "react";
 import { Route, Routes } from "react-router";
 import UserProvider from "./context/providers/UserProvider";
-import LoginPage from "./pages/Auth/LoginPage";
-import RegisterPage from "./pages/Auth/RegisterPage";
-import MainPage from "./pages/Main/MainPage";
+const LoginPage = lazy(() => import("./pages/Auth/LoginPage"));
+const RegisterPage = lazy(() => import("./pages/Auth/RegisterPage"));
+const MainPage = lazy(() => import("./pages/Main/MainPage"));
 
 function App() {
   return (
-    <UserProvider>
-      <Routes>
-        <Route index element={<MainPage />} />
-        <Route path="/auth">
-          <Route path="login" element={<LoginPage />} />
-          <Route path="register" element={<RegisterPage />} />
-        </Route>
-      </Routes>
-    </UserProvider>
+    <Suspense fallback={<div>Hello World</div>}>
+      <UserProvider>
+        <Routes>
+          <Route index element={<MainPage />} />
+          <Route path="/auth">
+            <Route path="login" element={<LoginPage />} />
+            <Route path="register" element={<RegisterPage />} />
+          </Route>
+        </Routes>
+      </UserProvider>
+    </Suspense>
   );
 }
 

@@ -1,4 +1,6 @@
 const User = require("./user.model");
+const jwt = require("jsonwebtoken");
+const config = require("config");
 const register = async (req, res) => {
   try {
     const user = req.body;
@@ -8,11 +10,43 @@ const register = async (req, res) => {
     res.status(200).json({ message: "user created" });
   } catch (error) {
     res.status(500).json({
+      error,
       message: "internal server error",
+    });
+  }
+};
+
+const login = async (req, res) => {
+  try {
+    const { body } = req;
+    const user = await User.findOne(body);
+    if (!user)
+      return res
+        .status(401)
+        .json({ message: "username or password is invalid" });
+
+    const token = jwt.sign(
+      {
+        level: "user",
+        id: user._id,
+      },
+      config.get("JWT_PASSWORD")
+    );
+
+    return res.status(200).json({
+      id: user._id,
+      token,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      message: "internal server error",
+      error,
     });
   }
 };
 
 module.exports = {
   register,
+  login,
 };
