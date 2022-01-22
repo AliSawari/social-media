@@ -2,16 +2,23 @@ import { lazy, Suspense } from "react";
 import { Route, Routes } from "react-router";
 import Loading from "./components/Loading/Loading";
 import UserProvider from "./context/providers/UserProvider";
+import PrivateRoute from "./components/PrivateRoute";
 const LoginPage = lazy(() => import("./pages/Auth/LoginPage"));
 const RegisterPage = lazy(() => import("./pages/Auth/RegisterPage"));
 const MainPage = lazy(() => import("./pages/Main/MainPage"));
-
 function App() {
   return (
     <Suspense fallback={<Loading />}>
       <UserProvider>
         <Routes>
-          <Route index element={<MainPage />} />
+          <Route
+            index
+            element={
+              <PrivateRoute>
+                <MainPage />
+              </PrivateRoute>
+            }
+          />
           <Route path="/auth">
             <Route path="login" element={<LoginPage />} />
             <Route path="register" element={<RegisterPage />} />
