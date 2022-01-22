@@ -1,5 +1,5 @@
 import React from "react";
-
+import {IoSearchOutline} from 'react-icons/io5'
 const SearchBox = () => {
   return (
     <div className="w-3/4">
@@ -10,7 +10,7 @@ const SearchBox = () => {
           placeholder="Search User"
         />{" "}
         <button className="bg-violet-700 hover:bg-violet-800 transition text-center px-3 h-9  text-sm text-white font-main rounded">
-          Search
+          <IoSearchOutline fontSize={20} />
         </button>
       </form>
     </div>

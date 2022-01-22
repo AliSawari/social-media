@@ -3,7 +3,7 @@ import { IoIosNotificationsOutline } from "react-icons/io";
 import { Link } from "react-router-dom";
 const Notifications = () => {
   return (
-    <div className="flex pt-1 justify-center">
+    <div className="flex justify-center">
       <Link to="/user/notification">
         <div className="relative cursor-pointer">
           <IoIosNotificationsOutline size="32" className="text-white" />

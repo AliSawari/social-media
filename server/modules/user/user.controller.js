@@ -53,7 +53,7 @@ const getUser = async (req, res) => {
     const user = await User.findById(id);
     return res
       .status(200)
-      .json({ fullname: user.fullname, profile: user.profile });
+      .json({ fullname: user.fullname, profile: user.profile , bio : user.bio });
   } catch (error) {
     console.log(error);
     res.status(500).json({

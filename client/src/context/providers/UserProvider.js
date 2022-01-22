@@ -7,6 +7,7 @@ const UserProvider = ({ children }) => {
   const initialState = {
     auth: user !== null,
     user: user,
+    data: undefined
   };
   const [state, dispatch] = useReducer(reducer, initialState);
   return (

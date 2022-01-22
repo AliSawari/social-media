@@ -4,7 +4,7 @@ import UserOptionItem from "./UserOptionItem";
 
 const UserOptions = ({ data, items }) => {
   const [state, setState] = useState(false);
-
+  console.log(data);
   const handleClickOpenDropdown = () => {
     setState((prevState) => !prevState);
   };

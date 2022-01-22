@@ -1,4 +1,4 @@
-import { LOGIN_USER } from "../actions/UserActions";
+import { GET_USER_DATA, LOGIN_USER } from "../actions/UserActions";
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -6,6 +6,11 @@ const reducer = (state, action) => {
       return {
         auth: true,
         user: action.user,
+      };
+    case GET_USER_DATA:
+      return {
+        ...state,
+        data: action.data,
       };
     default:
       return state;

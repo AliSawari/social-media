@@ -17,6 +17,7 @@ const UserSchema = new mongoose.Schema({
     required: true,
   },
   profile: { type: String, default: "" },
+  bio : {type : String , default :""}
 });
 
 const UserModel = mongoose.model("users", UserSchema);

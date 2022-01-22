@@ -1,7 +1,6 @@
 import React from "react";
 import { BsChevronDown } from "react-icons/bs";
 const UserInfo = ({ profile, fullname, onClick }) => {
-  console.log(profile);
   return (
     <div
       className="flex pb-3 cursor-pointer gap-3 justify-start items-center pr-3"
@@ -11,7 +10,7 @@ const UserInfo = ({ profile, fullname, onClick }) => {
         src={
           profile.length
             ? profile
-            : "https://avatars.dicebear.com/v2/identicon/0015f0eb0ef4b541766587a1f85cb6dd.svg"
+            : "https://gravatar.com/avatar/6c2ff79dddfe69146d3a3a55c0bc7f52?s=400&d=robohash&r=x"
         }
         width="35"
         height="35"
