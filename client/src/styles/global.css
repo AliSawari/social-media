@@ -29,14 +29,19 @@ body {
   }
 
   .auth-input {
-    @apply text-sm w-full bg-transparent border border-violet-900 h-10 my-2 font-main text-white px-2 outline-none;
+    @apply text-sm w-full bg-transparent border border-violet-900 h-10 my-2 font-main text-white px-2 outline-none ;
   }
 
-  .auth-button{
-    @apply w-full text-white font-main text-sm hover:bg-violet-900 transition bg-violet-800 py-3 rounded
+  .auth-button {
+    @apply w-full text-white font-main text-sm hover:bg-violet-900 transition bg-violet-800 py-3 rounded;
   }
+
+  .modal-input {
+    @apply w-full h-10 rounded bg-transparent outline-none px-3 text-white font-main border-violet-900 border-b block my-6;
+  }
+
 }
 
-.swal2-container{
+.swal2-container {
   font-family: "Poppins";
 }
