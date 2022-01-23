@@ -3,7 +3,7 @@ import { BiMessageSquareAdd } from "react-icons/bi";
 import Modal from "../../../components/Modal/Modal";
 import AddStoryForm from "./AddStoryForm";
 const AddStory = () => {
-  const [state, setState] = useState(true);
+  const [state, setState] = useState(false);
   const toggleShowModal = () => {
     setState((prevState) => !prevState);
   };
