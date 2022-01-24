@@ -53,7 +53,23 @@ const getUser = async (req, res) => {
     const user = await User.findById(id);
     return res
       .status(200)
-      .json({ fullname: user.fullname, profile: user.profile , bio : user.bio });
+      .json({ fullname: user.fullname, profile: user.profile, bio: user.bio });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      message: "internal server error",
+      error,
+    });
+  }
+};
+
+const getUsersBySearch = async (req, res) => {
+  try {
+    const { text } = req.params;
+    const users = await User.find({
+      username: { $regex: text, $options: "i" },
+    }).limit(10);
+    return res.status(200).json({ data: users });
   } catch (error) {
     console.log(error);
     res.status(500).json({
@@ -67,4 +83,5 @@ module.exports = {
   register,
   login,
   getUser,
+  getUsersBySearch,
 };

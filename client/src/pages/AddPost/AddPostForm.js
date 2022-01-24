@@ -14,7 +14,7 @@ const AddPostForm = () => {
   const SUPPORTED_TYPES = ["image/jpeg", "image/png"];
   const { id } = useGetUserId();
   const [image, convertImage, setImage] = useSelectImage();
-  console.log(image);
+
   const schema = yup.object().shape({
     description: yup.string().required("it can not be empty"),
     image: yup

@@ -5,7 +5,7 @@ const StoryItem = () => {
   return (
     <Link to="/">
       <div className="w-60 h-96 rounded relative flex justify-center items-center">
-        <div className="z-40 flex justify-center flex-col items-center">
+        <div className="z-30 flex justify-center flex-col items-center">
           <img
             src="https://picsum.photos/200/200?grayscale"
             alt="profile"
