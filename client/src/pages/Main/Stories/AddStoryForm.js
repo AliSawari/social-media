@@ -6,9 +6,12 @@ import Input from "../../../components/AuthInput/Input";
 import httpClient from "../../../api/client";
 import PreviewImage from "./PreviewImage";
 import swal from "sweetalert2";
+import { useSelectImage } from "../../../hooks/useSelectImage";
+import { useGetUserId } from "../../../hooks/useGetUserId";
 const AddStoryForm = ({ closeModal }) => {
   const SUPPORTED_TYPES = ["image/jpeg", "image/png"];
-  const [image, setImage] = useState(null);
+  const [image, handleSetImage, setImage] = useSelectImage();
+  const { id } = useGetUserId();
   const schema = yup.object().shape({
     image: yup
       .mixed()
@@ -34,6 +37,7 @@ const AddStoryForm = ({ closeModal }) => {
       const data = new FormData();
       data.append("title", title);
       data.append("image", image[0]);
+      data.append("user", id);
 
       await httpClient.post("stories/add", data, {
         headers: {
@@ -60,14 +64,7 @@ const AddStoryForm = ({ closeModal }) => {
   };
 
   const handleChangeImage = ({ target }) => {
-    const file = target.files[0];
-    if (file && SUPPORTED_TYPES.includes(file.type)) {
-      const reader = new FileReader();
-      reader.onload = ({ target: { result } }) => {
-        setImage(result);
-      };
-      reader.readAsDataURL(target.files[0]);
-    }
+    handleSetImage(target);
   };
 
   const handleClosePreviewImage = () => {
