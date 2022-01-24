@@ -4,8 +4,10 @@ const morgan = require("morgan");
 const bodyParser = require("body-parser");
 const userRoutes = require("./modules/user/user.routes");
 const storyRoutes = require("./modules/story/story.routes");
+const postStories = require("./modules/post/post.routes");
 const fileUpload = require("express-fileupload");
 const cors = require("cors");
+
 function createApp() {
   const app = express();
   app.use("/public", express.static("public"));
@@ -17,6 +19,7 @@ function createApp() {
 
   app.use("/api/v1/users/", userRoutes);
   app.use("/api/v1/stories/", storyRoutes);
+  app.use("/api/v1/posts/", postStories);
   app.listen(config.get("PORT") || 4000, () => {
     console.log(`server running on port ${config.get("PORT") || 4000}`);
   });

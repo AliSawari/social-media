@@ -1,5 +1,10 @@
 {
   "dependencies": {
     "framer-motion": "^6.2.1"
+  },
+  "devDependencies": {
+    "@fullstacksjs/eslint-config": "^7.2.1",
+    "eslint": "^8.7.0",
+    "prettier": "^2.5.1"
   }
 }

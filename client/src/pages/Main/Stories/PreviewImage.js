@@ -2,7 +2,7 @@ import React from "react";
 import { AiFillCloseCircle } from "react-icons/ai";
 
 const PreviewImage = ({ handleClose, image }) => {
-  return (
+  return image ? (
     <div className="w-full h-auto">
       {image ? (
         <div className="w-full relative">
@@ -16,7 +16,7 @@ const PreviewImage = ({ handleClose, image }) => {
         </div>
       ) : null}
     </div>
-  );
+  ) : null;
 };
 
 export default PreviewImage;

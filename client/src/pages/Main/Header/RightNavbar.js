@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import Notifications from "../../../components/Notifications/Notifications";
 import UserOptions from "../../../components/UserOptions/UserOptions";
 import { UserContext } from "../../../context/providers/UserProvider";
@@ -10,7 +10,6 @@ const RightNavbar = () => {
     const fetchUserData = async () => {
       try {
         const { data } = await httpClient.get(`users/user/${user.user.id}`);
-        console.log(data);
         dispatch(getUserData(data))
       } catch (error) {
         console.log(error);
