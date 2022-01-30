@@ -1,3 +1,4 @@
+const { Schema } = require("mongoose");
 const mongoose = require("../../database/connection");
 
 const UserSchema = new mongoose.Schema({
@@ -17,7 +18,8 @@ const UserSchema = new mongoose.Schema({
     required: true,
   },
   profile: { type: String, default: "" },
-  bio : {type : String , default :""}
+  bio: { type: String, default: "" },
+  posts: [{ type: Schema.Types.ObjectId, ref: "posts" }],
 });
 
 const UserModel = mongoose.model("users", UserSchema);

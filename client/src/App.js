@@ -7,6 +7,7 @@ const LoginPage = lazy(() => import("./pages/Auth/LoginPage"));
 const RegisterPage = lazy(() => import("./pages/Auth/RegisterPage"));
 const MainPage = lazy(() => import("./pages/Main/MainPage"));
 const AddPost = lazy(() => import("./pages/AddPost/AddPostPage"));
+const User = lazy(() => import("./pages/User/User"));
 function App() {
   return (
     <Suspense fallback={<Loading />}>
@@ -31,6 +32,17 @@ function App() {
               element={
                 <PrivateRoute>
                   <AddPost />
+                </PrivateRoute>
+              }
+            />
+          </Route>
+
+          <Route path="/user">
+            <Route
+              path=":username"
+              element={
+                <PrivateRoute>
+                  <User />
                 </PrivateRoute>
               }
             />

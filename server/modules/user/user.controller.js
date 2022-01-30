@@ -1,7 +1,8 @@
 const User = require("./user.model");
+const Post = require("../post/post.model");
 const jwt = require("jsonwebtoken");
 const config = require("config");
-const _ = require("lodash");
+
 const register = async (req, res) => {
   try {
     const user = req.body;
@@ -79,9 +80,32 @@ const getUsersBySearch = async (req, res) => {
   }
 };
 
+const getUserByUsername = async (req, res) => {
+  try {
+    const { username } = req.params;
+    const user = await User.findOne({ username });
+    const posts = await Post.find({ user: user._id });
+    console.log(posts);
+    return res.status(200).json({
+      fullname: user.fullname,
+      profile: user.profile,
+      bio: user.bio,
+      username: user.username,
+      posts,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      message: "internal server error",
+      error,
+    });
+  }
+};
+
 module.exports = {
   register,
   login,
   getUser,
   getUsersBySearch,
+  getUserByUsername,
 };

@@ -1,8 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
-const SearchUserItem = ({ profile, fullname, bio }) => {
+const SearchUserItem = ({ profile, fullname, bio, username }) => {
   return (
-    <Link to="/">
+    <Link to={`/user/${username}`}>
       <div className="w-full flex  py-2 items-center hover:border-l hover:border-l-violet-600 border-l border-l-transparent">
         <div className="px-3">
           <img

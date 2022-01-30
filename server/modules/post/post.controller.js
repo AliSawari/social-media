@@ -24,8 +24,7 @@ const add = async (req, res) => {
       image: fileName,
       timestamp,
     };
-    const newPost = new Post(postDocument);
-    await newPost.save();
+    await Post.create(postDocument);
 
     res.status(200).json({ message: "post added" });
   } catch (error) {
