@@ -13,7 +13,7 @@ const MainPage = () => {
         <LeftSide />
         <div className="w-4/6 px-14 flex flex-col">
           <Stories />
-          <Posts />
+          {/* <Posts /> */}
         </div>
         <Profile />
       </MainLayout>

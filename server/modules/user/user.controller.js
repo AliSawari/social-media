@@ -2,6 +2,7 @@ const User = require("./user.model");
 const Post = require("../post/post.model");
 const jwt = require("jsonwebtoken");
 const config = require("config");
+const FollowModel = require("../follow/follow.model");
 
 const register = async (req, res) => {
   try {
@@ -52,9 +53,12 @@ const getUser = async (req, res) => {
   try {
     const { id } = req.params;
     const user = await User.findById(id);
-    return res
-      .status(200)
-      .json({ fullname: user.fullname, profile: user.profile, bio: user.bio });
+    return res.status(200).json({
+      fullname: user.fullname,
+      profile: user.profile,
+      bio: user.bio,
+      username: user.username,
+    });
   } catch (error) {
     console.log(error);
     res.status(500).json({
@@ -82,16 +86,27 @@ const getUsersBySearch = async (req, res) => {
 
 const getUserByUsername = async (req, res) => {
   try {
-    const { username } = req.params;
+    const { username, id } = req.params;
     const user = await User.findOne({ username });
+    if (user === null) {
+      return res.status(404).json({ message: "user not found" });
+    }
+
+    const data = {
+      user: id,
+      following: user._id,
+    };
+
+    const isFollow = await FollowModel.findOne(data);
     const posts = await Post.find({ user: user._id });
-    console.log(posts);
     return res.status(200).json({
+      id: user._id,
       fullname: user.fullname,
       profile: user.profile,
       bio: user.bio,
       username: user.username,
       posts,
+      follow: isFollow,
     });
   } catch (error) {
     console.log(error);

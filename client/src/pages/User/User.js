@@ -1,26 +1,35 @@
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router";
+import React, { useEffect, useState, useContext } from "react";
+import { useParams, useNavigate } from "react-router";
 import UserInfo from "./UserInfo";
 import Header from "../Main/Header/Header";
 import UserFollow from "./UserFollow";
 import UserImage from "./UserImage";
 import httpClient from "../../api/client";
-import PostItem from "../Main/Posts/PostItem";
+import UserPosts from "./UserPosts";
+import { UserContext } from "../../context/providers/UserProvider";
+import { useGetUserId } from "../../hooks/useGetUserId";
 const User = () => {
   const { username } = useParams();
+  const navigate = useNavigate();
   const [state, setState] = useState(null);
+  const { id } = useGetUserId();
   useEffect(() => {
     const fetchUser = async () => {
       try {
         const { data } = await httpClient.get(
-          `users/user-by-username/${username}`
+          `users/user-by-username/${username}/${id}`
         );
+        console.log(data);
         setState(data);
-      } catch (error) {}
+      } catch (error) {
+        if (error.response.status === 404) navigate("/");
+      }
     };
 
     fetchUser();
   }, [username]);
+
+  const { state: user } = useContext(UserContext);
   return state !== null ? (
     <>
       <Header />
@@ -36,7 +45,10 @@ const User = () => {
                 bio={state.bio}
                 username={state.username}
               />
-              <UserFollow />
+              <UserFollow
+                isVisible={user.data?.username !== state.username}
+                user={state}
+              />
             </div>
           </div>
 
@@ -47,11 +59,7 @@ const User = () => {
               </h3>
             </div>
             <div className="flex w-full justify-center">
-              {state.posts.map((post) => (
-                <div className="w-2/6">
-                  <PostItem key={post._id} {...post} user={state} />
-                </div>
-              ))}
+              <UserPosts user={state} />
             </div>
           </div>
         </div>
