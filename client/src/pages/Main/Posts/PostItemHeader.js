@@ -1,5 +1,6 @@
 import React from "react";
 import { IoIosMore } from "react-icons/io";
+import { Link } from "react-router-dom";
 const PostItemHeader = ({ user }) => {
   return (
     <div className="w-full flex justify-between mb-4">
@@ -15,7 +16,9 @@ const PostItemHeader = ({ user }) => {
           alt={user.fullname}
           className="rounded-lg bg-violet-500  p-1 object-cover"
         />
-        <h3 className="text-white font-main">{user.fullname}</h3>
+        <Link to={`/user/${user.username}`}>
+          <h3 className="text-white font-main">{user.fullname}</h3>
+        </Link>
       </div>
       <div className="flex items-center">
         <button className="text-violet-500 text-xl">

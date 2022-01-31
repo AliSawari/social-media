@@ -3,6 +3,7 @@ const Post = require("../post/post.model");
 const jwt = require("jsonwebtoken");
 const config = require("config");
 const FollowModel = require("../follow/follow.model");
+const Posts = require("../post/post.model");
 
 const register = async (req, res) => {
   try {
