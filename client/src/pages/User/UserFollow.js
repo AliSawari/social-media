@@ -4,6 +4,7 @@ import { useGetUserId } from "../../hooks/useGetUserId";
 const UserFollow = ({ isVisible, user }) => {
   const { id } = useGetUserId();
   const [state, setState] = useState(user.follow !== null);
+  console.log(user);
   const handleFollowUnFollow = async () => {
     try {
       const {
@@ -21,17 +22,21 @@ const UserFollow = ({ isVisible, user }) => {
   return (
     <div className="w-full flex text-center flex-wrap justify-center gap-20">
       <div>
-        <h2 className="text-4xl font-main text-white">105</h2>
+        <h2 className="text-4xl font-main text-white">{user.followers}</h2>
         <span className="text-sm font-main text-violet-600">Followers</span>
       </div>
 
       <div>
-        <h2 className="text-4xl font-main text-white">8K</h2>
+        <h2 className="text-4xl font-main text-white">{user.followings}</h2>
         <span className="text-sm font-main text-violet-600">Followings</span>
       </div>
       {isVisible ? (
         <div
-          className={`w-full rounded font-main py-3 cursor-pointer text-white  transition ${state === false ? 'bg-violet-500 hover:bg-violet-800' : 'bg-neutral-700 hover:bg-neutral-800'}`}
+          className={`w-full rounded font-main py-3 cursor-pointer text-white  transition ${
+            state === false
+              ? "bg-violet-500 hover:bg-violet-800"
+              : "bg-neutral-700 hover:bg-neutral-800"
+          }`}
           onClick={handleFollowUnFollow}
         >
           {state ? "Following" : "Follow"}

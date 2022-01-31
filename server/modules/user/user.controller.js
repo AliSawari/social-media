@@ -99,6 +99,8 @@ const getUserByUsername = async (req, res) => {
     };
 
     const isFollow = await FollowModel.findOne(data);
+    const followers = await FollowModel.find({ following: user.id }).count();
+    const followings = await FollowModel.find({ user: user.id }).count();
     const posts = await Post.find({ user: user._id });
     return res.status(200).json({
       id: user._id,
@@ -108,6 +110,8 @@ const getUserByUsername = async (req, res) => {
       username: user.username,
       posts,
       follow: isFollow,
+      followers,
+      followings,
     });
   } catch (error) {
     console.log(error);

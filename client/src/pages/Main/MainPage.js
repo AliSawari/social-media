@@ -8,6 +8,7 @@ import LeftSide from "./LeftSide/LeftSide";
 import Posts from "./Posts/Posts";
 import Profile from "./Profile/Profile";
 import Stories from "./Stories/Stories";
+
 const MainPage = () => {
   const { id } = useGetUserId();
   const [posts, setPosts] = useState(null);
@@ -40,7 +41,6 @@ const MainPage = () => {
         <LeftSide />
         <div className="w-4/6 px-14 flex flex-col">
           <Stories />
-
           {renderPosts()}
         </div>
         <Profile />
