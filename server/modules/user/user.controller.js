@@ -160,6 +160,20 @@ const changeProfile = async (req, res) => {
   }
 };
 
+const getFollowers = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const users = await FollowModel.find({ following: id });
+    res.status(200).json(users);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      message: "internal server error",
+      error,
+    });
+  }
+};
+
 module.exports = {
   register,
   login,
@@ -167,4 +181,5 @@ module.exports = {
   getUsersBySearch,
   getUserByUsername,
   changeProfile,
+  getFollowers,
 };
