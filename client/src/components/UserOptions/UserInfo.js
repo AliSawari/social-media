@@ -9,7 +9,7 @@ const UserInfo = ({ profile, fullname, onClick }) => {
       <img
         src={
           profile.length
-            ? profile
+            ? `http://localhost:4000/public/images/${profile}`
             : "https://gravatar.com/avatar/6c2ff79dddfe69146d3a3a55c0bc7f52?s=400&d=robohash&r=x"
         }
         width="35"

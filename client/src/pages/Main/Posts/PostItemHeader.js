@@ -8,7 +8,7 @@ const PostItemHeader = ({ user }) => {
         <img
           src={
             user.profile.length
-              ? user.profile
+              ? `http://localhost:4000/public/images/${user.profile}`
               : "https://gravatar.com/avatar/6c2ff79dddfe69146d3a3a55c0bc7f52?s=400&d=robohash&r=x"
           }
           width="42"
@@ -16,7 +16,7 @@ const PostItemHeader = ({ user }) => {
           alt={user.fullname}
           className="rounded-lg bg-violet-500  p-1 object-cover"
         />
-        <Link to={`/user/${user.username}`}>
+        <Link to={`/@${user.username}`}>
           <h3 className="text-white font-main">{user.fullname}</h3>
         </Link>
       </div>

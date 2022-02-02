@@ -3,8 +3,7 @@ const Post = require("../post/post.model");
 const jwt = require("jsonwebtoken");
 const config = require("config");
 const FollowModel = require("../follow/follow.model");
-const Posts = require("../post/post.model");
-
+const path = require("path");
 const register = async (req, res) => {
   try {
     const user = req.body;
@@ -122,10 +121,50 @@ const getUserByUsername = async (req, res) => {
   }
 };
 
+const changeProfile = async (req, res) => {
+  try {
+    const files = req.files;
+    const { fullname, id } = req.body;
+    let fileName;
+    const user = await User.findOne({ _id: id });
+    fileName = user.profile;
+    if (files?.profile) {
+      fileName = Math.ceil(Math.random() * 200000) + files.profile.name;
+      const uploadedPath = path.resolve(
+        __dirname,
+        "../../public/images",
+        fileName
+      );
+
+      files.profile.mv(uploadedPath, (error) => {
+        console.log(error);
+        if (error)
+          res.status(500).json({
+            error,
+          });
+      });
+    }
+
+    console.log(files);
+    await User.findOneAndUpdate({ _id: id }, { fullname, profile: fileName });
+
+    res.status(200).json({
+      message: "user profile updated",
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      message: "internal server error",
+      error,
+    });
+  }
+};
+
 module.exports = {
   register,
   login,
   getUser,
   getUsersBySearch,
   getUserByUsername,
+  changeProfile,
 };
