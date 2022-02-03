@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
-import { useParams, useNavigate } from "react-router";
+import { useParams, useNavigate, useLocation } from "react-router";
 import UserInfo from "./UserInfo";
 import Header from "../Main/Header/Header";
 import UserFollow from "./UserFollow";
@@ -10,6 +10,7 @@ import { UserContext } from "../../context/providers/UserProvider";
 import { useGetUserId } from "../../hooks/useGetUserId";
 const User = () => {
   const { username } = useParams();
+  const location = useLocation();
   const navigate = useNavigate();
   const [state, setState] = useState(null);
   const { id } = useGetUserId();
@@ -27,7 +28,7 @@ const User = () => {
     };
 
     fetchUser();
-  }, [username]);
+  }, [location]);
 
   const { state: user } = useContext(UserContext);
   return state !== null ? (
@@ -43,7 +44,7 @@ const User = () => {
               <UserInfo
                 fullname={state.fullname}
                 bio={state.bio}
-                username={state.username}
+                id={state.id}
               />
               <UserFollow
                 isVisible={user.data?.username !== state.username}

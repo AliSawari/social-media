@@ -163,7 +163,8 @@ const changeProfile = async (req, res) => {
 const getFollowers = async (req, res) => {
   try {
     const { id } = req.params;
-    const users = await FollowModel.find({ following: id });
+    const users = await FollowModel.find({ following: id }).populate("user");
+    console.log(users);
     res.status(200).json(users);
   } catch (error) {
     console.log(error);

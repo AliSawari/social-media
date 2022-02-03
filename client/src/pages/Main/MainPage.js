@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import MainLayout from "../../components/MainLayout";
+import { useGetUserId } from "../../hooks/useGetUserId";
+import { useSocketConnection } from "../../hooks/useSocketConnection";
 import Header from "./Header/Header";
 import LeftSide from "./LeftSide/LeftSide";
 import Posts from "./Posts/Posts";

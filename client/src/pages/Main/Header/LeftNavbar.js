@@ -20,7 +20,7 @@ const LeftNavbar = () => {
         </NavbarItem>
 
 
-        <NavbarItem link="/chat">
+        <NavbarItem link="/chat/list">
           <MdOutlineChat />
         </NavbarItem>
       </ul>

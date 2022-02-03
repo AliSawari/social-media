@@ -29,7 +29,7 @@ const SearchBox = () => {
   const renderUsers = () => {
     if (data === null)
       return (
-        <div className="w-full h-48">
+        <div className="w-full h-16">
           <Loading />
         </div>
       );

@@ -11,7 +11,7 @@ const Followers = () => {
     const fetchData = async () => {
       try {
         const { data } = await httpClient.get(`users/followers/${id}`);
-        console.log(data);
+        setState(data);
       } catch (error) {
         console.log(error);
       }
@@ -19,35 +19,6 @@ const Followers = () => {
 
     fetchData();
   }, []);
-  const data = [
-    {
-      id: 1,
-      fullname: "HamidrezaRamzani",
-      online: true,
-      profile: "https://picsum.photos/200/200?grayscale",
-    },
-
-    {
-      id: 2,
-      fullname: "HamidrezaRamzani",
-      online: true,
-      profile: "https://picsum.photos/200/200?grayscale",
-    },
-
-    {
-      id: 3,
-      fullname: "HamidrezaRamzani",
-      online: true,
-      profile: "https://picsum.photos/200/200?grayscale",
-    },
-
-    {
-      id: 4,
-      fullname: "HamidrezaRamzani",
-      online: false,
-      profile: "https://picsum.photos/200/200?grayscale",
-    },
-  ];
 
   const renderUsers = () => {
     if (state === null)
@@ -57,7 +28,8 @@ const Followers = () => {
         </div>
       );
 
-    return state.map((item) => <UserItem key={item.id} {...item} />);
+      console.log(state);
+    return state.map((item) => <UserItem key={item.id} {...item.user} />);
   };
   return (
     <div className="w-full h-auto mt-4 pb-3 rounded bg-neutral-800 shadow-sm">

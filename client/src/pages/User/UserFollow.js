@@ -42,6 +42,8 @@ const UserFollow = ({ isVisible, user }) => {
           {state ? "Following" : "Follow"}
         </div>
       ) : null}
+
+      
     </div>
   );
 };

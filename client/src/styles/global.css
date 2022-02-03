@@ -29,7 +29,7 @@ body {
   }
 
   .auth-input {
-    @apply text-sm w-full bg-transparent border border-violet-900 h-10 my-2 font-main text-white px-2 outline-none ;
+    @apply text-sm w-full bg-transparent border border-violet-900 h-10 my-2 font-main text-white px-2 outline-none;
   }
 
   .auth-button {
@@ -39,9 +39,11 @@ body {
   .modal-input {
     @apply w-full h-10 rounded bg-transparent outline-none px-3 text-white font-main border-violet-900 border-b block my-6;
   }
-
 }
 
 .swal2-container {
   font-family: "Poppins";
+}
+.h-full-screen {
+  height: calc(100vh - 4rem);
 }

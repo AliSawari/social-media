@@ -2,14 +2,18 @@ import React from "react";
 import { FaCircle } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
-const UserItem = ({ id, profile, fullname, chat, online }) => {
+const UserItem = ({ _id, profile, fullname, chat, online }) => {
   return (
-    <Link to="/chat/id">
+    <Link to={`/chat/list/${_id}`}>
       <div className="left-sides-header">
         <div className="justify-center flex gap-3">
           <div>
             <img
-              src={profile}
+              src={
+                profile.length
+                  ? `http://localhost:4000/public/images/${profile}`
+                  : "https://gravatar.com/avatar/6c2ff79dddfe69146d3a3a55c0bc7f52?s=400&d=robohash&r=x"
+              }
               width="35"
               height="35"
               alt="profile user"
@@ -25,9 +29,8 @@ const UserItem = ({ id, profile, fullname, chat, online }) => {
         </div>
         <div className="items-center flex">
           <FaCircle
-            className={`text-sm ${
-              online ? "text-violet-600" : "text-neutral-700"
-            }`}
+            className={`text-sm ${online ? "text-violet-600" : "text-neutral-700"
+              }`}
           />
         </div>
       </div>
