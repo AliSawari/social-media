@@ -19,6 +19,7 @@ const PostSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "users",
   },
+  likes: [{ user: { type: mongoose.Schema.Types.ObjectId }, timestamp: { type: Number } }],
 });
 
 const PostModel = mongoose.model("posts", PostSchema);
