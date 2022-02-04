@@ -46,7 +46,7 @@ const getFollowingPosts = async (req, res) => {
     });
     const posts = await Posts.find({ user: { $all: followingIds } }).populate(
       "user"
-    );
+    ).populate("comments.user")
     return res.status(200).json(posts);
   } catch (error) {
     console.log(error);
@@ -86,5 +86,39 @@ const likePost = async (req, res) => {
   }
 };
 
+const addComment = async (req, res) => {
+  try {
+    const { user, text, id } = req.body;
+    const timestamp = moment.now();
 
-module.exports = { add, getFollowingPosts, likePost };
+    await Post.updateOne({ _id: id }, { $push: { comments: { user, text, timestamp } } });
+    const post = await Post.findById(id).populate("comments.user");
+    const comments = post.comments;
+    return res.status(200).json(comments);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      message: "internal server error",
+      error,
+    });
+  }
+};
+
+const allPostComments = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const post = await Post.findById(id).populate("comments.user");
+    const comments = post.comments;
+    return res.status(200).json(comments);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      message: "internal server error",
+      error,
+    });
+  }
+};
+
+
+
+module.exports = { add, getFollowingPosts, likePost, allPostComments, addComment };
