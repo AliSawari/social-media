@@ -5,7 +5,7 @@ import SearchBox from "./SearchBox";
 
 const Header = () => {
   return (
-    <header className="w-full relative h-16  z-40 pt-5  flex justify-center">
+    <header className="w-full relative  h-16  z-40 pt-5  flex justify-center">
       <LeftNavbar />
       <SearchBox />
       <RightNavbar />

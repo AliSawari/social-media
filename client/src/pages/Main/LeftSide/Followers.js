@@ -28,7 +28,6 @@ const Followers = () => {
         </div>
       );
 
-      console.log(state);
     return state.map((item) => <UserItem key={item.id} {...item.user} />);
   };
   return (

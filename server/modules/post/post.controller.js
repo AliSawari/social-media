@@ -57,4 +57,34 @@ const getFollowingPosts = async (req, res) => {
   }
 };
 
-module.exports = { add, getFollowingPosts };
+
+const likePost = async (req, res) => {
+  try {
+    const { id, uid, isLiked } = req.body;
+    if (isLiked) {
+      await Post.updateOne({ _id: id }, { $pull: { likes: { user: uid } } })
+      const post = await Post.findById(id);
+      return res.status(200).json({
+        isLiked: false,
+        count: post.likes.length
+      })
+    }
+
+    await Post.updateOne({ _id: id }, { $push: { likes: { user: uid } } })
+    const post = await Post.findById(id);
+    return res.status(200).json({
+      isLiked: true,
+      count: post.likes.length
+    })
+
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      message: "internal server error",
+      error,
+    });
+  }
+};
+
+
+module.exports = { add, getFollowingPosts, likePost };

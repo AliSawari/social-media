@@ -11,10 +11,10 @@ const PostItemHeader = ({ user }) => {
               ? `http://localhost:4000/public/images/${user.profile}`
               : "https://gravatar.com/avatar/6c2ff79dddfe69146d3a3a55c0bc7f52?s=400&d=robohash&r=x"
           }
-          width="42"
-          height="42"
+          width="42px"
+          height="42px"
           alt={user.fullname}
-          className="rounded-lg bg-violet-500  p-1 object-cover"
+          className="rounded-lg bg-violet-500 h-10 w-10  p-1 object-cover"
         />
         <Link to={`/@${user.username}`}>
           <h3 className="text-white font-main">{user.fullname}</h3>

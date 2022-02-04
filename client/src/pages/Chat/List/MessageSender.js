@@ -33,19 +33,10 @@ const MessageSender = ({ id: receiver, setState }) => {
     socket.emit("send message", { message: text, sender, receiver });
   };
 
-  socket.on("send message", (data) => {
-    console.log(data);
+
+  socket.on("send message", (data) => {    
     setState(data);
-    if (data.sender._id === sender) return;
-    toast.success(`${data.sender.fullname} send a message`, {
-      position: "bottom-right",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      theme: "dark",
-    });
+    
   });
 
   return (

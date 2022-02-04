@@ -16,15 +16,17 @@ const Converstation = require("./modules/conversation/conversation.model")
 const { Server } = require("socket.io");
 
 const ChatModel = require("./modules/chat/chat.model");
+
+const app = express();
+const server = http.createServer(app);
+const io = new Server(server, {
+  cors: {
+    origin: "http://localhost:3000",
+    methods: ["GET", "POST"],
+  },
+});
 function createApp() {
-  const app = express();
-  const server = http.createServer(app);
-  const io = new Server(server, {
-    cors: {
-      origin: "http://localhost:3000",
-      methods: ["GET", "POST"],
-    },
-  });
+
 
   app.use("/public", express.static("public"));
 
@@ -36,6 +38,7 @@ function createApp() {
   io.on("connection", (socket) => {
     socket.on("user:connect", ({ id }) => {
       socket.join(id);
+
     });
     socket.on("send message", async ({ message, sender, receiver }) => {
       const newChat = await ChatModel.create({
@@ -55,7 +58,6 @@ function createApp() {
 
       const timestamp = moment.now();
 
-      console.log();
       if (isSenderConverstationExists) {
         if (!isSenderConverstationExists.contacts.find(user => user.user == receiver)) {
           await Converstation.updateOne({ user: sender }, { $push: { contacts: { user: receiver, timestamp } } });
@@ -77,6 +79,7 @@ function createApp() {
         .populate("sender", "fullname username")
         .populate("receiver", "fullname username");
 
+      io.to(receiver).emit("user:notification", { message: `you have new message by ${chat.sender.fullname}`, sender });
       io.to(receiver).to(sender).emit("send message", chat);
     });
   });
@@ -93,4 +96,4 @@ function createApp() {
   });
 }
 
-module.exports = { createApp };
+module.exports = { createApp, io };
