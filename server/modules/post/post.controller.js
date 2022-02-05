@@ -3,6 +3,8 @@ const moment = require("moment");
 const path = require("path");
 const FollowModel = require("../follow/follow.model");
 const Posts = require("../post/post.model");
+const User = require("../user/user.model");
+const Notification = require("../notification/notification.model");
 const add = async (req, res) => {
   try {
     const { image } = req.files;
@@ -70,6 +72,9 @@ const likePost = async (req, res) => {
       })
     }
 
+    const userPost = await Post.findById(id)
+    const user = await User.findOne({ _id: userPost.user });
+    await Notification.create({ user: user._id, message: `${user.fullname} like your post` });
     await Post.updateOne({ _id: id }, { $push: { likes: { user: uid } } })
     const post = await Post.findById(id);
     return res.status(200).json({

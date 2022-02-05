@@ -12,7 +12,7 @@ const RightNavbar = () => {
       try {
         const { data } = await httpClient.get(`users/user/${user.user.id}`);
         dispatch(getUserData(data))
-        setNotifications(data.notifications)        
+        setNotifications(data.notifications)
       } catch (error) {
         console.log(error);
       }
@@ -27,7 +27,7 @@ const RightNavbar = () => {
 
   return (
     <div className="flex justify-center items-center rounded-lg gap-8">
-      <Notifications notifications={notifications} />
+      <Notifications haveNotifications={notifications.filter(item => item.seen === false).length} />
       <UserOptions data={user.data} items={menuItems} />
     </div>
   );
