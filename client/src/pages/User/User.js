@@ -20,7 +20,6 @@ const User = () => {
         const { data } = await httpClient.get(
           `users/user-by-username/${username}/${id}`
         );
-        console.log(data);
         setState(data);
       } catch (error) {
         if (error.response.status === 404) navigate("/");

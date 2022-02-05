@@ -1,16 +1,18 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Notifications from "../../../components/Notifications/Notifications";
 import UserOptions from "../../../components/UserOptions/UserOptions";
 import { UserContext } from "../../../context/providers/UserProvider";
 import httpClient from "../../../api/client";
 import { getUserData } from "../../../context/actions/UserActions";
 const RightNavbar = () => {
-  const { state: user , dispatch } = useContext(UserContext);  
+  const { state: user, dispatch } = useContext(UserContext);
+  const [notifications, setNotifications] = useState([]);
   useEffect(() => {
     const fetchUserData = async () => {
       try {
         const { data } = await httpClient.get(`users/user/${user.user.id}`);
         dispatch(getUserData(data))
+        setNotifications(data.notifications)        
       } catch (error) {
         console.log(error);
       }
@@ -25,7 +27,7 @@ const RightNavbar = () => {
 
   return (
     <div className="flex justify-center items-center rounded-lg gap-8">
-      <Notifications />
+      <Notifications notifications={notifications} />
       <UserOptions data={user.data} items={menuItems} />
     </div>
   );

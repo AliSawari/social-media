@@ -3,6 +3,7 @@ const Post = require("../post/post.model");
 const jwt = require("jsonwebtoken");
 const config = require("config");
 const FollowModel = require("../follow/follow.model");
+const Notification = require("../notification/notification.model");
 const path = require("path");
 const register = async (req, res) => {
   try {
@@ -53,11 +54,13 @@ const getUser = async (req, res) => {
   try {
     const { id } = req.params;
     const user = await User.findById(id);
+    const notifications = await Notification.find({ user: id });
     return res.status(200).json({
       fullname: user.fullname,
       profile: user.profile,
       bio: user.bio,
       username: user.username,
+      notifications
     });
   } catch (error) {
     console.log(error);
@@ -164,7 +167,6 @@ const getFollowers = async (req, res) => {
   try {
     const { id } = req.params;
     const users = await FollowModel.find({ following: id }).populate("user");
-    console.log(users);
     res.status(200).json(users);
   } catch (error) {
     console.log(error);

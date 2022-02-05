@@ -12,7 +12,7 @@ const UserFollow = ({ isVisible, user }) => {
       } = await httpClient.post("follow/follow", {
         user: id,
         following: user.id,
-      });
+      });      
 
       setState(follow);
     } catch (error) {

@@ -11,6 +11,7 @@ const AddPost = lazy(() => import("./pages/AddPost/AddPostPage"));
 const User = lazy(() => import("./pages/User/User"));
 const Profile = lazy(() => import("./pages/Profile/Profile"));
 const ChatList = lazy(() => import("./pages/Chat/List/List"));
+const NotificationList = lazy(() => import("./pages/Notification/List/List"));
 function App() {
   return (
     <Suspense fallback={<Loading />}>
@@ -51,6 +52,15 @@ function App() {
                 path="list/:id"
                 element={
                   <ChatList />
+                }
+              />
+            </Route>
+
+            <Route path="/notifications">
+              <Route
+                path="list"
+                element={
+                  <NotificationList />
                 }
               />
             </Route>

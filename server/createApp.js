@@ -7,6 +7,7 @@ const storyRoutes = require("./modules/story/story.routes");
 const postRoutes = require("./modules/post/post.routes");
 const followRoutes = require("./modules/follow/follow.routes");
 const chatRoutes = require("./modules/chat/chat.routes");
+const notificationRoutes = require("./modules/notification/notification.routes");
 const converstationRoutes = require("./modules/conversation/conversation.routes");
 const moment = require("moment");
 const fileUpload = require("express-fileupload");
@@ -16,7 +17,6 @@ const Converstation = require("./modules/conversation/conversation.model")
 const { Server } = require("socket.io");
 
 const ChatModel = require("./modules/chat/chat.model");
-const { send } = require("process");
 
 function createApp() {
 
@@ -93,6 +93,7 @@ function createApp() {
   app.use("/api/v1/follow/", followRoutes);
   app.use("/api/v1/chat/", chatRoutes);
   app.use("/api/v1/converstation/", converstationRoutes);
+  app.use("/api/v1/notifications/", notificationRoutes);
 
   server.listen(config.get("PORT") || 4000, () => {
     console.log(`server running on port ${config.get("PORT") || 4000}`);
