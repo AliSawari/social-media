@@ -3,8 +3,11 @@ import { IoIosHeart, IoIosHeartEmpty } from "react-icons/io";
 import { BiCommentDetail } from "react-icons/bi";
 import { AiOutlineSave } from "react-icons/ai";
 import { useGetUserId } from '../../../hooks/useGetUserId'
+import { useSocketConnection } from '../../../hooks/useSocketConnection'
 import httpClient from "../../../api/client";
 const PostOperations = ({ likes, user, id }) => {
+  const socket = useSocketConnection("http://localhost:4000");
+
   const { id: uid } = useGetUserId();
   const isLiked = likes.find(like => like.user === uid)
   const [state, setState] = useState({ isLiked: isLiked != undefined, count: likes.length });
@@ -12,6 +15,9 @@ const PostOperations = ({ likes, user, id }) => {
   const handleClickLike = async () => {
     try {
       const { data } = await httpClient.post("posts/like", { uid, id, isLiked: state.isLiked });
+      if (data.isLiked) {
+        socket.emit("post:liked", { uid, id })
+      }
       setState(data)
     } catch (error) {
       console.log(error);

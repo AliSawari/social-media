@@ -11,11 +11,9 @@ const UserInfo = ({ profile, fullname, onClick }) => {
           profile.length
             ? `http://localhost:4000/public/images/${profile}`
             : "https://gravatar.com/avatar/6c2ff79dddfe69146d3a3a55c0bc7f52?s=400&d=robohash&r=x"
-        }
-        width="35"
-        height="35"
+        }        
         alt="profile user"
-        className="rounded-lg border-1"
+        className="rounded-lg border-1 w-10 h-10 object-cover"
       />
       <h3 className="text-white text-center text-sm flex items-center font-main ">
         {fullname} &nbsp; <BsChevronDown className="text-violet-500" />

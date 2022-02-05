@@ -14,8 +14,6 @@ const UserItem = ({ _id, profile, fullname, online, message }) => {
                   ? `http://localhost:4000/public/images/${profile}`
                   : "https://gravatar.com/avatar/6c2ff79dddfe69146d3a3a55c0bc7f52?s=400&d=robohash&r=x"
               }
-              width="35"
-              height="35"
               alt="profile user"
               className="rounded-lg border-1 h-10 w-10 object-cover"
             />

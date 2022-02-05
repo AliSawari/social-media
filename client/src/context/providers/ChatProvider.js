@@ -33,7 +33,7 @@ const ChatProvider = ({ children }) => {
   const initialState = [];
   const [state, dispatch] = useReducer(reducer, initialState);
   return (
-    <ChatContext.Provider value={{ state, dispatch }}>
+    <ChatContext.Provider value={{ socket }}>
       <ToastContainer />
       {children}
     </ChatContext.Provider>

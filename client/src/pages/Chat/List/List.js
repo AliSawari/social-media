@@ -46,7 +46,7 @@ const List = () => {
       <Header />
 
       <div className="py-5 px-14 w-full flex">
-        <UsersList />
+        <UsersList  />
         <div className="w-9/12 h-[calc(100vh-7rem)] relative">
           <div className="w-full h-full relative overflow-y-scroll flex flex-col justify-end py-3 ">
             {renderMessagesBox()}

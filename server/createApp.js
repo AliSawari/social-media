@@ -17,9 +17,13 @@ const Converstation = require("./modules/conversation/conversation.model")
 const { Server } = require("socket.io");
 
 const ChatModel = require("./modules/chat/chat.model");
+const UserModel = require("./modules/user/user.model");
+const PostModel = require("./modules/post/post.model");
+
+
+
 
 function createApp() {
-
 
   const app = express();
   const server = http.createServer(app);
@@ -29,12 +33,9 @@ function createApp() {
       methods: ["GET", "POST"],
     },
   });
-  app.use("/public", express.static("public"));
 
-  app.use(fileUpload());
-  app.use(cors());
-  app.use(bodyParser.json());
-  app.use(morgan("dev"));
+
+
 
   io.on("connection", (socket) => {
     socket.on("user:connect", ({ id }) => {
@@ -85,7 +86,34 @@ function createApp() {
       io.to(receiver).emit("user:notification", { message: `you have new message by ${chat.sender.fullname}`, sender });
       io.to(receiver).to(sender).emit("send message", chat);
     });
+
+
+
+    socket.on("post:liked", async ({ uid, id }) => {
+      const liker = await UserModel.findOne({ _id: uid });
+      const postUser = await PostModel.findOne({ _id: id });
+      const userId = postUser.user.toHexString()
+      socket.to(userId).emit("user:notification", { message: `${liker.fullname} like your post`, sender: liker })
+    });
+
+
+
+    socket.on("post:comment", async ({ id, user }) => {
+      const post = await PostModel.findOne({ _id: id });
+      const userComment = await UserModel.findById(user);
+      const userId = post.user.toHexString();
+      socket.to(userId).emit("user:notification", { message: `${userComment.fullname} commented in your post` })
+    })
   });
+
+  app.use("/public", express.static("public"));
+
+  app.use(fileUpload());
+  app.use(cors());
+  app.use(bodyParser.json());
+  app.use(morgan("dev"));
+
+
 
   app.use("/api/v1/users/", userRoutes);
   app.use("/api/v1/stories/", storyRoutes);

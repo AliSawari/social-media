@@ -34,9 +34,8 @@ const MessageSender = ({ id: receiver, setState }) => {
   };
 
 
-  socket.on("send message", (data) => {    
+  socket.on("send message", (data) => {
     setState(data);
-    
   });
 
   return (

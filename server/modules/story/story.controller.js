@@ -19,7 +19,7 @@ const add = async (req, res) => {
     });
 
     const timestamp = moment.now();
-    const storyDocument = {
+    const storyDocument = { 
       ...req.body,
       image: fileName,
       timestamp,

@@ -62,6 +62,8 @@ const getFollowingPosts = async (req, res) => {
 
 const likePost = async (req, res) => {
   try {
+
+  
     const { id, uid, isLiked } = req.body;
     if (isLiked) {
       await Post.updateOne({ _id: id }, { $pull: { likes: { user: uid } } })
@@ -77,6 +79,8 @@ const likePost = async (req, res) => {
     await Notification.create({ user: user._id, message: `${user.fullname} like your post` });
     await Post.updateOne({ _id: id }, { $push: { likes: { user: uid } } })
     const post = await Post.findById(id);
+
+
     return res.status(200).json({
       isLiked: true,
       count: post.likes.length

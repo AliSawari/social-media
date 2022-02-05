@@ -1,17 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { AiOutlineSend } from 'react-icons/ai';
 import httpClient from '../../../api/client'
 import { useGetUserId } from '../../../hooks/useGetUserId'
 import PostCommentItem from "./PostCommentItem";
+import { ChatContext } from "../../../context/providers/ChatProvider";
+import swal from 'sweetalert2'
 const PostComments = ({ id, comments: commentsList }) => {
-
+  const { socket } = useContext(ChatContext);
   const [text, setText] = useState("")
   const { id: user } = useGetUserId();
   const [comments, setComments] = useState(commentsList)
   const [state, setState] = useState(false);
-  const [section,setSection] = useState(1);
   const handleChangeInputValue = (e) => {
-    const value = e.target.value.trim();
+    const value = e.target.value;
     setText(value);
   }
   const handleSubmitForm = async (e) => {
@@ -19,7 +20,14 @@ const PostComments = ({ id, comments: commentsList }) => {
     try {
       e.preventDefault();
       const { data: comments } = await httpClient.post("posts/comments/add", { user, text, id });
+      socket.emit("post:comment", { id, user })
+      swal.fire({
+        title: "Success",
+        text: "your comment submitted",
+        icon: "success"
+      })
       setComments(comments);
+      setText("");
     } catch (error) {
       console.log(error);
     }
