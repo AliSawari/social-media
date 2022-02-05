@@ -2,7 +2,7 @@ import React from "react";
 import { FaCircle } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
-const UserItem = ({ _id, profile, fullname, chat, online }) => {
+const UserItem = ({ _id, profile, fullname, online, message }) => {
   return (
     <Link to={`/chat/list/${_id}`}>
       <div className="left-sides-header">
@@ -17,14 +17,12 @@ const UserItem = ({ _id, profile, fullname, chat, online }) => {
               width="35"
               height="35"
               alt="profile user"
-              className="rounded-lg border-1"
+              className="rounded-lg border-1 h-10 w-10 object-cover"
             />
           </div>
           <div className="flex flex-col justify-center">
             <h3 className="font-main text-sm text-violet-600">{fullname}</h3>
-            {chat && (
-              <p className="font-main text-xs text-neutral-500">{chat}</p>
-            )}
+            {message && <p className="text-xs text-violet-400 font-main">{message}</p>}
           </div>
         </div>
         <div className="items-center flex">

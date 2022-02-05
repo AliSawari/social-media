@@ -6,7 +6,7 @@ const {
   getUsersBySearch,
   getUserByUsername,
   changeProfile,
-  getFollowers,
+  getFollowers
 } = require("./user.controller");
 const router = express.Router();
 

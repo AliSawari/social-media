@@ -1,51 +1,36 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { BsThreeDots } from "react-icons/bs";
 import UserItem from "./UserItem";
+import { useGetUserId } from '../../../hooks/useGetUserId'
+import { MdOutlineChat } from 'react-icons/md'
+
+import httpClient from '../../../api/client'
 const LastUserChats = () => {
-  const data = [
-    {
-      id: 1,
-      fullname: "HamidrezaRamzani",
-      chat: "Ex aute ut Lorem elit.",
-      online: true,
-      profile: "https://picsum.photos/200/200?grayscale",
-    },
+  const { id } = useGetUserId();
+  const [state, setState] = useState([]);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const { data: { contacts: users } } = await httpClient.get(`converstation/list/${id}`);
+        setState(users)
+      } catch (error) {
+        console.log(error);
+      }
+    }
 
-    {
-      id: 2,
-      fullname: "HamidrezaRamzani",
-      chat: "Ex aute ut Lorem elit.",
-      online: true,
-      profile: "https://picsum.photos/200/200?grayscale",
-    },
+    fetchData();
+  }, []);
 
-
-    {
-      id: 3,
-      fullname: "HamidrezaRamzani",
-      chat: "Ex aute ut Lorem elit.",
-      online: true,
-      profile: "https://picsum.photos/200/200?grayscale",
-    },
-
-    {
-      id: 4,
-      fullname: "HamidrezaRamzani",
-      chat: "Ex aute ut Lorem elit.",
-      online: false,
-      profile: "https://picsum.photos/200/200?grayscale",
-    },
-  ];
   return (
     <div className="w-full h-auto pb-3 rounded overflow-hidden bg-neutral-800 shadow-sm">
       <div className="flex justify-between p-4 bg-gradient-to-l from-violet-800 to-violet-900">
         <h3 className="font-main text-white">Last Chats</h3>
         <button className="text-white text-xl">
-          <BsThreeDots />
+          <MdOutlineChat />
         </button>
       </div>
-      {data.map((item) => (
-        <UserItem key={item.id} {...item} />
+      {state.map((item) => (
+        <UserItem message={item.message} key={item._id} {...item.user} />
       ))}
     </div>
   );

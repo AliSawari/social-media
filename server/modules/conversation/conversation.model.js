@@ -13,6 +13,7 @@ const ConverstationModel = new mongoose.Schema(
                     type: mongoose.Schema.Types.ObjectId,
                     ref: "users",
                 },
+                message: { type: String },
                 timestamps: { type: Number }
             }
         ],

@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const StoryItem = () => {
   return (
     <Link to="/">
-      <div className="w-60 h-96 rounded relative flex justify-center items-center">
+      <div className="w-60 h-52 rounded relative flex justify-center items-center">
         <div className="z-30 flex justify-center flex-col items-center">
           <img
             src="https://picsum.photos/200/200?grayscale"
@@ -13,16 +13,10 @@ const StoryItem = () => {
             height={105}
             className="rounded-full p-1 bg-gradient-to-l from-violet-800 to-violet-900"
           />
-          <h3 className="py-2 text-center font-main text-white">Hamidreza Ramzani</h3> 
+          <h3 className="py-2 text-center font-main text-white">Hamidreza Ramzani</h3>
+          <span className="text-sm text-violet-500">2S</span>
         </div>
-        <div className="h-96 rounded overflow-hidden absolute left-0 top-0 z-0">
-          <img
-            src="https://picsum.photos/600/500?grayscale"
-            alt="story"
-            className="h-full  blur-sm"
-          />
-        </div>
-        <span className="absolute bottom-3 text-white font-main text-sm">2s</span>
+
       </div>
     </Link>
   );

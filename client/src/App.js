@@ -17,37 +17,24 @@ function App() {
       <UserProvider>
         <ChatProvider>
           <Routes>
-            <Route
-              index
-              element={
-                <PrivateRoute>
-                  <MainPage />
-                </PrivateRoute>
-              }
-            />
             <Route path="/auth">
               <Route path="login" element={<LoginPage />} />
               <Route path="register" element={<RegisterPage />} />
             </Route>
 
+
+
+            <Route index element={<MainPage />} />
+
             <Route path="/post">
-              <Route
-                path="add"
-                element={
-                  <PrivateRoute>
-                    <AddPost />
-                  </PrivateRoute>
-                }
-              />
+              <Route path="add" element={<AddPost />} />
             </Route>
 
             <Route path="/user">
               <Route
                 path="profile"
                 element={
-                  <PrivateRoute>
-                    <Profile />
-                  </PrivateRoute>
+                  <Profile />
                 }
               />
             </Route>
@@ -56,18 +43,14 @@ function App() {
               <Route
                 path="list"
                 element={
-                  <PrivateRoute>
-                    <ChatList />
-                  </PrivateRoute>
+                  <ChatList />
                 }
               />
 
               <Route
                 path="list/:id"
                 element={
-                  <PrivateRoute>
-                    <ChatList />
-                  </PrivateRoute>
+                  <ChatList />
                 }
               />
             </Route>
@@ -75,9 +58,7 @@ function App() {
             <Route
               path="@:username"
               element={
-                <PrivateRoute>
-                  <User />
-                </PrivateRoute>
+                <User />
               }
             />
           </Routes>

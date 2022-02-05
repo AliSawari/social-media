@@ -10,10 +10,10 @@ const UsersList = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const { data: { contacts: users } } = await httpClient.get(
+                const { data } = await httpClient.get(
                     `converstation/list/${id}`
                 );
-                setUsers(users)
+                setUsers(data && data.contacts ? data.contacts : [])
             } catch (error) {
                 console.log(error);
             }
@@ -23,7 +23,7 @@ const UsersList = () => {
     }, [location])
     return <div className="w-2/12">
         {users.map(item => (
-            <UserItem key={item.user._id} {...item.user} />
+            <UserItem key={item.user._id} message={item.message} {...item.user} />
         ))}
     </div>
 };
