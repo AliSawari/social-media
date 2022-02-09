@@ -1,3 +1,4 @@
+const { Schema } = require("mongoose");
 const mongoose = require("../../database/connection");
 
 const StorySchema = new mongoose.Schema({
@@ -11,20 +12,17 @@ const StorySchema = new mongoose.Schema({
     required: true,
   },
 
-  timestamp: {
-    type: String,
-    required: true,
+  expireTime: {
+    type: Number,
+    required: true
   },
-  seen: {
-    type: Boolean,
-    default: false,
-  },
+
+  views: [{ user: { type: Schema.Types.ObjectId } }],
   user: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "users",
-    required: true,
+    ref : "users"
   },
-});
+}, { timestamps: true });
 
 const StoryModel = mongoose.model("stories", StorySchema);
 

@@ -47,3 +47,11 @@ body {
 .h-full-screen {
   height: calc(100vh - 4rem);
 }
+
+.slick-item > li {
+  width: auto!important;
+}
+
+.slick-item .slick-active div{
+  background: magenta!important;
+}

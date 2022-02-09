@@ -40,9 +40,10 @@ function createApp() {
   io.on("connection", (socket) => {
     socket.on("user:connect", ({ id }) => {
       socket.join(id);
-
     });
     socket.on("send message", async ({ message, sender, receiver }) => {
+
+
       const newChat = await ChatModel.create({
         message,
         sender,
@@ -68,7 +69,7 @@ function createApp() {
 
       if (isReceiverConverstationExists) {
         if (!isReceiverConverstationExists.contacts.find(user => user.user == sender)) {
-          await Converstation.updateOne({ user: sender }, { $push: { contacts: { user: sender, timestamp, message: "" } } });
+          await Converstation.updateOne({ user: receiver }, { $push: { contacts: { user: sender, timestamp, message: "" } } });
         }
       } else {
         await Converstation.create({ user: receiver, contacts: [{ user: sender, timestamp, message: "" }] });
@@ -83,8 +84,8 @@ function createApp() {
         .populate("sender", "fullname username")
         .populate("receiver", "fullname username");
 
-      io.to(receiver).emit("user:notification", { message: `you have new message by ${chat.sender.fullname}`, sender });
-      io.to(receiver).to(sender).emit("send message", chat);
+      socket.to(receiver).emit("user:notification", { message: `you have new message by ${chat.sender.fullname}`, sender });
+      socket.to(receiver).to(sender).emit("send message", chat);
     });
 
 

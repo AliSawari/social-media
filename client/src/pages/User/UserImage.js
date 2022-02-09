@@ -1,13 +1,11 @@
 import React from "react";
+import { useShowUserProfile } from "../../hooks/useShowUserProfile";
 
 const UserImage = ({ profile }) => {
+  const mainProfile = useShowUserProfile(profile);
   return (
     <img
-      src={
-        profile.length
-          ? `http://localhost:4000/public/images/${profile}`
-          : "https://gravatar.com/avatar/6c2ff79dddfe69146d3a3a55c0bc7f52?s=400&d=robohash&r=x"
-      }
+      src={mainProfile}
       alt="My User"
       className="object-cover"
     />

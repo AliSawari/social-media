@@ -14,7 +14,7 @@ const AddStory = () => {
       </Modal>
       <div className="px-20 h-52 rounded relative flex justify-center items-center">
         <div className="z-30 w-100 flex justify-center flex-col items-center">
-          <button onClick={toggleShowModal}>
+          <button onClick={toggleShowModal} className="flex justify-center flex-col items-center">
             <BiMessageSquareAdd className="text-4xl text-violet-600" />
             <h3 className="py-2 text-center font-main text-violet-600">Add Story</h3>
           </button>

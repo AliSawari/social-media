@@ -1,17 +1,16 @@
 import React from "react";
 import { BsChevronDown } from "react-icons/bs";
+import { useShowUserProfile } from "../../hooks/useShowUserProfile";
 const UserInfo = ({ profile, fullname, onClick }) => {
+  const mainProfile = useShowUserProfile(profile);
+  console.log(mainProfile);
   return (
     <div
       className="flex pb-3 cursor-pointer gap-3 justify-start items-center pr-3"
       onClick={onClick}
     >
       <img
-        src={
-          profile.length
-            ? `http://localhost:4000/public/images/${profile}`
-            : "https://gravatar.com/avatar/6c2ff79dddfe69146d3a3a55c0bc7f52?s=400&d=robohash&r=x"
-        }        
+        src={mainProfile}
         alt="profile user"
         className="rounded-lg border-1 w-10 h-10 object-cover"
       />

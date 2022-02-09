@@ -148,7 +148,6 @@ const changeProfile = async (req, res) => {
       });
     }
 
-    console.log(files);
     await User.findOneAndUpdate({ _id: id }, { fullname, profile: fileName });
 
     res.status(200).json({
@@ -165,8 +164,8 @@ const changeProfile = async (req, res) => {
 
 const getFollowers = async (req, res) => {
   try {
-    const { id } = req.params;
-    const users = await FollowModel.find({ following: id }).populate("user");
+    const { id } = req.params;    
+    const users = await FollowModel.find({ following: id }).populate("user")
     res.status(200).json(users);
   } catch (error) {
     console.log(error);

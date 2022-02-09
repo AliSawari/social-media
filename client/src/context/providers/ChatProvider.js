@@ -1,5 +1,6 @@
 import { createContext, useEffect, useReducer, useState } from "react";
 import { useNavigate } from 'react-router-dom'
+import notif from '../../assets/audio/notif.wav'
 import { useGetUserId } from "../../hooks/useGetUserId";
 import { useSocketConnection } from "../../hooks/useSocketConnection";
 import reducer from "../reducers/ChatReducer";
@@ -20,6 +21,8 @@ const ChatProvider = ({ children }) => {
     navigate(`/chat/list/${sender}`)
   }
   socket.on("user:notification", ({ message }) => {
+    const audio = new Audio(notif);
+    audio.play();
     toast.success(message, {
       position: "bottom-right",
       autoClose: 5000,
@@ -27,7 +30,7 @@ const ChatProvider = ({ children }) => {
       closeOnClick: true,
       pauseOnHover: true,
       draggable: true,
-      theme: "dark",      
+      theme: "dark",
     });
   })
   const initialState = [];

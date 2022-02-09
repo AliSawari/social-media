@@ -19,8 +19,8 @@ const UserSchema = new mongoose.Schema({
   },
   profile: { type: String, default: "" },
   bio: { type: String, default: "" },
-  posts: [{ type: Schema.Types.ObjectId, ref: "posts" }],
 });
+
 
 const UserModel = mongoose.model("users", UserSchema);
 

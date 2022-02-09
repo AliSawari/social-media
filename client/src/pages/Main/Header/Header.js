@@ -5,11 +5,13 @@ import SearchBox from "./SearchBox";
 
 const Header = () => {
   return (
-    <header className="w-full relative  h-16  z-40 pt-5  flex justify-center">
-      <LeftNavbar />
-      <SearchBox />
-      <RightNavbar />
-    </header>
+    <div className="fixed z-50 bg-neutral-800 w-full">
+      <header className="w-full relative  h-20  z-40 pt-5  flex justify-center items-center">
+        <LeftNavbar />
+        <SearchBox />
+        <RightNavbar />
+      </header>
+    </div>
   );
 };
 

@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import httpClient from "../../api/client";
+import { Link } from 'react-router-dom'
 import { useGetUserId } from "../../hooks/useGetUserId";
+import { AiOutlineSend } from "react-icons/ai";
 const UserFollow = ({ isVisible, user }) => {
   const { id } = useGetUserId();
   const [state, setState] = useState(user.follow !== null);
@@ -12,7 +14,7 @@ const UserFollow = ({ isVisible, user }) => {
       } = await httpClient.post("follow/follow", {
         user: id,
         following: user.id,
-      });      
+      });
 
       setState(follow);
     } catch (error) {
@@ -32,18 +34,24 @@ const UserFollow = ({ isVisible, user }) => {
       </div>
       {isVisible ? (
         <div
-          className={`w-full rounded font-main py-3 cursor-pointer text-white  transition ${
-            state === false
-              ? "bg-violet-500 hover:bg-violet-800"
-              : "bg-neutral-700 hover:bg-neutral-800"
-          }`}
+          className={`w-full rounded font-main py-3 cursor-pointer text-white  transition ${state === false
+            ? "bg-violet-500 hover:bg-violet-800"
+            : "bg-neutral-700 hover:bg-neutral-800"
+            }`}
           onClick={handleFollowUnFollow}
         >
           {state ? "Following" : "Follow"}
         </div>
       ) : null}
 
-      
+      <Link
+        to={`/chat/list/${user.id}`}
+        className="text-sm bg-violet-700 h-12 py-1 px-2 rounded flex items-center justify-center gap-2 text-white  font-main w-full"
+      >
+        <AiOutlineSend fontSize={18} /> Send Message
+      </Link>
+
+
     </div>
   );
 };

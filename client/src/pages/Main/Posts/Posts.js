@@ -28,7 +28,7 @@ const Posts = () => {
 
     return posts.map((item) => <PostItem {...item} key={item._id} />);
   };
-  return <div className="w-full h-auto p-4 flex gap-5 ">{renderPosts()}</div>;
+  return <div className="w-full h-auto p-4 flex gap-5 flex-col">{renderPosts()}</div>;
 };
 
 export default Posts;

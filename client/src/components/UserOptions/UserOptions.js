@@ -21,9 +21,8 @@ const UserOptions = ({ data, items }) => {
       )}
 
       <ul
-        className={`bg-violet-700 rounded animation-spin absolute w-full ${
-          state ? "flex flex-col" : "hidden"
-        }`}
+        className={`bg-violet-700 rounded animation-spin absolute w-full ${state ? "flex flex-col" : "hidden"
+          }`}
       >
         {items.map((item) => (
           <UserOptionItem {...item} key={item.id} />

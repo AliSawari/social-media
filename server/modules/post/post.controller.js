@@ -44,11 +44,14 @@ const getFollowingPosts = async (req, res) => {
     const { id } = req.params;
     const followings = await FollowModel.find({ user: id });
     const followingIds = followings.map((item) => {
-      return item.following;
+      return item.following.toHexString();
     });
-    const posts = await Posts.find({ user: { $all: followingIds } }).populate(
+
+    const posts = await Posts.find({ user: { $in: followingIds } }).populate(
       "user"
-    ).populate("comments.user")
+    ).populate("comments.user").sort({ "timestamp": -1 });
+
+    console.log(followingIds);
     return res.status(200).json(posts);
   } catch (error) {
     console.log(error);
@@ -63,7 +66,7 @@ const getFollowingPosts = async (req, res) => {
 const likePost = async (req, res) => {
   try {
 
-  
+
     const { id, uid, isLiked } = req.body;
     if (isLiked) {
       await Post.updateOne({ _id: id }, { $pull: { likes: { user: uid } } })
@@ -74,9 +77,10 @@ const likePost = async (req, res) => {
       })
     }
 
-    const userPost = await Post.findById(id)
+    const userPost = await Post.findById(id);
+    const liker = await User.findOne({ _id: uid });
     const user = await User.findOne({ _id: userPost.user });
-    await Notification.create({ user: user._id, message: `${user.fullname} like your post` });
+    await Notification.create({ user: user._id, message: `${liker.fullname} like your post` });
     await Post.updateOne({ _id: id }, { $push: { likes: { user: uid } } })
     const post = await Post.findById(id);
 

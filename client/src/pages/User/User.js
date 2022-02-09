@@ -36,7 +36,7 @@ const User = () => {
       <div className="full flex justify-center py-28">
         <div className="w-2/3 h-auto flex-col flex justify-center">
           <div className="w-full  justify-center flex">
-            <div className="w-1/2 bg-white rounded h-auto flex justify-center">
+            <div className="w-1/2 h-auto flex justify-center">
               <UserImage profile={state.profile} />
             </div>
             <div className="w-1/2 p-10 flex items-center flex-col">

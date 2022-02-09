@@ -1,19 +1,17 @@
 import React from "react";
 import { FaCircle } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { useShowUserProfile } from "../../../hooks/useShowUserProfile";
 
 const UserItem = ({ _id, profile, fullname, online, message }) => {
+  const mainProfile = useShowUserProfile(profile);
   return (
     <Link to={`/chat/list/${_id}`}>
       <div className="left-sides-header">
         <div className="justify-center flex gap-3">
           <div>
             <img
-              src={
-                profile.length
-                  ? `http://localhost:4000/public/images/${profile}`
-                  : "https://gravatar.com/avatar/6c2ff79dddfe69146d3a3a55c0bc7f52?s=400&d=robohash&r=x"
-              }
+              src={mainProfile}
               alt="profile user"
               className="rounded-lg border-1 h-10 w-10 object-cover"
             />

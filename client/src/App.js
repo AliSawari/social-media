@@ -10,7 +10,7 @@ const MainPage = lazy(() => import("./pages/Main/MainPage"));
 const AddPost = lazy(() => import("./pages/AddPost/AddPostPage"));
 const User = lazy(() => import("./pages/User/User"));
 const Profile = lazy(() => import("./pages/Profile/Profile"));
-const ChatList = lazy(() => import("./pages/Chat/List/List"));
+const ChatList = lazy(() => import("./pages/Chat/List/Chat"));
 const NotificationList = lazy(() => import("./pages/Notification/List/List"));
 function App() {
   return (

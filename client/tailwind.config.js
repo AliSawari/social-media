@@ -4,6 +4,11 @@ module.exports = {
     fontFamily: {
       main: ["Poppins"],
     },
+    extends: {
+      height: {
+        "128": "32rem"
+      }
+    }
   },
   plugins: [],
 };

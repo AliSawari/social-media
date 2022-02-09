@@ -1,7 +1,9 @@
 const express = require("express");
-const { add } = require("./story.controller");
+const { add, getFollowingStories , getUserStories } = require("./story.controller");
 const router = express.Router();
 
-router.post("/add",add);
+router.post("/add", add);
+router.get("/list/:id", getFollowingStories);
+router.get("/all/:id", getUserStories);
 
 module.exports = router;

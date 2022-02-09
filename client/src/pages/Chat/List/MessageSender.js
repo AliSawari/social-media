@@ -1,22 +1,18 @@
-import React, { useEffect, useState, useContext } from "react";
-import { AiOutlineSend } from "react-icons/ai";
-import { BsEmojiSmile } from "react-icons/bs";
-import Picker from "emoji-picker-react";
-import { useSocketConnection } from "../../../hooks/useSocketConnection";
+import React, { useState, useContext, useEffect } from "react";
 import { useGetUserId } from "../../../hooks/useGetUserId";
-import { ChatContext } from "../../../context/providers/ChatProvider";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { ChatContext } from '../../../context/providers/ChatProvider'
+import { SendEmojiPicker, SendMessageInput, SendMessageButton } from "../../../components/SendMessage/index";
 const MessageSender = ({ id: receiver, setState }) => {
-  const socket = useSocketConnection("http://localhost:4000");
+  const { socket } = useContext(ChatContext);
   const { id: sender } = useGetUserId();
-  useEffect(() => {
-    socket.emit("user:connect", { id: sender });
-  }, []);
   const [text, setText] = useState("");
-  const [toggle, setToggle] = useState(false);
 
-  const handleChangeMessage = ({ target: { value } }) => {
+  useEffect(() => {
+    socket.on("send message", (data) => {
+      setState(data);
+    });
+  }, []);
+  const handleChangText = ({ target: { value } }) => {
     setText(value);
   };
 
@@ -24,53 +20,23 @@ const MessageSender = ({ id: receiver, setState }) => {
     setText((text) => `${text}${emoji}`);
   };
 
-  const handleToggleEmojiPicker = () => {
-    setToggle((toggle) => !toggle);
-  };
 
   const handleSendMessage = () => {
+    if (!text.length) return
+    
     setText("");
     socket.emit("send message", { message: text, sender, receiver });
   };
 
 
-  socket.on("send message", (data) => {
-    setState(data);
-  });
 
-  return (
-    <div className="w-full h-12 bg-neutral-900 absolute bottom-0 right-0 flex justify-between items-center px-2">
-      <ToastContainer />
-      <div className="w-1/12">
-        {toggle && (
-          <Picker
-            pickerStyle={{ position: "absolute", bottom: "70px" }}
-            onEmojiClick={handleSelectEmoji}
-          />
-        )}
-        <button
-          onClick={handleToggleEmojiPicker}
-          className="text-2xl text-violet-500"
-        >
-          <BsEmojiSmile />
-        </button>
-      </div>
-      <div className="w-10/12">
-        <input
-          type="text"
-          className="w-full h-12 bg-transparent outline-none text-white font-main"
-          placeholder="Type your message"
-          value={text}
-          onChange={handleChangeMessage}
-        />
-      </div>
-      <div className="w-1/12 text-right text-2xl text-violet-500">
-        <button type="button" onClick={handleSendMessage}>
-          <AiOutlineSend />
-        </button>
-      </div>
+  return receiver ? (
+    <div className="w-full h-12 bg-neutral-800 absolute bottom-0 right-0 flex justify-between items-center px-2">
+      <SendEmojiPicker onEmojiSelect={handleSelectEmoji} />
+      <SendMessageInput text={text} onChange={handleChangText} onSubmit={handleSendMessage} />
+      <SendMessageButton onSubmit={handleSendMessage} />
     </div>
-  );
+  ) : [];
 };
 
 export default MessageSender;
