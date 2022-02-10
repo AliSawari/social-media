@@ -1,16 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useShowUserProfile } from '../../../hooks/useShowUserProfile'
 const SearchUserItem = ({ profile, fullname, bio, username }) => {
+  const mainProfile = useShowUserProfile(profile);
   return (
     <Link to={`/@${username}`}>
       <div className="w-full flex  py-2 items-center hover:border-l hover:border-l-violet-600 border-l border-l-transparent">
         <div className="px-3">
           <img
-            src={
-              profile
-                ? `http://localhost:4000/public/images/${profile}`
-                : "https://gravatar.com/avatar/6c2ff79dddfe69146d3a3a55c0bc7f52?s=400&d=robohash&r=x"
-            }
+            src={mainProfile}
             className="bg-violet-700 w-20 h-20 rounded-full object-cover"
             alt={fullname}
           />

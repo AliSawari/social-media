@@ -49,7 +49,7 @@ const SearchBox = () => {
       <form className="w-full flex justify-center" onSubmit={handleSearchForm}>
         <input
           type="text"
-          className="w-3/4 h-9 outline-none px-3 rounded-l-2 font-main bg-neutral-800 text-white"
+          className="w-3/4 h-9 outline-none px-3 rounded-l-2 font-main bg-neutral-900 text-white"
           placeholder="Search User"
           required
           onChange={handleSearchForm}

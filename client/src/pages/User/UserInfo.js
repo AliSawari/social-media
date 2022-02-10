@@ -1,14 +1,9 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import { AiOutlineSend } from "react-icons/ai";
-const UserInfo = ({ fullname, id, bio }) => {
+const UserInfo = ({ fullname, bio }) => {
   return (
-    <div className="w-full text-center py-20">
-    
-      <h1 className="text-4xl mt-4 font-main text-white">{fullname}</h1>
-      <p className="text-sm text-violet-700 font-main text-center py-2">
-        {bio}
-      </p>
+    <div className="px-4">
+      <h2 className="text-3xl text-white font-main">{fullname}</h2>
+      <p className="font-main text-sm text-violet-300">{bio}</p>
     </div>
   );
 };
