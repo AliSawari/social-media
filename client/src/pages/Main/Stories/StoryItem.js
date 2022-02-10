@@ -4,10 +4,10 @@ import { useShowUserProfile } from '../../../hooks/useShowUserProfile'
 
 const StoryItem = ({ _id: id, fullname, profile: userProfile }) => {
   const profile = useShowUserProfile(userProfile);
-  
+
   return (
     <Link to={`?story=${id}`}>
-      <div className="w-60 h-52 rounded relative flex justify-center items-center">
+      <div className="w-52 h-52 rounded relative flex justify-center items-center">
         <div className="z-30 flex justify-center flex-col items-center">
           <img
             src={profile}

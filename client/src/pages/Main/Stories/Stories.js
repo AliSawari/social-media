@@ -43,7 +43,6 @@ const Stories = () => {
 
   const handlePrevUserStories = (userId) => {
 
-    console.log(userId);
     if (users.length === 1) {
       navigate("/");
       return;
@@ -59,7 +58,7 @@ const Stories = () => {
     return users.map(item => <StoryItem key={item._id} {...item} />)
   }
   return (
-    <div className="w-full overflow-hidden h-2/4 px-4 flex mt-32">
+    <div className="w-full overflow-hidden h-2/4 px-4 flex mt-20">
       <AddStory />
       {renderUserStories()}
       <StoryContent nextUser={handleNextUserStories} prevUser={handlePrevUserStories} />

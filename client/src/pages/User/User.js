@@ -8,6 +8,8 @@ import httpClient from "../../api/client";
 import UserPosts from "./UserPosts";
 import { UserContext } from "../../context/providers/UserProvider";
 import { useGetUserId } from "../../hooks/useGetUserId";
+import MainLayout from "../../components/MainLayout";
+import LeftSide from "../Main/LeftSide/LeftSide";
 const User = () => {
   const { username } = useParams();
   const location = useLocation();
@@ -33,37 +35,28 @@ const User = () => {
   return state !== null ? (
     <>
       <Header />
-      <div className="full flex justify-center py-28">
-        <div className="w-2/3 h-auto flex-col flex justify-center">
-          <div className="w-full  justify-center flex">
-            <div className="w-1/2 h-auto flex justify-center">
-              <UserImage profile={state.profile} />
+      <MainLayout>
+        <LeftSide />
+        <div className="w-5/6 h-96 user-bg mt-32 p-4">
+          <div className="w-full flex justify-between items-center h-96">
+            <div className="w-1/2 flex items-center justify-start">
+              <div className="w-64 h-64">
+                <img src="https://s6.uupload.ir/files/user_(1)_mpvu.png" width={256} height="256" className="w-64 h-64 object-cover" />
+              </div>
+              <div className="px-4">
+                <h2 className="text-3xl text-white font-main">{state.fullname}</h2>
+                <p className="font-main text-sm text-violet-300">{state.bio}</p>
+              </div>
             </div>
-            <div className="w-1/2 p-10 flex items-center flex-col">
-              <UserInfo
-                fullname={state.fullname}
-                bio={state.bio}
-                id={state.id}
-              />
-              <UserFollow
-                isVisible={user.data?.username !== state.username}
-                user={state}
-              />
+            <div className="w-1/2 flex">
+              <UserFollow isVisible={true} user={state} />
             </div>
           </div>
-
-          <div className="w-full flex flex-wrap py-5">
-            <div className="w-full py-3">
-              <h3 className="w-full text-violet-500 border-b border-b-violet-500 text-3xl font-main">
-                Posts
-              </h3>
-            </div>
-            <div className="flex w-full justify-center">
-              <UserPosts user={state} />
-            </div>
+          <div className="p">
+            س
           </div>
         </div>
-      </div>
+      </MainLayout>
     </>
   ) : null;
 };
