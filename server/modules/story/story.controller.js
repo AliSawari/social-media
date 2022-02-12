@@ -7,8 +7,10 @@ const StoryModel = require("./story.model");
 const UserModel = require("../user/user.model");
 const add = async (req, res) => {
   try {
+    const { id } = req.body;
     const { image } = req.files;
-    const fileName = Math.ceil(Math.random() * 200000) + image.name;
+
+    const fileName = Math.ceil(Math.random() * 200000) + "image.png";
     const uploadedPath = path.resolve(
       __dirname,
       "../../public/images",
@@ -23,14 +25,7 @@ const add = async (req, res) => {
     });
 
     const timestamp = moment().add(1, "days").unix();
-    const storyDocument = {
-      ...req.body,
-      image: fileName,
-      expireTime: timestamp,
-      views: []
-    };
-    const newStory = new Story(storyDocument);
-    await newStory.save();
+    await StoryModel.create({ user: id, image: fileName, expireTime: timestamp });
 
     res.status(200).json({ message: "story added" });
   } catch (error) {

@@ -3,7 +3,6 @@ import { BsChevronDown } from "react-icons/bs";
 import { useShowUserProfile } from "../../hooks/useShowUserProfile";
 const UserInfo = ({ profile, fullname, onClick }) => {
   const mainProfile = useShowUserProfile(profile);
-  console.log(mainProfile);
   return (
     <div
       className="flex pb-3 cursor-pointer gap-3 justify-start items-center pr-3"
@@ -12,9 +11,9 @@ const UserInfo = ({ profile, fullname, onClick }) => {
       <img
         src={mainProfile}
         alt="profile user"
-        className="rounded-lg border-1 w-10 h-10 object-cover"
+        className="rounded-full border-1 w-10 h-10 object-cover"
       />
-      <h3 className="text-white text-center text-sm flex items-center font-main ">
+      <h3 className="text-white text-center flex items-center text-sm h-10 leading-none font-main ">
         {fullname} &nbsp; <BsChevronDown className="text-violet-500" />
       </h3>
     </div>

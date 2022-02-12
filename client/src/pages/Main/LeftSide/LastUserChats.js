@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from "react";
-import { BsThreeDots } from "react-icons/bs";
 import UserItem from "./UserItem";
 import { useGetUserId } from '../../../hooks/useGetUserId'
 import { MdOutlineChat } from 'react-icons/md'
-
+import Loading from '../../../components/Loading/Loading'
+import EmptySectionMessage from '../../../components/EmptySectionMessage/EmptySectionMessage'
 import httpClient from '../../../api/client'
 const LastUserChats = () => {
   const { id } = useGetUserId();
-  const [state, setState] = useState([]);
+  const [state, setState] = useState(null);
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const { data: { contacts: users } } = await httpClient.get(`converstation/list/${id}`);
-        setState(users)
+        const { data: users } = await httpClient.get(`converstation/list/${id}`);
+        setState(users === null ? [] : users);
       } catch (error) {
         console.log(error);
       }
@@ -21,6 +21,23 @@ const LastUserChats = () => {
     fetchData();
   }, []);
 
+
+  const renderChats = () => {
+
+    console.log(state);
+    if (state === null) {
+      return <Loading />
+    }
+
+    if (state.length === 0) {
+      console.log("Nothing To Show");
+      return <EmptySectionMessage message="You have not any follower." />
+    }
+
+    return state.map((item) => (
+      <UserItem message={item.message} key={item._id} {...item.user} />
+    ));
+  }
   return (
     <div className="w-full h-auto pb-3 rounded overflow-hidden bg-neutral-800 shadow-sm">
       <div className="flex justify-between p-4 bg-gradient-to-l from-violet-800 to-violet-900">
@@ -29,9 +46,7 @@ const LastUserChats = () => {
           <MdOutlineChat />
         </button>
       </div>
-      {state.map((item) => (
-        <UserItem message={item.message} key={item._id} {...item.user} />
-      ))}
+      {renderChats()}
     </div>
   );
 };

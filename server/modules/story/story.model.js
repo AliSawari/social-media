@@ -2,10 +2,6 @@ const { Schema } = require("mongoose");
 const mongoose = require("../../database/connection");
 
 const StorySchema = new mongoose.Schema({
-  title: {
-    type: String,
-    required: true,
-  },
 
   image: {
     type: String,
@@ -20,7 +16,7 @@ const StorySchema = new mongoose.Schema({
   views: [{ user: { type: Schema.Types.ObjectId } }],
   user: {
     type: mongoose.Schema.Types.ObjectId,
-    ref : "users"
+    ref: "users"
   },
 }, { timestamps: true });
 

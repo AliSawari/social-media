@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import UserInfo from "./UserInfo";
 import UserOptionItem from "./UserOptionItem";
 
-const UserOptions = ({ data, items }) => {
+const UserOptions = ({ user, items }) => {
   const [state, setState] = useState(false);
   const handleClickOpenDropdown = () => {
     setState((prevState) => !prevState);
@@ -10,10 +10,10 @@ const UserOptions = ({ data, items }) => {
 
   return (
     <div className="relative z-10">
-      {data ? (
+      {user ? (
         <UserInfo
-          profile={data.profile}
-          fullname={data.fullname}
+          profile={user.profile}
+          fullname={user.fullname}
           onClick={handleClickOpenDropdown}
         />
       ) : (

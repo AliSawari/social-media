@@ -40,17 +40,19 @@ body {
     @apply w-full h-10 rounded bg-transparent outline-none px-3 text-white font-main border-violet-900 border-b block my-6;
   }
 
-  .send-message-btn{
+  .send-message-btn {
     @apply text-sm bg-violet-800 h-12 py-1 shadow-md px-2 rounded flex items-center justify-center gap-2 text-white  font-main w-60 hover:bg-violet-900 transition;
   }
 
-  .follow-btn{
+  .follow-btn {
     @apply bg-purple-800 py-2 font-main text-white rounded shadow-md hover:bg-purple-900 transition;
   }
 
-
-  .following-btn{
+  .following-btn {
     @apply bg-neutral-800  py-2 font-main text-white rounded shadow-md hover:bg-purple-900 transition;
+  }
+  .story-tool-btn {
+    @apply shadow-md border border-white w-10 h-10 rounded-full text-white flex justify-center items-center stroke-black;
   }
 }
 
@@ -62,14 +64,22 @@ body {
 }
 
 .slick-item > li {
-  width: auto!important;
+  width: auto !important;
 }
 
-.slick-item .slick-active div{
-  background: magenta!important;
+.slick-item .slick-active div {
+  background: magenta !important;
 }
 
-.user-bg{
-  background: rgb(109,40,217);
-  background: linear-gradient(180deg, rgba(109,40,217,1) 0%, rgba(171,0,255,0) 100%);
+.user-bg {
+  background: rgb(109, 40, 217);
+  background: linear-gradient(
+    180deg,
+    rgba(109, 40, 217, 1) 0%,
+    rgba(171, 0, 255, 0) 100%
+  );
+}
+
+.input-range__label-container{
+  display: none!important;
 }

@@ -7,16 +7,16 @@ const StoryItem = ({ _id: id, fullname, profile: userProfile }) => {
 
   return (
     <Link to={`?story=${id}`}>
-      <div className="w-52 h-52 rounded relative flex justify-center items-center">
+      <div className="h-32 px-3 rounded relative flex justify-center items-center">
         <div className="z-30 flex justify-center flex-col items-center">
           <img
             src={profile}
             alt="profile"
-            width={105}
-            height={105}
-            className="rounded-full p-1 bg-gradient-to-l from-violet-800 to-violet-900 w-28 h-28 object-cover"
+            width={50}
+            height={50}
+            className="rounded-full p-1 bg-gradient-to-l from-violet-800 to-violet-900 w-20 h-20 object-cover"
           />
-          <h3 className="py-2 text-center font-main text-white">{fullname}</h3>
+          <h3 className="py-2 text-sm text-center font-main text-white">{fullname}</h3>
         </div>
 
       </div>

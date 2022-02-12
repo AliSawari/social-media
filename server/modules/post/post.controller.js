@@ -43,10 +43,11 @@ const getFollowingPosts = async (req, res) => {
   try {
     const { id } = req.params;
     const followings = await FollowModel.find({ user: id });
-    const followingIds = followings.map((item) => {
+    let followingIds = followings.map((item) => {
       return item.following.toHexString();
     });
-
+    followingIds.push(id);
+    
     const posts = await Posts.find({ user: { $in: followingIds } }).populate(
       "user"
     ).populate("comments.user").sort({ "timestamp": -1 });

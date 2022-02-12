@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { useGetUserId } from "../../../hooks/useGetUserId";
 import AddStory from "./AddStory";
 import StoryContent from "./StoryContent";
-import StoryItem from "./StoryItem";
+import StoryUserItem from "./StoryUserItem";
 
 const Stories = () => {
   const { id } = useGetUserId();
@@ -55,7 +55,7 @@ const Stories = () => {
   }
 
   const renderUserStories = () => {
-    return users.map(item => <StoryItem key={item._id} {...item} />)
+    return users.map(item => <StoryUserItem key={item._id} {...item} />)
   }
   return (
     <div className="w-full overflow-hidden h-2/4 px-4 flex mt-20">

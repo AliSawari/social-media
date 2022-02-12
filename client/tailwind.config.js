@@ -4,9 +4,9 @@ module.exports = {
     fontFamily: {
       main: ["Poppins"],
     },
-    extends: {
+    extend: {
       height: {
-        "128": "32rem"
+        "128": "40rem"
       }
     }
   },

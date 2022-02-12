@@ -28,7 +28,7 @@ const RightNavbar = () => {
   return (
     <div className="flex justify-center items-center rounded-lg gap-8">
       <Notifications haveNotifications={notifications.filter(item => item.seen === false).length} />
-      <UserOptions data={user.data} items={menuItems} />
+      <UserOptions user={user.data} items={menuItems} />
     </div>
   );
 };
