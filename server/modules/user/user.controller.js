@@ -55,12 +55,16 @@ const getUser = async (req, res) => {
     const { id } = req.params;
     const user = await User.findById(id);
     const notifications = await Notification.find({ user: id });
+    const followers = await FollowModel.find({ following: id }).count();
+    const followings = await FollowModel.find({ user: id }).count();
     return res.status(200).json({
       fullname: user.fullname,
       profile: user.profile,
       bio: user.bio,
       username: user.username,
-      notifications
+      notifications,
+      followers,
+      followings
     });
   } catch (error) {
     console.log(error);
@@ -164,7 +168,7 @@ const changeProfile = async (req, res) => {
 
 const getFollowers = async (req, res) => {
   try {
-    const { id } = req.params;    
+    const { id } = req.params;
     const users = await FollowModel.find({ following: id }).populate("user")
     res.status(200).json(users);
   } catch (error) {

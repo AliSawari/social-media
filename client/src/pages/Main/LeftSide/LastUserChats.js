@@ -12,7 +12,7 @@ const LastUserChats = () => {
     const fetchData = async () => {
       try {
         const { data: users } = await httpClient.get(`converstation/list/${id}`);
-        setState(users === null ? [] : users);
+        setState(users === null ? [] : users.contacts);
       } catch (error) {
         console.log(error);
       }
@@ -24,15 +24,15 @@ const LastUserChats = () => {
 
   const renderChats = () => {
 
-    console.log(state);
     if (state === null) {
       return <Loading />
     }
 
     if (state.length === 0) {
-      console.log("Nothing To Show");
       return <EmptySectionMessage message="You have not any follower." />
     }
+
+    console.log(state);
 
     return state.map((item) => (
       <UserItem message={item.message} key={item._id} {...item.user} />

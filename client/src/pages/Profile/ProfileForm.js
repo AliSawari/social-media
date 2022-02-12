@@ -94,7 +94,6 @@ const ProfileForm = () => {
       return;
     }
 
-    console.log("hello world");
     const fileReader = new FileReader();
     if (data.has("profile")) {
       data.delete("profile");
@@ -112,7 +111,7 @@ const ProfileForm = () => {
     if (state.blob === true) {
       return state.src;
     } else if (state.src == "") {
-      return "https://gravatar.com/avatar/6c2ff79dddfe69146d3a3a55c0bc7f52?s=400&d=robohash&r=x";
+      return "https://s6.uupload.ir/files/user_(1)_mpvu.png";
     } else {
       return `http://localhost:4000/public/images/${state.src}`;
     }

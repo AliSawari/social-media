@@ -14,8 +14,9 @@ const UserInfo = ({ profile, fullname, onClick }) => {
         className="rounded-full border-1 w-10 h-10 object-cover"
       />
       <h3 className="text-white text-center flex items-center text-sm h-10 leading-none font-main ">
-        {fullname} &nbsp; <BsChevronDown className="text-violet-500" />
+        {fullname}
       </h3>
+      <BsChevronDown fontSize={20} className="text-violet-500" />
     </div>
   );
 };

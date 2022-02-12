@@ -11,8 +11,8 @@ const Followers = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const { data } = await httpClient.get(`users/followers/${id}`);
-        setState(data);
+        const { data : users } = await httpClient.get(`users/followers/${id}`);
+        setState(users);
       } catch (error) {
         console.log(error);
       }
