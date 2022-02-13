@@ -19,6 +19,7 @@ const UserSchema = new mongoose.Schema({
   },
   profile: { type: String, default: "" },
   bio: { type: String, default: "" },
+  saveds : [{type : Schema.Types.ObjectId , ref : "posts"}]
 });
 
 

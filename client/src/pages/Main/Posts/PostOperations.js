@@ -1,17 +1,19 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { IoIosHeart, IoIosHeartEmpty } from "react-icons/io";
 import { BiCommentDetail } from "react-icons/bi";
 import { AiOutlineSave } from "react-icons/ai";
 import { useGetUserId } from '../../../hooks/useGetUserId'
 import { useSocketConnection } from '../../../hooks/useSocketConnection'
 import httpClient from "../../../api/client";
-const PostOperations = ({ likes, user, id }) => {
+import { UserContext } from '../../../context/providers/UserProvider'
+const PostOperations = ({ likes, id }) => {
   const socket = useSocketConnection("http://localhost:4000");
-
+  const { state: { data } } = useContext(UserContext);
   const { id: uid } = useGetUserId();
   const isLiked = likes.find(like => like.user === uid)
   const [state, setState] = useState({ isLiked: isLiked != undefined, count: likes.length });
-
+  const isSavedPost = data.saveds.some(item => item.user === uid && item.post === id);
+  const [save, setSave] = useState(isSavedPost);
   const handleClickLike = async () => {
     try {
       const { data } = await httpClient.post("posts/like", { uid, id, isLiked: state.isLiked });
@@ -19,6 +21,16 @@ const PostOperations = ({ likes, user, id }) => {
         socket.emit("post:liked", { uid, id })
       }
       setState(data)
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+
+  const handleClickSavePost = async () => {
+    try {
+      const { data: { mode } } = await httpClient.post(`save/add`, { post: id, user: uid });
+      setSave(mode === "save");
     } catch (error) {
       console.log(error);
     }
@@ -37,7 +49,7 @@ const PostOperations = ({ likes, user, id }) => {
       </div>
 
       <div>
-        <button className="post-operation-button">
+        <button className={`post-operation-button ${save ? 'bg-violet-700 text-white' : ''}`} onClick={handleClickSavePost}>
           <AiOutlineSave />
         </button>
       </div>

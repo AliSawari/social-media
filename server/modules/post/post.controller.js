@@ -47,12 +47,11 @@ const getFollowingPosts = async (req, res) => {
       return item.following.toHexString();
     });
     followingIds.push(id);
-    
+
     const posts = await Posts.find({ user: { $in: followingIds } }).populate(
       "user"
     ).populate("comments.user").sort({ "timestamp": -1 });
 
-    console.log(followingIds);
     return res.status(200).json(posts);
   } catch (error) {
     console.log(error);
@@ -134,5 +133,19 @@ const allPostComments = async (req, res) => {
 };
 
 
+const saveToggle = async (req, res) => {
+  try {
+    const { id } = req.params;
+    
+    return res.status(200).json({ message: "post saved" });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      message: "internal server error",
+      error,
+    });
+  }
+};
 
-module.exports = { add, getFollowingPosts, likePost, allPostComments, addComment };
+
+module.exports = { add, getFollowingPosts, likePost, allPostComments, addComment, saveToggle };
