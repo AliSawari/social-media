@@ -5,7 +5,7 @@ import { MdOutlineChat } from 'react-icons/md'
 import Loading from '../../../components/Loading/Loading'
 import EmptySectionMessage from '../../../components/EmptySectionMessage/EmptySectionMessage'
 import httpClient from '../../../api/client'
-const LastUserChats = () => {
+const UserChatsHistory = () => {
   const { id } = useGetUserId();
   const [state, setState] = useState(null);
   useEffect(() => {
@@ -51,4 +51,4 @@ const LastUserChats = () => {
   );
 };
 
-export default LastUserChats;
+export default UserChatsHistory;
