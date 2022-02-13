@@ -117,6 +117,21 @@ const addComment = async (req, res) => {
   }
 };
 
+
+const removeComment = async (req, res) => {
+  try {
+    const { pid ,id } = req.params;
+    await Post.updateOne({ _id: pid }, { $pull: { comments: { _id: id } } });
+    return res.status(200).json({ message: "comment removed" });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      message: "internal server error",
+      error,
+    });
+  }
+};
+
 const allPostComments = async (req, res) => {
   try {
     const { id } = req.params;
@@ -136,7 +151,7 @@ const allPostComments = async (req, res) => {
 const saveToggle = async (req, res) => {
   try {
     const { id } = req.params;
-    
+
     return res.status(200).json({ message: "post saved" });
   } catch (error) {
     console.log(error);
@@ -148,4 +163,4 @@ const saveToggle = async (req, res) => {
 };
 
 
-module.exports = { add, getFollowingPosts, likePost, allPostComments, addComment, saveToggle };
+module.exports = { add, getFollowingPosts, likePost, allPostComments, addComment, saveToggle, removeComment };

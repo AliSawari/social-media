@@ -19,13 +19,16 @@ const PostComments = ({ id, comments: commentsList }) => {
 
     try {
       e.preventDefault();
+      if (value.length === 0) {
+        return;
+      }
       const { data: comments } = await httpClient.post("posts/comments/add", { user, text, id });
       socket.emit("post:comment", { id, user })
       swal.fire({
         title: "Success",
         text: "your comment submitted",
         icon: "success"
-      })
+      });
       setComments(comments);
       setText("");
     } catch (error) {
@@ -35,9 +38,13 @@ const PostComments = ({ id, comments: commentsList }) => {
   }
 
 
+  const handleRemoveComment = (id) => {
+    setComments(comments => comments.filter(item => item._id !== id));
+  }
+
   const renderComments = () => {
     return comments.map(comment => (
-      <PostCommentItem {...comment} key={comment._id} />
+      <PostCommentItem removeComment={handleRemoveComment} {...comment} key={comment._id} pid={id} />
     ))
   }
 

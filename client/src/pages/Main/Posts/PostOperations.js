@@ -13,8 +13,7 @@ const PostOperations = ({ likes, id }) => {
   const { id: uid } = useGetUserId();
   const isLiked = likes.find(like => like.user === uid)
   const [state, setState] = useState({ isLiked: isLiked != undefined, count: likes.length });
-  const isSavedPost = data.saveds.some(item => item.user._id === uid && item.post._id === id);
-  console.log(data.saveds);
+  const isSavedPost = data ? data.saveds.some(item => item.user._id === uid && item.post._id === id) : null;
   const [save, setSave] = useState(isSavedPost);
   const handleClickLike = async () => {
     try {

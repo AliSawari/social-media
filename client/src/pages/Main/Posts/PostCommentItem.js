@@ -1,34 +1,40 @@
 import React from 'react';
-import { BsThreeDots } from 'react-icons/bs'
+import { BsTrash } from 'react-icons/bs'
+import httpClient from '../../../api/client';
 import { useGetUserId } from '../../../hooks/useGetUserId';
+import { useShowUserProfile } from '../../../hooks/useShowUserProfile';
 
-const PostCommentItem = ({ text, user }) => {
+const PostCommentItem = ({ text, user, _id , removeComment , pid }) => {
+
+
+    const handleClickDeleteComment = async () => {
+        try {
+            await httpClient.get(`posts/delete-comment/${pid}/${_id}`);
+            removeComment(_id);
+        } catch (error) {
+            console.log(error);
+        }
+    }
     const { id } = useGetUserId();
-    return <div className="w-full h-auto flex items-center justify-start gap-4 p-3 rounded bg-neutral-700">
-        <div className="w-3/12 flex justify-start gap-1 items-center">
+    const mainProfile = useShowUserProfile(user.profile);
+    return <div className="w-full h-auto flex items-center justify-start gap-4 p-3 rounded my-5 border border-neutral-700">
+        <div className="w-7/12 flex justify-start gap-3 items-center">
             <img
-                src={
-                    user.profile.length
-                        ? `http://localhost:4000/public/images/${user.profile}`
-                        : "https://gravatar.com/avatar/6c2ff79dddfe69146d3a3a55c0bc7f52?s=400&d=robohash&r=x"
-                }
-                width="35"
-                height="35"
+                src={mainProfile}
+                width="30"
+                height="30"
                 alt="profile user"
                 className="rounded-lg border-1"
             />
             <h3 className='font-main text-violet-500 text-sm'>{user.fullname}</h3>
-        </div>
-        <div className="w-8/12">
             <p className="font-main text-white">{text}</p>
         </div>
-        <div className="w-1/12 text-center">
+        <div className="w-5/12 text-right">
             {user._id === id ? (
-                <button className="text-violet-500">
-                    <BsThreeDots />
+                <button className="text-violet-500" onClick={handleClickDeleteComment}>
+                    <BsTrash />
                 </button>
             ) : null}
-
         </div>
     </div>;
 };

@@ -32,7 +32,6 @@ const UserChatsHistory = () => {
       return <EmptySectionMessage message="You have not any follower." />
     }
 
-    console.log(state);
 
     return state.map((item) => (
       <UserItem message={item.message} key={item._id} {...item.user} />
