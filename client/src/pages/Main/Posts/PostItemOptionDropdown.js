@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-const PostItemOptionDropdown = ({ title, link, clickButton, type = "link", args }) => {
+const PostItemOptionDropdown = ({ title, link, clickButton, type = "link" }) => {
 
     const renderContent = () => {
         if (type == "link") {
@@ -10,7 +10,7 @@ const PostItemOptionDropdown = ({ title, link, clickButton, type = "link", args 
             </Link>
         }
 
-        return <button onClick={() => clickButton(args)}>
+        return <button onClick={() => clickButton()}>
             {title}
         </button>
     }

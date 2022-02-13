@@ -9,6 +9,7 @@ const followRoutes = require("./modules/follow/follow.routes");
 const chatRoutes = require("./modules/chat/chat.routes");
 const notificationRoutes = require("./modules/notification/notification.routes");
 const converstationRoutes = require("./modules/conversation/conversation.routes");
+const reportRoutes = require("./modules/reports/report.routes");
 const moment = require("moment");
 const fileUpload = require("express-fileupload");
 const cors = require("cors");
@@ -123,6 +124,7 @@ function createApp() {
   app.use("/api/v1/chat/", chatRoutes);
   app.use("/api/v1/converstation/", converstationRoutes);
   app.use("/api/v1/notifications/", notificationRoutes);
+  app.use("/api/v1/report/", reportRoutes);
 
   server.listen(config.get("PORT") || 4000, () => {
     console.log(`server running on port ${config.get("PORT") || 4000}`);

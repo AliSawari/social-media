@@ -7,7 +7,7 @@ import PostDropdownItem from './PostItemOptionDropdown'
 import ReportModal from "./ReportModal";
 import { toast } from "react-toastify";
 import SharePostModal from "./SharePostModal";
-const PostItemHeader = ({ user, link }) => {
+const PostItemHeader = ({ user, link , id }) => {
   const mainProfile = useShowUserProfile(user.profile);
   const [show, setShow] = useState(false);
   const [showReportModal, setShowReportModal] = useState(false);
@@ -65,10 +65,8 @@ const PostItemHeader = ({ user, link }) => {
           <PostDropdownItem title="Cancel" type="button" clickButton={handleTogglePostItemDropdown} />
         </ul>
       </Modal>
-      <ReportModal show={showReportModal} closeReportModal={handleHideReportModal} />
+      <ReportModal show={showReportModal} closeReportModal={handleHideReportModal} id={id} />
       <SharePostModal link={link} show={showSharePostModal} closeReportModal={handleHideSharePostModal} />
-
-
       <div className="flex gap-3 items-center">
         <img
           src={mainProfile}
