@@ -4,7 +4,6 @@ import Loading from "./components/Loading/Loading";
 import UserProvider from "./context/providers/UserProvider";
 import ChatProvider from "./context/providers/ChatProvider";
 import PrivateRoute from "./components/PrivateRoute";
-import Welcome from "./pages/Welcome/Welcome";
 const LoginPage = lazy(() => import("./pages/Auth/LoginPage"));
 const RegisterPage = lazy(() => import("./pages/Auth/RegisterPage"));
 const MainPage = lazy(() => import("./pages/Main/MainPage"));
@@ -25,11 +24,8 @@ function App() {
             </Route>
 
 
-          {/* <Welcome /> */}
 
-          <Route index element={<Welcome />}  />
-
-            {/* />
+            <Route index element={<MainPage />} />
 
             <Route path="/post">
               <Route path="add" element={<AddPost />} />
@@ -74,7 +70,7 @@ function App() {
               element={
                 <User />
               }
-            /> */}
+            />
           </Routes>
         </ChatProvider>
       </UserProvider>

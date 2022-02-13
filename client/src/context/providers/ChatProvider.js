@@ -33,8 +33,6 @@ const ChatProvider = ({ children }) => {
       theme: "dark",
     });
   })
-  const initialState = [];
-  const [state, dispatch] = useReducer(reducer, initialState);
   return (
     <ChatContext.Provider value={{ socket }}>
       <ToastContainer />

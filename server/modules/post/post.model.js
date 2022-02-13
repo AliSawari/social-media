@@ -20,7 +20,11 @@ const PostSchema = new mongoose.Schema({
     ref: "users",
   },
   likes: [{ user: { type: mongoose.Schema.Types.ObjectId, ref: "users" } }],
-  comments: [{ user: { type: mongoose.Schema.Types.ObjectId, ref: "users" }, text: { type: String }, timestamp: { type: Number } }]
+  comments: [{ user: { type: mongoose.Schema.Types.ObjectId, ref: "users" }, text: { type: String }, timestamp: { type: Number } }],
+  link: {
+    type: String,
+    default: () => Math.random().toString(36).slice(5)
+  }
 });
 
 const PostModel = mongoose.model("posts", PostSchema);
