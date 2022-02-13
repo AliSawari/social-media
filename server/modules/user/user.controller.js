@@ -58,7 +58,7 @@ const getUser = async (req, res) => {
     const notifications = await Notification.find({ user: id });
     const followers = await FollowModel.find({ following: id }).count();
     const followings = await FollowModel.find({ user: id }).count();
-    const savePosts = await SaveModel.find({ user: id });
+    const savePosts = await SaveModel.find({ user: id }).populate("user").populate("post").populate({ path: "post", populate: { path: "user", model: "users" } })
     return res.status(200).json({
       fullname: user.fullname,
       profile: user.profile,

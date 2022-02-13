@@ -22,7 +22,9 @@ const RightNavbar = () => {
   }, [dispatch, user.user.id]);
   const menuItems = [
     { id: 1, title: "Profile", link: "/user/profile" },
-    { id: 2, title: "Logout", link: "/user/logout" },
+    { id: 2, title: "Saved", link: "/user/saved" },
+    { id: 3
+      , title: "Logout", link: "/user/logout" },
   ];
 
   return (

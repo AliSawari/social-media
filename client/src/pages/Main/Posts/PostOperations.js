@@ -7,12 +7,14 @@ import { useSocketConnection } from '../../../hooks/useSocketConnection'
 import httpClient from "../../../api/client";
 import { UserContext } from '../../../context/providers/UserProvider'
 const PostOperations = ({ likes, id }) => {
+
   const socket = useSocketConnection("http://localhost:4000");
   const { state: { data } } = useContext(UserContext);
   const { id: uid } = useGetUserId();
   const isLiked = likes.find(like => like.user === uid)
   const [state, setState] = useState({ isLiked: isLiked != undefined, count: likes.length });
-  const isSavedPost = data.saveds.some(item => item.user === uid && item.post === id);
+  const isSavedPost = data.saveds.some(item => item.user._id === uid && item.post._id === id);
+  console.log(data.saveds);
   const [save, setSave] = useState(isSavedPost);
   const handleClickLike = async () => {
     try {

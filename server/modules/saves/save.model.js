@@ -5,11 +5,13 @@ const SaveSchema = new mongoose.Schema({
     post: {
         type: Schema.Types.ObjectId,
         required: true,
+        ref : "posts"
     },
 
     user: {
         type: Schema.Types.ObjectId,
         required: true,
+        ref : "users"
     },
 
 }, { timestamps: true });
