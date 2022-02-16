@@ -2,13 +2,14 @@ import React, { useState, useContext } from "react";
 import Modal from "../../../components/Modal/Modal";
 import AddStoryForm from "./AddStoryForm";
 import { UserContext } from '../../../context/providers/UserProvider'
-import { AiFillPlusCircle } from "react-icons/ai";
-const AddStory = () => {
+import { AiFillPlusCircle, AiFillEye } from "react-icons/ai";
+const AddStory = ({ userStories }) => {
   const { state: { data } } = useContext(UserContext);
   const [state, setState] = useState(false);
   const toggleShowModal = () => {
     setState((prevState) => !prevState);
   };
+
   return (
     <>
       <Modal show={state} closeModal={toggleShowModal} title="Add Story">
@@ -18,8 +19,9 @@ const AddStory = () => {
         {data && <div className="z-30 flex justify-center flex-col relative items-center">
 
           <div className="relative">
-            <div className="absolute cursor-pointer top-0 left-0 flex justify-center items-center w-20 h-20  z-50" onClick={toggleShowModal}>
-              <AiFillPlusCircle fontSize={30} className="text-white" />
+            <div className="absolute cursor-pointer gap-1 top-0 left-0 flex flex-col justify-center items-center w-20 h-20  z-50" >
+              <AiFillPlusCircle fontSize={25} className="text-white" onClick={toggleShowModal} />
+              <AiFillEye fontSize={25} className="text-white" />
             </div>
             <img
               src={`http://localhost:4000/public/images/${data.profile}`}

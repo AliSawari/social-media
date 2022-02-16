@@ -17,6 +17,7 @@ const ProfileForm = () => {
 
   const schema = yup.object().shape({
     fullname: yup.string().required("it can not be empty"),
+    bio: yup.string().required("it can not be empty"),
     profile: yup.mixed(),
   });
 
@@ -35,7 +36,7 @@ const ProfileForm = () => {
       try {
         const { data } = await httpClient.get(`users/user/${id}`);
         setValue("fullname", data.fullname);
-        setValue("username", data.username);
+        setValue("bio", data.bio);
         if (data.profile) {
           setState({ blob: false, src: data.profile });
         }
@@ -49,9 +50,9 @@ const ProfileForm = () => {
 
   const handleSubmitForm = async (values) => {
     try {
-      console.log(values.profile[0]);
       const data = new FormData();
       data.append("fullname", values.fullname);
+      data.append("bio", values.bio);
       data.append("id", id);
       data.append("profile", values.profile[0]);
       await httpClient.post("users/change-profile", data, {
@@ -149,6 +150,14 @@ const ProfileForm = () => {
         register={register}
         name="fullname"
         placeholder="Type Fullname"
+        errors={errors}
+      />
+
+      <Input
+        type="text"
+        register={register}
+        name="bio"
+        placeholder="Type Your Bio"
         errors={errors}
       />
 

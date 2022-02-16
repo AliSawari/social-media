@@ -1,16 +1,29 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { AiOutlineSend } from 'react-icons/ai';
 import httpClient from '../../../api/client'
 import { useGetUserId } from '../../../hooks/useGetUserId'
 import PostCommentItem from "./PostCommentItem";
 import { ChatContext } from "../../../context/providers/ChatProvider";
 import swal from 'sweetalert2'
-const PostComments = ({ id, comments: commentsList }) => {
+const PostComments = ({ id }) => {
   const { socket } = useContext(ChatContext);
-  const [text, setText] = useState("")
+  const [text, setText] = useState("");
   const { id: user } = useGetUserId();
-  const [comments, setComments] = useState(commentsList)
+  const [comments, setComments] = useState([]);
   const [state, setState] = useState(false);
+  useEffect(() => {
+    const fetchComments = async () => {
+      try {
+        const { data: comments } = await httpClient.get(`comments/get-by-post/${id}`);
+        setComments(comments);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    fetchComments();
+  }, []);
+
   const handleChangeInputValue = (e) => {
     const value = e.target.value;
     setText(value);
@@ -19,10 +32,10 @@ const PostComments = ({ id, comments: commentsList }) => {
 
     try {
       e.preventDefault();
-      if (value.length === 0) {
+      if (text.length === 0) {
         return;
       }
-      const { data: comments } = await httpClient.post("posts/comments/add", { user, text, id });
+      const { data: comments } = await httpClient.post("comments/add", { user, message: text, post: id, depth: 0 });
       socket.emit("post:comment", { id, user })
       swal.fire({
         title: "Success",
@@ -37,15 +50,43 @@ const PostComments = ({ id, comments: commentsList }) => {
 
   }
 
+  const createNestedComments = (arrComments) => {
+    let nestedChildrens = [];
+    const sortedComments = arrComments.sort((a, b) => {
+      return a.depth - b.depth;
+    }).reverse();
+    for (let index = 0; index < sortedComments.length; index++) {
+      const comment = sortedComments[index];
+      if (!comment.childrens) {
+        comment.childrens = [];
+      }
+      const id = comment._id;
+      const childrens = sortedComments.filter(item => item.parent === id);
+      if (childrens.length) {
+        comment["childrens"] = childrens;
+        childrens.forEach(child => {
+          nestedChildrens = nestedChildrens.filter(item => item._id != child._id);
+        })
+      }
+      nestedChildrens.push(comment);
+    }
+    return nestedChildrens;
+  }
+
 
   const handleRemoveComment = (id) => {
     setComments(comments => comments.filter(item => item._id !== id));
   }
 
+  const handleChangeComments = (comments) => {
+    setComments(comments);
+  }
+
   const renderComments = () => {
-    return comments.map(comment => (
-      <PostCommentItem removeComment={handleRemoveComment} {...comment} key={comment._id} pid={id} />
-    ))
+    const nestedComments = createNestedComments(comments);
+    return nestedComments.map(comment => (
+      <PostCommentItem removeComment={handleRemoveComment} {...comment} key={comment._id} changeComments={handleChangeComments} />
+    ));
   }
 
   const handleClickToggleCommentList = () => {

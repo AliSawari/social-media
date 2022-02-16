@@ -50,7 +50,7 @@ const getFollowingPosts = async (req, res) => {
 
     const posts = await Posts.find({ user: { $in: followingIds } }).populate(
       "user"
-    ).populate("comments.user").sort({ "timestamp": -1 });
+    ).sort({ "timestamp": -1 });
 
     return res.status(200).json(posts);
   } catch (error) {
@@ -120,7 +120,7 @@ const addComment = async (req, res) => {
 
 const removeComment = async (req, res) => {
   try {
-    const { pid ,id } = req.params;
+    const { pid, id } = req.params;
     await Post.updateOne({ _id: pid }, { $pull: { comments: { _id: id } } });
     return res.status(200).json({ message: "comment removed" });
   } catch (error) {

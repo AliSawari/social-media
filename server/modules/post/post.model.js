@@ -1,3 +1,4 @@
+const { Schema } = require("mongoose");
 const mongoose = require("../../database/connection");
 
 const PostSchema = new mongoose.Schema({
@@ -20,7 +21,6 @@ const PostSchema = new mongoose.Schema({
     ref: "users",
   },
   likes: [{ user: { type: mongoose.Schema.Types.ObjectId, ref: "users" } }],
-  comments: [{ user: { type: mongoose.Schema.Types.ObjectId, ref: "users" }, text: { type: String }, timestamp: { type: Number } }],
   link: {
     type: String,
     default: () => Math.random().toString(36).slice(5)

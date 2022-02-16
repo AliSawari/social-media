@@ -11,7 +11,7 @@ const ProfileUserInfo = ({ profile, fullname, bio }) => {
         alt={fullname}
       />
       <h1 className="text-white font-main m-0 p-0">{fullname}</h1>
-      <p className="text-violet-500 text-sm font-main m-0 p-0">{bio}</p>
+      <p className="text-violet-500 text-sm text-center font-main m-0 p-0">{bio}</p>
     </div>
   );
 };

@@ -71,7 +71,7 @@ const LoginPage = () => {
         />
         <Input
           type="password"
-          placeholder="Type your username"
+          placeholder="Type your password"
           errors={errors}
           register={register}
           name="password"

@@ -6,6 +6,7 @@ const FollowModel = require("../follow/follow.model");
 const Notification = require("../notification/notification.model");
 const path = require("path");
 const SaveModel = require("../saves/save.model");
+const StoryModel = require('../story/story.model');
 const register = async (req, res) => {
   try {
     const user = req.body;
@@ -58,7 +59,9 @@ const getUser = async (req, res) => {
     const notifications = await Notification.find({ user: id });
     const followers = await FollowModel.find({ following: id }).count();
     const followings = await FollowModel.find({ user: id }).count();
-    const savePosts = await SaveModel.find({ user: id }).populate("user").populate("post").populate({ path: "post", populate: { path: "user", model: "users" } })
+    const savePosts = await SaveModel.find({ user: id }).populate("user").populate("post").populate({ path: "post", populate: { path: "user", model: "users" } });
+    const stories = await StoryModel.find({ user: id }).populate("user");
+
     return res.status(200).json({
       fullname: user.fullname,
       profile: user.profile,
@@ -67,7 +70,8 @@ const getUser = async (req, res) => {
       notifications,
       followers,
       followings,
-      saveds: savePosts
+      saveds: savePosts,
+      stories
     });
   } catch (error) {
     console.log(error);
@@ -134,7 +138,7 @@ const getUserByUsername = async (req, res) => {
 const changeProfile = async (req, res) => {
   try {
     const files = req.files;
-    const { fullname, id } = req.body;
+    const { fullname, id, bio } = req.body;
     let fileName;
     const user = await User.findOne({ _id: id });
     fileName = user.profile;
@@ -155,7 +159,7 @@ const changeProfile = async (req, res) => {
       });
     }
 
-    await User.findOneAndUpdate({ _id: id }, { fullname, profile: fileName });
+    await User.findOneAndUpdate({ _id: id }, { fullname, profile: fileName, bio });
 
     res.status(200).json({
       message: "user profile updated",

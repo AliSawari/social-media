@@ -1,4 +1,4 @@
-import { GET_USER_DATA, LOGIN_USER } from "../actions/UserActions";
+import { GET_USER_DATA, LOGIN_USER, LOGOUT_USER } from "../actions/UserActions";
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -12,6 +12,16 @@ const reducer = (state, action) => {
         ...state,
         data: action.data,
       };
+
+    case LOGOUT_USER:{      
+      return {
+        auth: false,
+        user: null,
+        data: undefined
+      };
+    }
+      
+
     default:
       return state;
   }

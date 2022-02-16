@@ -1,6 +1,6 @@
 import React from "react";
 import Header from "../Main/Header/Header";
-import ProfileForm from "./ProfileForm";
+import EditProfileForm from "./EditProfileForm";
 
 const Profile = () => {
   return (
@@ -11,10 +11,10 @@ const Profile = () => {
           Edit Profile
         </h3>
         <p className="font-main text-center block text-sm text-neutral-500">
-          Occaecat amet aliqua minim voluptate dolore laboris.
+          you can change your profile details
         </p>
 
-        <ProfileForm />
+        <EditProfileForm />
       </div>
     </>
   );

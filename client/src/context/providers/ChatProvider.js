@@ -10,16 +10,13 @@ import "react-toastify/dist/ReactToastify.css";
 
 const ChatProvider = ({ children }) => {
   const socket = useSocketConnection("http://localhost:4000")
-  const navigate = useNavigate();
   const { id } = useGetUserId();
   useEffect(() => {
     socket.emit("user:connect", { id })
   }, [])
 
 
-  const handleClickToast = (sender) => {
-    navigate(`/chat/list/${sender}`)
-  }
+
   socket.on("user:notification", ({ message }) => {
     const audio = new Audio(notif);
     audio.play();
