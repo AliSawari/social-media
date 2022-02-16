@@ -1,5 +1,5 @@
 import { Fragment, lazy, Suspense } from "react";
-import { Route, Routes } from "react-router";
+import { Route, Routes, useRoutes } from "react-router";
 import Loading from "./components/Loading/Loading";
 import UserProvider from "./context/providers/UserProvider";
 import ChatProvider from "./context/providers/ChatProvider";
@@ -15,84 +15,77 @@ const NotificationList = lazy(() => import("./pages/Notification/List/List"));
 const Saved = lazy(() => import("./pages/Saved/Saved"));
 const Logout = lazy(() => import("./pages/Logout/Logout"));
 function App() {
+
+
+  const routes = useRoutes([
+    {
+      path: "/auth", children: [
+        { path: "login", element: <LoginPage /> },
+        { path: "register", element: <RegisterPage /> },
+      ]
+    },
+    {
+      path: "/",
+      element: <PrivateRoute><MainPage /></PrivateRoute>
+    },
+
+    {
+      path: "/post", children: [
+        { path: "add", element: <PrivateRoute><AddPost /></PrivateRoute> }
+      ]
+    },
+    {
+      path: "/user", children: [
+        {
+          path: "profile",
+          element: <PrivateRoute> <Profile /></PrivateRoute>
+        },
+        {
+          path: "saved",
+          element: <PrivateRoute> <Saved /></PrivateRoute>
+        },
+        {
+          path: "logout",
+          element: <PrivateRoute> <Logout /></PrivateRoute>
+        },
+
+      ]
+    },
+    {
+      path: "/chat",
+      children: [
+        {
+          path: "list",
+          element: <PrivateRoute> <ChatList /></PrivateRoute>
+        },
+        {
+          path: "list/:id",
+          element: <PrivateRoute> <ChatList /></PrivateRoute>
+        },
+      ]
+    },
+    {
+      path: "/notifications",
+      children: [
+        {
+          path: "list",
+          element: <PrivateRoute> <NotificationList /></PrivateRoute>
+        }
+      ]
+    },
+    {
+      path: "@:username",
+      element: <PrivateRoute> <User /></PrivateRoute>
+    }
+  ])
   return (
     <Suspense fallback={<Loading />}>
-   <UserProvider>
-            <ChatProvider>
-      <Routes>
-        
-          <Route path="/auth">
-            <Route path="login" element={<LoginPage />} />
-            <Route path="register" element={<RegisterPage />} />
-          </Route>
-       
-              <Route index element={<MainPage />} />
+      <UserProvider>
+        <ChatProvider>
+          {routes}
+        </ChatProvider>
+      </UserProvider>
 
-              <Route path="/post">
-                <Route path="add" element={<AddPost />} />
-              </Route>
-
-              <Route path="/user">
-                <Route
-                  path="profile"
-                  element={
-                    <Profile />
-                  }
-                />
-
-
-                <Route
-                  path="saved"
-                  element={
-                    <Saved />
-                  }
-                />
-
-
-                <Route
-                  path="logout"
-                  element={
-                    <Logout />
-                  }
-                />
-              </Route>
-
-              <Route path="/chat">
-                <Route
-                  path="list"
-                  element={
-                    <ChatList />
-                  }
-                />
-
-                <Route
-                  path="list/:id"
-                  element={
-                    <ChatList />
-                  }
-                />
-              </Route>
-
-              <Route path="/notifications">
-                <Route
-                  path="list"
-                  element={
-                    <NotificationList />
-                  }
-                />
-              </Route>
-
-              <Route
-                path="@:username"
-                element={
-                  <User />
-                }
-              />
-                  
-      </Routes>
-  </ChatProvider>
-          </UserProvider>
-          
     </Suspense>
   );
 }
