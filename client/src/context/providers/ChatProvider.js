@@ -10,6 +10,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 const ChatProvider = ({ children }) => {
   const socket = useSocketConnection("http://localhost:4000")
+  
   const { id } = useGetUserId();
   useEffect(() => {
     socket.emit("user:connect", { id })

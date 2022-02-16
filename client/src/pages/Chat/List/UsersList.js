@@ -21,7 +21,7 @@ const UsersList = () => {
 
         fetchData();
     }, [location])
-    return <div className="w-2/12">
+    return <div className="w-2/12 mt-16">
         {users.map(item => (
             <UserItem key={item.user._id} message={item.message} {...item.user} />
         ))}

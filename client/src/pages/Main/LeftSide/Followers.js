@@ -5,14 +5,15 @@ import httpClient from "../../../api/client";
 import { useGetUserId } from "../../../hooks/useGetUserId";
 import Loading from "../../../components/Loading/Loading";
 import { Link } from "react-router-dom";
+import EmptySectionMessage from "../../../components/EmptySectionMessage/EmptySectionMessage";
 const Followers = () => {
   const { id } = useGetUserId();
   const [state, setState] = useState(null);
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const { data : users } = await httpClient.get(`users/followers/${id}`);
-        setState(users);
+        const { data: users } = await httpClient.get(`users/followers/${id}`);
+        setState(users === null ? [] : users);
       } catch (error) {
         console.log(error);
       }
@@ -28,6 +29,10 @@ const Followers = () => {
           <Loading />
         </div>
       );
+
+    if (state.length === 0) {
+      return <EmptySectionMessage message={"you did non't follow somebody"} />
+    }
 
     return state.map((item) => <UserItem key={item._id} {...item.user} />);
   };

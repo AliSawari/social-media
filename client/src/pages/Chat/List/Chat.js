@@ -62,7 +62,7 @@ const List = () => {
       <Header />
       <div className="py-5 w-full flex flex-between">
         <UsersList />
-        <div className="w-9/12 h-[calc(100vh-7rem)] relative bg-neutral-900">
+        <div className="w-9/12 h-[calc(100vh-7rem)]  relative bg-neutral-900 mt-16">
           {renderMessagesBox()}
         </div>
       </div>

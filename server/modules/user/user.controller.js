@@ -56,9 +56,9 @@ const getUser = async (req, res) => {
   try {
     const { id } = req.params;
     const user = await User.findById(id);
-    const notifications = await Notification.find({ user: id });
-    const followers = await FollowModel.find({ following: id }).count();
-    const followings = await FollowModel.find({ user: id }).count();
+    const notifications = await Notification.find({ user: id })
+    const followers = await FollowModel.find({ following: id }).populate("user");
+    const followings = await FollowModel.find({ user: id }).populate("following");;
     const savePosts = await SaveModel.find({ user: id }).populate("user").populate("post").populate({ path: "post", populate: { path: "user", model: "users" } });
     const stories = await StoryModel.find({ user: id }).populate("user");
 

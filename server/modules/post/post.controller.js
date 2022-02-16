@@ -99,53 +99,6 @@ const likePost = async (req, res) => {
   }
 };
 
-const addComment = async (req, res) => {
-  try {
-    const { user, text, id } = req.body;
-    const timestamp = moment.now();
-
-    await Post.updateOne({ _id: id }, { $push: { comments: { user, text, timestamp } } });
-    const post = await Post.findById(id).populate("comments.user");
-    const comments = post.comments;
-    return res.status(200).json(comments);
-  } catch (error) {
-    console.log(error);
-    res.status(500).json({
-      message: "internal server error",
-      error,
-    });
-  }
-};
-
-
-const removeComment = async (req, res) => {
-  try {
-    const { pid, id } = req.params;
-    await Post.updateOne({ _id: pid }, { $pull: { comments: { _id: id } } });
-    return res.status(200).json({ message: "comment removed" });
-  } catch (error) {
-    console.log(error);
-    res.status(500).json({
-      message: "internal server error",
-      error,
-    });
-  }
-};
-
-const allPostComments = async (req, res) => {
-  try {
-    const { id } = req.params;
-    const post = await Post.findById(id).populate("comments.user");
-    const comments = post.comments;
-    return res.status(200).json(comments);
-  } catch (error) {
-    console.log(error);
-    res.status(500).json({
-      message: "internal server error",
-      error,
-    });
-  }
-};
 
 
 const saveToggle = async (req, res) => {
@@ -163,4 +116,4 @@ const saveToggle = async (req, res) => {
 };
 
 
-module.exports = { add, getFollowingPosts, likePost, allPostComments, addComment, saveToggle, removeComment };
+module.exports = { add, getFollowingPosts, likePost,saveToggle};

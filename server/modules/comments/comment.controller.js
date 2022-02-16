@@ -36,7 +36,7 @@ const getCommentsByPostId = async (req, res) => {
 const removeComment = async (req, res) => {
     try {
         const { id } = req.params;
-        await CommentModel.deleteOne({ _id: id });
+        await CommentModel.deleteOne({ _id: id });        
         return res.status(200).json({ message: "comment removed" });
     } catch (error) {
         console.log(error);
