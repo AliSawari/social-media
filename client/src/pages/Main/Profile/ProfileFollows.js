@@ -26,7 +26,7 @@ const ProfileFollows = ({ followers, followings }) => {
         ))}
       </Modal>
 
-      <Modal show={showFollowingModal} title="Followers" size="sm" closeModal={handleClickToggleShowFollowingsModal}>
+      <Modal show={showFollowingModal} title="Followings" size="sm" closeModal={handleClickToggleShowFollowingsModal}>
         {followings.map(follow => (
           <UserInfo key={follow._id} {...follow.following} />
         ))}

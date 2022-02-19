@@ -6,7 +6,9 @@ const {
   getUsersBySearch,
   getUserByUsername,
   changeProfile,
-  getFollowers
+  getFollowers,
+  checkExistsPassword,
+  changePassword
 } = require("./user.controller");
 const router = express.Router();
 
@@ -18,5 +20,7 @@ router.get("/user-by-username/:username/:id", getUserByUsername);
 router.get("/followers/:id", getFollowers);
 
 router.get("/search/:text", getUsersBySearch);
+router.post("/exists-password", checkExistsPassword);
+router.post("/change-password", changePassword);
 
 module.exports = router;

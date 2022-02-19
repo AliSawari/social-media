@@ -26,7 +26,7 @@ const UserFollow = ({ user }) => {
       <div className="w-full flex text-center flex-wrap justify-center gap-4">
 
         <div className="w-full flex justify-center gap-4">
-          <div onClick={handleClickShowFollowers}>
+          <div>
             <h2 className="text-4xl font-main text-white">{user.followers}</h2>
             <span className="text-sm font-main text-violet-200">Followers</span>
           </div>

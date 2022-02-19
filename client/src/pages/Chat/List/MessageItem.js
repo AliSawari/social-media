@@ -1,7 +1,7 @@
 import React from "react";
 import { useGetUserId } from "../../../hooks/useGetUserId";
 
-const MessageItem = ({ message, sender, createdAt }) => {
+const MessageItem = ({ message, sender, createdAt , test }) => {
   const { id } = useGetUserId();
   return (
     <div

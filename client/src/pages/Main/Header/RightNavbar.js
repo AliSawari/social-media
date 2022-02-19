@@ -23,7 +23,7 @@ const RightNavbar = () => {
   const menuItems = [
     { id: 1, title: "Profile", link: "/user/profile" },
     { id: 2, title: "Saved", link: "/user/saved" },
-    { id: 3, title: "Settings", link: "/user/settings" },
+    { id: 3, title: "Settings", link: "/settings/main" },
     { id: 4 , title: "Logout", link: "/user/logout" },
       
   ];

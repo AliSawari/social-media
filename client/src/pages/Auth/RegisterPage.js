@@ -17,7 +17,7 @@ const RegisterPage = () => {
     password: yup
       .string()
       .required("it can not be empty")
-      .min(6, "you must provide at 3 least characters for password"),
+      .min(6, "you must provide at 6 least characters for password"),
   });
   const {
     handleSubmit,

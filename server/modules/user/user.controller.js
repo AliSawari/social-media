@@ -7,11 +7,15 @@ const Notification = require("../notification/notification.model");
 const path = require("path");
 const SaveModel = require("../saves/save.model");
 const StoryModel = require('../story/story.model');
+const bcrypt = require("bcryptjs");
 const register = async (req, res) => {
   try {
     const user = req.body;
-    const newUser = new User(user);
 
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(user.password, salt);
+    user.password = hashedPassword;
+    const newUser = new User(user);
     await newUser.save();
     res.status(200).json({ message: "user created" });
   } catch (error) {
@@ -188,6 +192,38 @@ const getFollowers = async (req, res) => {
 };
 
 
+const checkExistsPassword = async (req, res) => {
+  try {
+    const { password, id } = req.body;
+    const user = await User.findById(id);
+    const isExists = await bcrypt.compare(password, user.password);
+    console.log(isExists);
+    res.status(200).json({ isExists });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      message: "internal server error",
+      error,
+    });
+  }
+};
+
+const changePassword = async (req, res) => {
+  try {
+    const { password, id } = req.body;
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(password, salt);
+    await User.findByIdAndUpdate(id, { password: hashedPassword });
+    res.status(200).json({ message: "password updated" });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      message: "internal server error",
+      error,
+    });
+  }
+};
+
 
 module.exports = {
   register,
@@ -197,4 +233,6 @@ module.exports = {
   getUserByUsername,
   changeProfile,
   getFollowers,
+  checkExistsPassword,
+  changePassword
 };
