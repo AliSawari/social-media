@@ -69,7 +69,7 @@ const likePost = async (req, res) => {
 
     const { id, uid, isLiked } = req.body;
     if (isLiked) {
-      await Post.updateOne({ _id: id }, { $pull: { likes: { user: uid } } })
+      await Post.updateOne({ _id: id }, { $pull: { likes: { user: uid } } });
       const post = await Post.findById(id);
       return res.status(200).json({
         isLiked: false,

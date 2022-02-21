@@ -7,14 +7,13 @@ import StoryToolIcons from "./StoryToolIcons";
 import { Stage, Layer, Line, Text } from 'react-konva';
 import URLImage from "./URLImage";
 import httpClient from '../../../api/client'
-import {base64ToBlob, blobToBase64} from  "base64-blob"
+import { base64ToBlob, blobToBase64 } from "base64-blob"
 import { useGetUserId } from '../../../hooks/useGetUserId'
 const AddStoryForm = ({ closeModal }) => {
 
   const { id } = useGetUserId();
   const webcamRef = useRef(null);
   const isDrawing = React.useRef(false);
-  const [test , setTest] = useState("");
   const [state, setState] = useState({
     mode: "draw"
   });
@@ -27,7 +26,6 @@ const AddStoryForm = ({ closeModal }) => {
     width: 2,
     color: "#000"
   });
-  const webCamStyles = { objectFit: "fill", width: "100%", height: "32rem", borderRadius: "20px" };
   const [facingMode, setFacingMode] = useState("user");
   const [image, setImage] = useState(null);
   const [lines, setLines] = useState([]);
@@ -174,8 +172,7 @@ const AddStoryForm = ({ closeModal }) => {
   return (
     <>
       <div className="w-full h-full relative">
-        <img src={test} alt="" />
-        {image === null && test === "" ?
+        {image === null ?
           <>
             <Webcam
               audio={false}

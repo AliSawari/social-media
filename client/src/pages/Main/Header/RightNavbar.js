@@ -10,7 +10,7 @@ const RightNavbar = () => {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const { data } = await httpClient.get(`users/user/${user.user.id}`);
+        const { data } = await httpClient.get(`users/user/${user.user.id}`);        
         dispatch(getUserData(data))
         setNotifications(data.notifications)
       } catch (error) {

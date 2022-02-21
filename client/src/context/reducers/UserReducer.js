@@ -1,4 +1,4 @@
-import { GET_USER_DATA, LOGIN_USER, LOGOUT_USER } from "../actions/UserActions";
+import { GET_USER_DATA, LOGIN_USER, LOGOUT_USER, SET_CHAT_BACKGROUND } from "../actions/UserActions";
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -13,14 +13,26 @@ const reducer = (state, action) => {
         data: action.data,
       };
 
-    case LOGOUT_USER:{      
+    case LOGOUT_USER: {
       return {
         auth: false,
         user: null,
         data: undefined
       };
+    };
+    case SET_CHAT_BACKGROUND: {
+      return {
+        ...state,
+        data: {
+          ...state.data,
+          chatSettings: {
+            ...state.data.chatSettings,
+            background: action.image
+          }
+        }
+      }
     }
-      
+
 
     default:
       return state;

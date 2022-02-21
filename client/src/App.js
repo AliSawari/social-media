@@ -1,11 +1,11 @@
-import { Fragment, lazy, Suspense } from "react";
-import { Route, Routes, useRoutes } from "react-router";
+import { lazy, Suspense } from "react";
+import { useRoutes } from "react-router";
 import Loading from "./components/Loading/Loading";
 import UserProvider from "./context/providers/UserProvider";
 import ChatProvider from "./context/providers/ChatProvider";
 import PrivateRoute from "./components/PrivateRoute";
 const ChangePassword = lazy(() => import("./pages/Settings/ChangePassword"));
-const ChatSettings = lazy(() => import("./pages/Settings/ChatSettings"));
+const ChatSettings = lazy(() => import("./pages/Settings/ChatSettings/ChatSettings"));
 const LoginPage = lazy(() => import("./pages/Auth/LoginPage"));
 const RegisterPage = lazy(() => import("./pages/Auth/RegisterPage"));
 const MainPage = lazy(() => import("./pages/Main/MainPage"));
@@ -86,12 +86,12 @@ function App() {
         {
           path: "change_password",
           element: <PrivateRoute><ChangePassword /></PrivateRoute>
-        } ,
-        
+        },
+
         {
           path: "chat_settings",
           element: <PrivateRoute><ChatSettings /></PrivateRoute>
-        } ,
+        },
       ]
     },
     {
@@ -108,7 +108,6 @@ function App() {
           {routes}
         </ChatProvider>
       </UserProvider>
-
     </Suspense>
   );
 }

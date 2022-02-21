@@ -54,6 +54,7 @@ body {
   .story-tool-btn {
     @apply shadow-md border border-white w-10 h-10 rounded-full text-white flex justify-center items-center stroke-black;
   }
+  
 }
 
 .swal2-container {
@@ -80,6 +81,7 @@ body {
   );
 }
 
-.input-range__label-container{
-  display: none!important;
+.input-range__label-container {
+  display: none !important;
 }
+
