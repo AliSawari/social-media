@@ -24,7 +24,7 @@ const UserSchema = new mongoose.Schema({
   chatSettings: {
     type: Object,
     default: {
-      fontSize: 10,
+      fontSize: 15,
       background: "black.jpg"
     }
   }

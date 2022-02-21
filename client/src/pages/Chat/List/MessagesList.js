@@ -19,7 +19,7 @@ const MessagesList = ({ messages }) => {
         ref={chatListRef}
     >
         <div className='flex flex-col justify-end'>
-            {messages.map((item, index) => <MessageItem key={index} {...item} />)}
+            {messages.map((item, index) => <MessageItem key={index} fontSize={user.data ? user.data.chatSettings.fontSize : 15} {...item} />)}
         </div>
     </div>
 

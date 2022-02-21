@@ -1,4 +1,4 @@
-import { GET_USER_DATA, LOGIN_USER, LOGOUT_USER, SET_CHAT_BACKGROUND } from "../actions/UserActions";
+import { GET_USER_DATA, LOGIN_USER, LOGOUT_USER, SET_CHAT_BACKGROUND, SET_CHAT_FONT_SIZE } from "../actions/UserActions";
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -31,7 +31,20 @@ const reducer = (state, action) => {
           }
         }
       }
-    }
+    };
+
+    case SET_CHAT_FONT_SIZE: {
+      return {
+        ...state,
+        data: {
+          ...state.data,
+          chatSettings: {
+            ...state.data.chatSettings,
+            fontSize: action.size
+          }
+        }
+      }
+    };
 
 
     default:

@@ -226,6 +226,19 @@ const changePassword = async (req, res) => {
 };
 
 
+const setChatFontSize = async (req, res) => {
+  try {
+    const { size, id } = req.body;
+    await User.findByIdAndUpdate(id, { $set: { "chatSettings.fontSize": size } });
+    res.status(200).json({ message: "chat font size updated" });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      message: "internal server error",
+      error,
+    });
+  }
+};
 module.exports = {
   register,
   login,
@@ -235,5 +248,6 @@ module.exports = {
   changeProfile,
   getFollowers,
   checkExistsPassword,
-  changePassword
+  changePassword,
+  setChatFontSize
 };

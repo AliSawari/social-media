@@ -8,7 +8,8 @@ const {
   changeProfile,
   getFollowers,
   checkExistsPassword,
-  changePassword
+  changePassword ,
+  setChatFontSize
 } = require("./user.controller");
 const router = express.Router();
 
@@ -22,5 +23,6 @@ router.get("/followers/:id", getFollowers);
 router.get("/search/:text", getUsersBySearch);
 router.post("/exists-password", checkExistsPassword);
 router.post("/change-password", changePassword);
+router.post("/set-chat-font-size", setChatFontSize);
 
 module.exports = router;

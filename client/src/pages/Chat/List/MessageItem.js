@@ -1,7 +1,7 @@
 import React from "react";
 import { useGetUserId } from "../../../hooks/useGetUserId";
 
-const MessageItem = ({ message, sender, createdAt }) => {
+const MessageItem = ({ message, sender, createdAt, fontSize }) => {
   const { id } = useGetUserId();
   return (
     <div
@@ -9,8 +9,8 @@ const MessageItem = ({ message, sender, createdAt }) => {
         }  my-12 `}
     >
       <div className={`${sender._id == id ? "bg-fuchsia-700" : "bg-violet-700"} p-5 rounded w-96 h-auto`}>
-        <h3 className="font-main text-white mb-3">{message}</h3>
-        <p className="w-full font-main text-sm text-neutral-100">{createdAt}</p>
+        <h3 className="font-main text-white mb-3" style={{ fontSize: `${fontSize}px` }}>{message}</h3>
+        <p className="w-full font-main text-sm text-neutral-100" style={{ fontSize: `${fontSize}px` }}>{createdAt}</p>
       </div>
     </div>
   );
