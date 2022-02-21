@@ -66,7 +66,6 @@ const getUser = async (req, res) => {
     const savePosts = await SaveModel.find({ user: id }).populate("user").populate("post").populate({ path: "post", populate: { path: "user", model: "users" } });
     const stories = await StoryModel.find({ user: id }).populate("user");
 
-    console.log(user);
     return res.status(200).json({
       fullname: user.fullname,
       profile: user.profile,
