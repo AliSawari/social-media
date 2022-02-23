@@ -71,6 +71,7 @@ const getUser = async (req, res) => {
       profile: user.profile,
       bio: user.bio,
       chatSettings: user.chatSettings,
+      settings: user.settings,
       username: user.username,
       settings: user.settings,
       notifications,
@@ -249,6 +250,37 @@ const setChatFontSize = async (req, res) => {
     });
   }
 };
+
+
+
+const setPrivate = async (req, res) => {
+  try {
+    const { private, id } = req.body;
+    await User.findByIdAndUpdate(id, { $set: { "settings.private": private } });
+    res.status(200).json({ message: "set private status" });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      message: "internal server error",
+      error,
+    });
+  }
+};
+
+
+const getPrivate = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const user = await User.findById(id);
+    res.status(200).json({ settings: user.settings });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      message: "internal server error",
+      error,
+    });
+  }
+};
 module.exports = {
   register,
   login,
@@ -259,5 +291,7 @@ module.exports = {
   getFollowers,
   checkExistsPassword,
   changePassword,
-  setChatFontSize
+  setChatFontSize,
+  setPrivate,
+  getPrivate
 };
