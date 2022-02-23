@@ -63,7 +63,7 @@ const getUser = async (req, res) => {
     const notifications = await Notification.find({ user: id })
     const followers = await FollowModel.find({ following: id }).populate("user");
     const followings = await FollowModel.find({ user: id }).populate("following");;
-    const savePosts = await SaveModel.find({ user: id }).populate("user").populate("post").populate({ path: "post", populate: { path: "user", model: "users" } });
+    const savedPosts = await SaveModel.find({ user: id }).populate("user").populate("post").populate({ path: "post", populate: { path: "user", model: "users" } });
     const stories = await StoryModel.find({ user: id }).populate("user");
 
     return res.status(200).json({
@@ -72,10 +72,11 @@ const getUser = async (req, res) => {
       bio: user.bio,
       chatSettings: user.chatSettings,
       username: user.username,
+      settings: user.settings,
       notifications,
       followers,
       followings,
-      saveds: savePosts,
+      saveds: savedPosts,
       stories
     });
   } catch (error) {
@@ -116,9 +117,17 @@ const getUserByUsername = async (req, res) => {
       following: user._id,
     };
 
-    const isFollow = await FollowModel.findOne(data);
-    const followers = await FollowModel.find({ following: user.id }).count();
-    const followings = await FollowModel.find({ user: user.id }).count();
+    const userFollowDocument = await FollowModel.findOne(data);
+
+    let followStatus;
+    if (userFollowDocument) {
+      followStatus = userFollowDocument.status;
+    } else {
+      followStatus === "follow";
+    }
+
+    const followers = await FollowModel.find({ following: user.id });
+    const followings = await FollowModel.find({ user: user.id });
     const posts = await Post.find({ user: user._id });
     return res.status(200).json({
       id: user._id,
@@ -126,8 +135,9 @@ const getUserByUsername = async (req, res) => {
       profile: user.profile,
       bio: user.bio,
       username: user.username,
+      settings: user.settings,
       posts,
-      follow: isFollow,
+      follow: followStatus,
       followers,
       followings,
     });

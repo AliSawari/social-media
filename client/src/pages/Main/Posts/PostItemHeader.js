@@ -1,19 +1,22 @@
 import React, { useState } from "react";
 import { IoIosMore } from "react-icons/io";
 import { Link } from "react-router-dom";
-import { useShowUserProfile } from '../../../hooks/useShowUserProfile'
+import { useShowUserProfile } from '../../../hooks/useShowUserProfile';
+import { useGetUserId } from '../../../hooks/useGetUserId';
 import Modal from '../../../components/Modal/Modal';
-import PostDropdownItem from './PostItemOptionDropdown'
+import PostDropdownItem from './PostItemOptionDropdown';
 import ReportModal from "./ReportModal";
 import { toast } from "react-toastify";
 import SharePostModal from "./SharePostModal";
-const PostItemHeader = ({ user, link , id }) => {
+import httpClient from "../../../api/client";
+import swal from 'sweetalert2';
+const PostItemHeader = ({ user, link, id }) => {
   const mainProfile = useShowUserProfile(user.profile);
   const [show, setShow] = useState(false);
   const [showReportModal, setShowReportModal] = useState(false);
   const [showSharePostModal, setShowSharePostModal] = useState(false);
 
-
+  const { id: userId } = useGetUserId();
   const handleTogglePostItemDropdown = () => {
     setShow(show => !show);
   }
@@ -55,6 +58,27 @@ const PostItemHeader = ({ user, link , id }) => {
     });
   }
 
+  const handleDeletePost = async () => {
+    try {
+
+      swal.fire({
+        title: "Delete Post",
+        text: "Really you wanna delete this post?",
+        showConfirmButton: true,
+        showCancelButton: true,
+        confirmButtonText: "Yes",
+        cancelButtonText: "No",
+        icon: "question"
+      }).then(async ({ isConfirmed }) => {
+        if (isConfirmed) {
+          await httpClient.post(`posts/delete`, { user: userId, id });
+        }
+      })
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   return (
     <div className="w-full flex justify-between mb-4">
       <Modal show={show} closeModal={handleTogglePostItemDropdown} size="xs" title="Post">
@@ -62,6 +86,9 @@ const PostItemHeader = ({ user, link , id }) => {
           <PostDropdownItem title="Report" type="button" clickButton={handleShowReportModal} />
           <PostDropdownItem title="Copy Link" type="button" clickButton={handleCopyPostLink} />
           <PostDropdownItem title="Share to ..." type="button" clickButton={handleShowSharePostModal} />
+          {userId === user._id ? <>
+            <PostDropdownItem title="Delete" type="button" clickButton={handleDeletePost} />
+          </> : ""}
           <PostDropdownItem title="Cancel" type="button" clickButton={handleTogglePostItemDropdown} />
         </ul>
       </Modal>

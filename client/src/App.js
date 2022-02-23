@@ -4,6 +4,7 @@ import Loading from "./components/Loading/Loading";
 import UserProvider from "./context/providers/UserProvider";
 import ChatProvider from "./context/providers/ChatProvider";
 import PrivateRoute from "./components/PrivateRoute";
+const Privacy = lazy(() => import("./pages/Settings/Privacy/Privacy"));
 const ChangePassword = lazy(() => import("./pages/Settings/ChangePassword"));
 const ChatSettings = lazy(() => import("./pages/Settings/ChatSettings/ChatSettings"));
 const LoginPage = lazy(() => import("./pages/Auth/LoginPage"));
@@ -91,6 +92,10 @@ function App() {
         {
           path: "chat_settings",
           element: <PrivateRoute><ChatSettings /></PrivateRoute>
+        },
+        {
+          path: "privacy",
+          element: <PrivateRoute><Privacy /></PrivateRoute>
         },
       ]
     },

@@ -40,7 +40,7 @@ const add = async (req, res) => {
 const getFollowingStories = async (req, res) => {
   try {
     const { id } = req.params;
-    const followings = await Follow.find({ user: id });
+    const followings = await Follow.find({ user: id, status: "request-accepted" });
     const followingIds = followings.map((item) => {
       return item.following;
     });

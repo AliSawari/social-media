@@ -27,6 +27,12 @@ const UserSchema = new mongoose.Schema({
       fontSize: 15,
       background: "black.jpg"
     }
+  },
+  settings: {
+    type: Object,
+    default: {
+      private: false
+    }
   }
 });
 

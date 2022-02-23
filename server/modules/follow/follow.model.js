@@ -11,6 +11,10 @@ const FollowSchema = new mongoose.Schema({
     ref: "users",
     required: true,
   },
+  status: {
+    type: String,
+    default: "request-none"
+  }
 });
 
 const FollowModel = mongoose.model("follows", FollowSchema);

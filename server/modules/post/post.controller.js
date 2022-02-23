@@ -3,6 +3,8 @@ const moment = require("moment");
 const path = require("path");
 const FollowModel = require("../follow/follow.model");
 const Posts = require("../post/post.model");
+const Comment = require("../comments/comment.model");
+const Saved = require("../saves/save.model");
 const User = require("../user/user.model");
 const Notification = require("../notification/notification.model");
 const add = async (req, res) => {
@@ -42,7 +44,7 @@ const add = async (req, res) => {
 const getFollowingPosts = async (req, res) => {
   try {
     const { id } = req.params;
-    const followings = await FollowModel.find({ user: id });
+    const followings = await FollowModel.find({ user: id, status: "request-accepted" });
     let followingIds = followings.map((item) => {
       return item.following.toHexString();
     });
@@ -101,11 +103,14 @@ const likePost = async (req, res) => {
 
 
 
-const saveToggle = async (req, res) => {
+const deletePost = async (req, res) => {
   try {
-    const { id } = req.params;
-
-    return res.status(200).json({ message: "post saved" });
+    const { user, id } = req.body;
+    Post.findOneAndDelete({ _id: id, user }).exec(() => {
+      Saved.deleteMany({ post: id }).exec();
+      Comment.deleteMany({ post: id }).exec();
+      return res.status(200).json({ message: "post deleted" });
+    });
   } catch (error) {
     console.log(error);
     res.status(500).json({
@@ -116,4 +121,4 @@ const saveToggle = async (req, res) => {
 };
 
 
-module.exports = { add, getFollowingPosts, likePost,saveToggle};
+module.exports = { add, getFollowingPosts, likePost, deletePost };

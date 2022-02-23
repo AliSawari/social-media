@@ -47,6 +47,9 @@ body {
   .follow-btn {
     @apply bg-purple-800 py-2 font-main text-white rounded shadow-md hover:bg-purple-900 transition;
   }
+  .follow-request-sended-btn{
+    @apply bg-gray-800 py-2 font-main text-white rounded shadow-md hover:bg-gray-900 transition;
+  }
 
   .following-btn {
     @apply bg-neutral-800  py-2 font-main text-white rounded shadow-md hover:bg-purple-900 transition;

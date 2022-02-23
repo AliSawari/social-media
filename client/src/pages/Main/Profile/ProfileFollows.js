@@ -5,7 +5,6 @@ const ProfileFollows = ({ followers, followings }) => {
   const [showFollowerModal, setShowFollowerModal] = useState(false);
   const [showFollowingModal, setShowFollowingModal] = useState(false);
 
-  console.log(followings);
 
   const handleClickToggleShowFollowersModal = () => {
     setShowFollowerModal(prevState => !prevState)

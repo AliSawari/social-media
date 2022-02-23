@@ -5,10 +5,7 @@ import Header from '../Main/Header/Header'
 import PostItem from '../Main/Posts/PostItem';
 
 const Saved = () => {
-
-    const { state } = useContext(UserContext);
-
-    console.log(state);
+    const { state } = useContext(UserContext);    
     return (
         <>
             <Header />

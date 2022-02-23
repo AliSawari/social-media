@@ -26,6 +26,12 @@ const Posts = () => {
         </div>
       );
 
+    if (posts.length === 0) {
+      return <div className="w-full h-96 flex justify-center items-center">
+        <p className="text-sm text-violet-600 font-main">Please follow somebody for see posts</p>
+      </div>;
+    }
+
     return posts.map((item) => <PostItem {...item} key={item._id} />);
   };
   return <div className="w-full h-auto p-4 flex gap-5 flex-col">{renderPosts()}</div>;

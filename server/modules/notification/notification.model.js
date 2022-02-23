@@ -7,7 +7,11 @@ const NotificationModel = new mongoose.Schema(
             ref: "users",
         },
         message: { type: String, required: true },
-        seen: { type: Boolean, default: false }
+        seen: { type: Boolean, default: false },
+        request: {
+            type: Object,
+            default: { status: false }
+        }
     },
     { timestamps: true }
 );
