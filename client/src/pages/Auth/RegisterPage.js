@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link , useNavigate } from "react-router-dom";
 import AuthProvider from "../../components/AuthLayout";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -8,6 +8,8 @@ import Input from "../../components/AuthInput/Input";
 import httpClient from "../../api/client";
 import swal from "sweetalert2";
 const RegisterPage = () => {
+
+  const navigate = useNavigate();
   const schema = yup.object().shape({
     fullname: yup.string().required("it can not be empty"),
     username: yup

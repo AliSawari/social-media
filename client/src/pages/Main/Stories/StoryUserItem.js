@@ -3,8 +3,7 @@ import { Link } from "react-router-dom";
 import { useShowUserProfile } from '../../../hooks/useShowUserProfile'
 
 const StoryItem = ({ _id: id, fullname, profile: userProfile }) => {
-  const profile = useShowUserProfile(userProfile);
-
+  const profile = useShowUserProfile(userProfile);  
   return (
     <Link to={`?story=${id}`}>
       <div className="h-32 px-3 rounded relative flex justify-center items-center">

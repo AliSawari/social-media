@@ -29,6 +29,12 @@ function App() {
       ]
     },
     {
+      path: "/auth", children: [
+        { path: "login", element: <LoginPage /> },
+        { path: "register", element: <RegisterPage /> },
+      ]
+    },
+    {
       path: "/",
       element: <PrivateRoute><MainPage /></PrivateRoute>
     },

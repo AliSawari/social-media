@@ -5,6 +5,7 @@ import { MdOutlineChat } from 'react-icons/md'
 import Loading from '../../../components/Loading/Loading'
 import EmptySectionMessage from '../../../components/EmptySectionMessage/EmptySectionMessage'
 import httpClient from '../../../api/client'
+import UserItemLoading from "../../../components/SkeletonLoading/UserItemLoading";
 const UserChatsHistory = () => {
   const { id } = useGetUserId();
   const [state, setState] = useState(null);
@@ -25,7 +26,7 @@ const UserChatsHistory = () => {
   const renderChats = () => {
 
     if (state === null) {
-      return <Loading />
+      return <UserItemLoading count={2} />
     }
 
     if (state.length === 0) {

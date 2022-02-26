@@ -1,7 +1,6 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useGetUserId } from '../../../hooks/useGetUserId';
 import httpClient from '../../../api/client'
-import { UserContext } from '../../../context/providers/UserProvider';
 const PrivateAccount = () => {
 
     const { id } = useGetUserId();

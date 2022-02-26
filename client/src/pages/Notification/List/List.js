@@ -27,7 +27,7 @@ const List = () => {
         <Header />
         <div className='w-full h-auto flex justify-center py-10'>
             <div className='w-4/6 p-3'>
-                <div className='w-full'>
+                <div className='w-full  mt-32'>
                     <div className="inline-flex rounded-md shadow-sm" role="group">
                         <button type="button" onClick={() => { setShow(false) }} className="py-2 px-4 text-sm font-medium  bg-violet-600 hover:bg-violet-700 text-white font-main rounded-l-lg ">
                             Un Read Notifications

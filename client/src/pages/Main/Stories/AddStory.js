@@ -3,8 +3,11 @@ import Modal from "../../../components/Modal/Modal";
 import AddStoryForm from "./AddStoryForm";
 import { UserContext } from '../../../context/providers/UserProvider'
 import { AiFillPlusCircle, AiFillEye } from "react-icons/ai";
+import { useShowUserProfile } from "../../../hooks/useShowUserProfile";
 const AddStory = ({ userStories }) => {
+
   const { state: { data } } = useContext(UserContext);
+  const mainProfile = useShowUserProfile(data?.profile);
   const [state, setState] = useState(false);
   const toggleShowModal = () => {
     setState((prevState) => !prevState);
@@ -24,7 +27,7 @@ const AddStory = ({ userStories }) => {
               <AiFillEye fontSize={25} className="text-white" />
             </div>
             <img
-              src={`http://localhost:4000/public/images/${data.profile}`}
+              src={mainProfile}
               alt="profile"
               className="rounded-full opacity-50 p-1 bg-gradient-to-l from-violet-800 to-violet-900 w-20 h-20 object-cover"
             />

@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams, useNavigate, useLocation } from "react-router";
 import UserInfo from "./UserInfo";
 import Header from "../Main/Header/Header";
@@ -6,7 +6,6 @@ import UserFollow from "./UserFollow";
 import UserProfile from "./UserProfile";
 import httpClient from "../../api/client";
 import UserPosts from "./UserPosts";
-import { UserContext } from "../../context/providers/UserProvider";
 import { useGetUserId } from "../../hooks/useGetUserId";
 import MainLayout from "../../components/MainLayout";
 import LeftSide from "../Main/LeftSide/LeftSide";
@@ -32,7 +31,6 @@ const User = () => {
     fetchUser();
   }, [location]);
 
-  const { state: user } = useContext(UserContext);
   const renderUserPosts = () => {
     if (state && state.settings.private === true) {
       return <div className="w-full h-10 flex justify-center items-center z-50 flex-col mt-20">

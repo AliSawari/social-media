@@ -3,7 +3,7 @@ import { FiUsers } from "react-icons/fi";
 import UserItem from "./UserItem";
 import httpClient from "../../../api/client";
 import { useGetUserId } from "../../../hooks/useGetUserId";
-import Loading from "../../../components/Loading/Loading";
+import UserItemLoading from "../../../components/SkeletonLoading/UserItemLoading";
 import { Link } from "react-router-dom";
 import EmptySectionMessage from "../../../components/EmptySectionMessage/EmptySectionMessage";
 const Followers = () => {
@@ -25,13 +25,11 @@ const Followers = () => {
   const renderUsers = () => {
     if (state === null)
       return (
-        <div className="w-full flex justify-between items-center">
-          <Loading />
-        </div>
+        <UserItemLoading count={2} />
       );
 
     if (state.length === 0) {
-      return <EmptySectionMessage message={"you did non't follow somebody"} />
+      return <EmptySectionMessage message={"you didn't follow somebody"} />
     }
 
     return state.map((item) => <UserItem key={item._id} {...item.user} />);

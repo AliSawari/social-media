@@ -19,6 +19,7 @@ const register = async (req, res) => {
     await newUser.save();
     res.status(200).json({ message: "user created" });
   } catch (error) {
+    console.log(error);
     res.status(500).json({
       error,
       message: "internal server error",
@@ -28,25 +29,33 @@ const register = async (req, res) => {
 
 const login = async (req, res) => {
   try {
-    const { body } = req;
-    const user = await User.findOne(body);
-    if (!user)
-      return res
+    const { username, password } = req.body;
+    const user = await User.findOne({ username });
+    if (user) {
+      const isCorrectPassword = await bcrypt.compare(password, user.password);
+
+      if (!isCorrectPassword) return res
         .status(401)
         .json({ message: "username or password is invalid" });
 
-    const token = jwt.sign(
-      {
-        level: "user",
-        id: user._id,
-      },
-      config.get("JWT_PASSWORD")
-    );
+      const token = jwt.sign(
+        {
+          level: "user",
+          id: user._id,
+        },
+        config.get("JWT_PASSWORD")
+      );
 
-    return res.status(200).json({
-      id: user._id,
-      token,
-    });
+      return res.status(200).json({
+        id: user._id,
+        token,
+      });
+    } else {
+      return res
+        .status(401)
+        .json({ message: "username or password is invalid" });
+    }
+
   } catch (error) {
     console.log(error);
     res.status(500).json({

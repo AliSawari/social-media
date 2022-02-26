@@ -5,7 +5,7 @@ const ModalHeader = ({ handleCloseModal, title }) => {
   return (
     <div className="w-full  flex  justify-between">
       <h3 className="font-main text-violet-600">{title}</h3>
-      <button className="text-violet-500" onClick={handleCloseModal}>
+      <button className="text-violet-500 z-50" onClick={handleCloseModal}>
         <AiOutlineCloseCircle fontSize={23} />
       </button>
     </div>

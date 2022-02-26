@@ -12,7 +12,7 @@ const ProfileForm = () => {
   const { id } = useGetUserId();
   const [state, setState] = useState({
     blob: false,
-    src: "https://gravatar.com/avatar/6c2ff79dddfe69146d3a3a55c0bc7f52?s=400&d=robohash&r=x",
+    src: ""
   });
 
   const schema = yup.object().shape({
@@ -112,10 +112,10 @@ const ProfileForm = () => {
     if (state.blob === true) {
       return state.src;
     } else if (state.src == "") {
-      return "https://s6.uupload.ir/files/user_(1)_mpvu.png";
-    } else {
-      return `http://localhost:4000/public/images/${state.src}`;
+      return `https://s6.uupload.ir/files/user_(1)_mpvu.png`;
     }
+
+    return `http://localhost:4000/public/images/${state.src}`;
   };
   return (
     <form onSubmit={handleSubmit(handleSubmitForm)}>
@@ -123,7 +123,7 @@ const ProfileForm = () => {
         <div className="w-full flex flex-col items-center">
           <img
             src={renderUserProfile()}
-            className="bg-violet-700 rounded-md object-cover"
+            className="object-cover"
             width={200}
             height={200}
           />
