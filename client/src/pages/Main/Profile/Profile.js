@@ -3,7 +3,7 @@ import ProfileUserInfo from "./ProfileUserInfo";
 import ProfileFollows from "./ProfileFollows";
 import ProfileAddPostLink from "./ProfileAddPostLink";
 import { UserContext } from "../../../context/providers/UserProvider";
-import Skeleton from 'react-loading-skeleton'
+import ProfileLoading from '../../../components/SkeletonLoading/ProfileLoading';
 const Profile = () => {
   const { state: { data: user } } = useContext(UserContext);
   return (
@@ -13,7 +13,7 @@ const Profile = () => {
           <ProfileUserInfo profile={user.profile} fullname={user.fullname} bio={user.bio} />
           <ProfileFollows followers={user.followers} followings={user.followings} />
           <ProfileAddPostLink />
-        </>) : <Skeleton />}
+        </>) : <ProfileLoading />}
       </div>
     </div>
   );

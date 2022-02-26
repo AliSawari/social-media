@@ -48,15 +48,16 @@ const getFollowingStories = async (req, res) => {
 
     const timestamp = moment.now();
     const stories = await StoryModel.find({ user: { $in: followingIds }, expireTime: { $lt: timestamp } }).populate("user");
-    let useHaveStories = {};
+    const userStories = await StoryModel.find({ user: id, expireTime: { $lt: timestamp } }).populate("user");
+    let userHaveStories = {};
     stories.forEach(item => {
-      const keys = Object.keys(useHaveStories);
+      const keys = Object.keys(userHaveStories);
       const id = item.user._id;
       if (!keys.includes(id))
-        useHaveStories[id] = item.user;
+        userHaveStories[id] = item.user;
     });
 
-    return res.status(200).json(useHaveStories);
+    return res.status(200).json({ stories: userHaveStories, userStories });
   } catch (error) {
     console.log(error);
     res.status(500).json({

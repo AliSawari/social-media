@@ -15,9 +15,14 @@ const SliderListContent = ({ users }) => {
         const fetchData = async () => {
             try {
                 const { data: { user, stories } } = await httpClient.get(`stories/all/${id}`);
+                if (!stories.length) {
+                    navigate("/");
+                    return;
+                }
                 setUser(user);
                 setStories(stories);
             } catch (error) {
+                navigate("/");
                 console.log(error);
             }
         }

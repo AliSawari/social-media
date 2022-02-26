@@ -10,22 +10,23 @@ import SliderListContent from "./SliderListContent";
 const Stories = () => {
   const { id } = useGetUserId();
   const [users, setUsers] = useState([]);
+  const [userStory, setUserStory] = useState([]);
   const { state } = useContext(UserContext);
   const userStories = state.data ? state.data.stories : [];
-  const navigate = useNavigate();
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const { data } = await httpClient.get(`stories/list/${id}`);
-        const userHaveStories = Object.values(data);
+        const { data: { stories, userStories } } = await httpClient.get(`stories/list/${id}`);
+        const userHaveStories = Object.values(stories);
         setUsers(userHaveStories);
+        setUserStory(userStories);
       } catch (error) {
         console.log(error);
       }
     }
 
     fetchData();
-  }, [])
+  }, []);
 
 
   const renderUserStories = () => {
@@ -33,7 +34,7 @@ const Stories = () => {
   }
   return (
     <div className="w-full overflow-hidden h-2/4 px-4 flex mt-20">
-      <AddStory userStories={userStories} />
+      <AddStory userStories={userStory} />
       {renderUserStories()}
       <SliderListContent users={users} />
     </div>
