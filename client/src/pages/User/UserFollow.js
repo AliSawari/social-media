@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import httpClient from "../../api/client";
 import { Link } from 'react-router-dom'
 import { useGetUserId } from "../../hooks/useGetUserId";
@@ -45,6 +45,10 @@ const UserFollow = ({ user }) => {
     }
 
   }
+
+  const getAcceptedFollowsLength = (follows) => {    
+      return follows.filter(item => item.status === "request-accepted").length;
+  }
   return (
     <>
 
@@ -52,12 +56,12 @@ const UserFollow = ({ user }) => {
 
         <div className="w-full flex justify-center gap-4">
           <div>
-            <h2 className="text-4xl font-main text-white">{user.followers.filter(item => item.request === false).length}</h2>
+            <h2 className="text-4xl font-main text-white">{getAcceptedFollowsLength(user.followers)}</h2>
             <span className="text-sm font-main text-violet-200">Followers</span>
           </div>
 
           <div>
-            <h2 className="text-4xl font-main text-white">{user.followings.filter(item => item.request === false).length}</h2>
+            <h2 className="text-4xl font-main text-white">{getAcceptedFollowsLength(user.followings)}</h2>
             <span className="text-sm font-main text-violet-200">Followings</span>
           </div>
         </div>

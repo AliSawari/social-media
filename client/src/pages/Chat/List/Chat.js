@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router";
 import Header from "../../Main/Header/Header";
 import MessageSender from "./MessageSender";
@@ -7,11 +7,13 @@ import httpClient from "../../../api/client";
 import UsersList from "./UsersList";
 import ChatHeader from "./ChatHeader";
 import MessagesList from "./MessagesList";
+import { ChatContext } from '../../../context/providers/ChatProvider';
+import { getSetMessages } from "../../../context/actions/ChatActions";
 const List = () => {
+
   const { id } = useParams();
   const { id: sender } = useGetUserId();
-
-  const [messages, setMessages] = useState([]);
+  const { dispatch , messages } = useContext(ChatContext);
   const [user, setUser] = useState(null);
   useEffect(() => {
     if (!id) {
@@ -24,7 +26,11 @@ const List = () => {
         );
         const { data: user } = await httpClient.get(`users/user/${id}`);
         setUser(user);
-        setMessages(messages);
+        dispatch(getSetMessages(messages));
+        return () => {
+          setUser(null);
+          setMessages([]);
+        }
       } catch (error) {
         console.log(error);
       }
@@ -34,9 +40,6 @@ const List = () => {
   }, [id]);
 
 
-  const handleSetNewMessages = (data) => {
-    setMessages((prevState) => [...prevState, data]);
-  }
 
   const renderMessagesBox = () => {
     if (!id)
@@ -51,7 +54,7 @@ const List = () => {
     return <>
       <ChatHeader user={user} id={id} />
       <MessagesList messages={messages} />
-      <MessageSender setState={handleSetNewMessages} id={id} />
+      <MessageSender id={id} />
     </>
 
 
@@ -60,9 +63,9 @@ const List = () => {
   return (
     <>
       <Header />
-      <div className="py-5 w-full flex flex-between">
+      <div className="py-5 w-full flex justify-around">
         <UsersList />
-        <div className="w-9/12 h-[calc(100vh-7rem)]  relative bg-neutral-900 mt-16">
+        <div className="w-9/12 h-[calc(100vh-9rem)] shadow-md relative bg-neutral-900 mt-24">
           {renderMessagesBox()}
         </div>
       </div>

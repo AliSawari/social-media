@@ -2,16 +2,12 @@ import React, { useState, useContext, useEffect } from "react";
 import { useGetUserId } from "../../../hooks/useGetUserId";
 import { ChatContext } from '../../../context/providers/ChatProvider'
 import { SendEmojiPicker, SendMessageInput, SendMessageButton } from "../../../components/SendMessage/index";
-const MessageSender = ({ id: receiver, setState }) => {
+const MessageSender = ({ id: receiver }) => {
   const { socket } = useContext(ChatContext);
   const { id: sender } = useGetUserId();
   const [text, setText] = useState("");
 
-  useEffect(() => {
-    socket.on("send message", (data) => {
-      setState(data);
-    });
-  }, []);
+
   const handleChangText = ({ target: { value } }) => {
     setText(value);
   };
@@ -23,7 +19,6 @@ const MessageSender = ({ id: receiver, setState }) => {
 
   const handleSendMessage = () => {
     if (!text.length) return
-    
     setText("");
     socket.emit("send message", { message: text, sender, receiver });
   };

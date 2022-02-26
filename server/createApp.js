@@ -89,7 +89,7 @@ function createApp() {
         .populate("receiver", "fullname username");
 
       socket.to(receiver).emit("user:notification", { message: `you have new message by ${chat.sender.fullname}`, sender });
-      socket.to(receiver).to(sender).emit("send message", chat);
+      socket.to([receiver, sender]).emit("send message", chat);
     });
 
 
