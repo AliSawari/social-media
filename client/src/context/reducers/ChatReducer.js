@@ -7,7 +7,7 @@ const reducer = (state, action) => {
     }
 
     case SET_MESSAGES: {
-      return [...state, ...action.data];
+      return action.data;
     }
 
     default:

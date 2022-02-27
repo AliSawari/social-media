@@ -14,7 +14,7 @@ const ConverstationModel = new mongoose.Schema(
                     ref: "users",
                 },
                 message: { type: String },
-                timestamps: { type: Number }
+                timestamp: { type: Number }
             }
         ],
     },

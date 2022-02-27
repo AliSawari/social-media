@@ -13,7 +13,7 @@ const List = () => {
 
   const { id } = useParams();
   const { id: sender } = useGetUserId();
-  const { dispatch , messages } = useContext(ChatContext);
+  const { dispatch, messages } = useContext(ChatContext);
   const [user, setUser] = useState(null);
   useEffect(() => {
     if (!id) {
@@ -27,10 +27,6 @@ const List = () => {
         const { data: user } = await httpClient.get(`users/user/${id}`);
         setUser(user);
         dispatch(getSetMessages(messages));
-        return () => {
-          setUser(null);
-          setMessages([]);
-        }
       } catch (error) {
         console.log(error);
       }
