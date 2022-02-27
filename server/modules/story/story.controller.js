@@ -24,7 +24,7 @@ const add = async (req, res) => {
         });
     });
 
-    const timestamp = moment().add(1, "days").unix();
+    const timestamp = moment().add(1, "days");
     await StoryModel.create({ user: id, image: fileName, expireTime: timestamp });
 
     res.status(200).json({ message: "story added" });
@@ -47,8 +47,8 @@ const getFollowingStories = async (req, res) => {
 
 
     const timestamp = moment.now();
-    const stories = await StoryModel.find({ user: { $in: followingIds }, expireTime: { $lt: timestamp } }).populate("user");
-    const userStories = await StoryModel.find({ user: id, expireTime: { $lt: timestamp } }).populate("user");
+    const stories = await StoryModel.find({ user: { $in: followingIds }, expireTime: { $gt: timestamp } }).populate("user");
+    const userStories = await StoryModel.find({ user: id, expireTime: { $gt: timestamp } }).populate("user");
     let userHaveStories = {};
     stories.forEach(item => {
       const keys = Object.keys(userHaveStories);
@@ -72,7 +72,7 @@ const getUserStories = async (req, res) => {
     const { id } = req.params;
 
     const timestamp = moment.now();
-    const stories = await StoryModel.find({ user: id, expireTime: { $lt: timestamp } }).populate("user");
+    const stories = await StoryModel.find({ user: id, expireTime: { $gt: timestamp } }).populate("user");
 
     const user = await UserModel.findById(id);
     return res.status(200).json({ stories, user });

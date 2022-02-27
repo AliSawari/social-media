@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
-import Loading from "../../../components/Loading/Loading";
 import { useGetUserId } from "../../../hooks/useGetUserId";
 import PostItem from "./PostItem";
 import httpClient from "../../../api/client";
+import PostLoading from "../../../components/SkeletonLoading/PostLoading";
 const Posts = () => {
   const { id } = useGetUserId();
   const [posts, setPosts] = useState(null);
+  console.log("Posts rendered" , posts)
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -21,9 +22,7 @@ const Posts = () => {
   const renderPosts = () => {
     if (posts === null)
       return (
-        <div className="w-full h-60 flex justify-center items-center">
-          <Loading />
-        </div>
+        <PostLoading />
       );
 
     if (posts.length === 0) {
@@ -37,4 +36,4 @@ const Posts = () => {
   return <div className="w-full h-auto p-4 flex gap-5 flex-col">{renderPosts()}</div>;
 };
 
-export default Posts;
+export default Posts

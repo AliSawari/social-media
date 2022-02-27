@@ -1,25 +1,22 @@
 import React, { useContext, useEffect, useState } from "react";
 import httpClient from "../../../api/client";
-import { useNavigate } from 'react-router-dom'
 import { useGetUserId } from "../../../hooks/useGetUserId";
 import AddStory from "./AddStory";
 import StoryUserItem from "./StoryUserItem";
-import { UserContext } from "../../../context/providers/UserProvider";
-import SliderListContent from "./SliderListContent";
+import StoriesModal from "./StoriesModal";
 
 const Stories = () => {
   const { id } = useGetUserId();
-  const [users, setUsers] = useState([]);
-  const [userStory, setUserStory] = useState([]);
-  const { state } = useContext(UserContext);
-  const userStories = state.data ? state.data.stories : [];
+  const [userStories, setUserStories] = useState({ users: [], stories: [] });
   useEffect(() => {
     const fetchData = async () => {
       try {
         const { data: { stories, userStories } } = await httpClient.get(`stories/list/${id}`);
         const userHaveStories = Object.values(stories);
-        setUsers(userHaveStories);
-        setUserStory(userStories);
+        setUserStories({
+          stories: userStories,
+          users: userHaveStories
+        });
       } catch (error) {
         console.log(error);
       }
@@ -28,15 +25,18 @@ const Stories = () => {
     fetchData();
   }, []);
 
+  console.log("Stories rendered", userStories);
+
+
 
   const renderUserStories = () => {
-    return users.map(item => <StoryUserItem key={item._id} {...item} />)
+    return userStories.users.map(item => <StoryUserItem key={item._id} {...item} />)
   }
   return (
     <div className="w-full overflow-hidden h-2/4 px-4 flex mt-20">
-      <AddStory userStories={userStory} />
+      <AddStory userStories={userStories.stories} />
       {renderUserStories()}
-      <SliderListContent users={users} />
+      <StoriesModal users={userStories.users} />
     </div>
   );
 };

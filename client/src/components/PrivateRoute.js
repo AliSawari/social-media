@@ -1,9 +1,10 @@
 import React from "react";
-import { Navigate, Outlet } from "react-router";
+import { Navigate } from "react-router";
+import ChatProvider from "../context/providers/ChatProvider";
 import { useAuth } from "../hooks/useAuth";
 const PrivateRoute = ({ children }) => {
   const auth = useAuth();
-  return auth ? children : <Navigate to="/auth/login" />;
+  return auth ? <ChatProvider>{children}</ChatProvider> : <Navigate to="/auth/login" />;
 };
 
 export default PrivateRoute;

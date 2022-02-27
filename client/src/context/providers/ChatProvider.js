@@ -18,6 +18,7 @@ const ChatProvider = ({ children }) => {
     transports: ["websocket"],
     upgrade: false,
   });
+  console.log("Chat provider rendered");
 
   useEffect(() => {
     socket.emit("user:connect", { id });

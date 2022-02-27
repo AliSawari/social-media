@@ -5,12 +5,13 @@ import Modal from '../../../components/Modal/Modal';
 import UserItem from '../LeftSide/UserItem';
 import StoryContentSlider from './StoryContentSlider';
 import StoryLoading from '../../../components/SkeletonLoading/StoryLoading';
-const SliderListContent = ({ users }) => {
+const StoriesModal = ({ users }) => {
     const [searchParams] = useSearchParams();
     const [stories, setStories] = useState([]);
     const [user, setUser] = useState(null);
     const id = searchParams.get("story");
     const navigate = useNavigate();
+    console.log("Stories Modal rendered");
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -79,4 +80,4 @@ const SliderListContent = ({ users }) => {
     )
 }
 
-export default React.memo(SliderListContent);
+export default React.memo(StoriesModal);

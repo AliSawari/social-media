@@ -35,7 +35,7 @@ const Followers = () => {
     return state.map((item) => <UserItem key={item._id} {...item.user} />);
   };
   return (
-    <div className="w-full h-auto mt-4 pb-3 rounded bg-neutral-800 shadow-sm">
+    <div className="w-full max-h-auto h-72 mt-4 pb-3 rounded bg-neutral-800 shadow-sm">
       <div className="flex justify-between p-4 bg-gradient-to-l from-violet-800 to-violet-900">
         <h3 className="font-main text-white">Followers</h3>
         <Link to="/followers" className="text-white text-xl">

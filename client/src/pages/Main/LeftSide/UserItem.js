@@ -3,7 +3,7 @@ import { FaCircle } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { useShowUserProfile } from "../../../hooks/useShowUserProfile";
 
-const UserItem = ({ _id, profile, fullname, online, message }) => {
+const UserItem = ({ _id, profile, fullname, message }) => {
   const mainProfile = useShowUserProfile(profile);
   return (
     <Link to={`/chat/list/${_id}`}>
@@ -20,12 +20,6 @@ const UserItem = ({ _id, profile, fullname, online, message }) => {
             <h3 className="font-main text-sm text-violet-600">{fullname}</h3>
             {message && <p className="text-xs text-violet-400 font-main">{message}</p>}
           </div>
-        </div>
-        <div className="items-center flex">
-          <FaCircle
-            className={`text-sm ${online ? "text-violet-600" : "text-neutral-700"
-              }`}
-          />
         </div>
       </div>
     </Link>

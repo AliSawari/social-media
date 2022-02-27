@@ -2,7 +2,6 @@ import { lazy, Suspense } from "react";
 import { useRoutes } from "react-router";
 import Loading from "./components/Loading/Loading";
 import UserProvider from "./context/providers/UserProvider";
-import ChatProvider from "./context/providers/ChatProvider";
 import PrivateRoute from "./components/PrivateRoute";
 const Privacy = lazy(() => import("./pages/Settings/Privacy/Privacy"));
 const ChangePassword = lazy(() => import("./pages/Settings/ChangePassword"));
@@ -20,6 +19,8 @@ const Saved = lazy(() => import("./pages/Saved/Saved"));
 const Logout = lazy(() => import("./pages/Logout/Logout"));
 function App() {
 
+
+  console.log("App  rendered");
 
   const routes = useRoutes([
     {
@@ -114,10 +115,8 @@ function App() {
 
   return (
     <Suspense fallback={<Loading />}>
-      <UserProvider>
-        <ChatProvider>
-          {routes}
-        </ChatProvider>
+      <UserProvider>      
+          {routes}        
       </UserProvider>
     </Suspense>
   );

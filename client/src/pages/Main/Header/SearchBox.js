@@ -3,6 +3,7 @@ import { IoSearchOutline } from "react-icons/io5";
 import SearchUserItem from "./SearchUserItem";
 import Loading from "../../../components/Loading/Loading";
 import httpClient from "../../../api/client";
+import UserItemLoading from "../../../components/SkeletonLoading/UserItemLoading";
 const SearchBox = () => {
   const ref = useRef();
   const [state, setState] = useState("");
@@ -29,8 +30,8 @@ const SearchBox = () => {
   const renderUsers = () => {
     if (data === null)
       return (
-        <div className="w-full h-16">
-          <Loading />
+        <div className="w-full h-16 p-5">
+            <UserItemLoading count={5} />
         </div>
       );
 
