@@ -29,7 +29,7 @@ const UsersList = () => {
         }
 
         if (users.length === 0) {
-            return <p className='w-full text-sm text-violet-600 text-center font-main'>No Chats Yet , Get started by messaging a user</p>;
+            return <p className='w-full text-sm text-violet-600 text-center font-main items-center'>No Chats Yet , Get started by messaging a user</p>;
         }
 
         return users.map(item => (
