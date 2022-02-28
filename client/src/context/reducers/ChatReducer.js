@@ -1,4 +1,4 @@
-import { SEND_MESSAGE, SET_MESSAGES } from "../actions/ChatActions";
+import { SEND_MESSAGE, SET_MESSAGES, SET_SEEN_MESSAGE } from "../actions/ChatActions";
 
 const reducer = (state, action) => {
   switch (action.key) {
@@ -8,6 +8,15 @@ const reducer = (state, action) => {
 
     case SET_MESSAGES: {
       return action.data;
+    };
+
+    case SET_SEEN_MESSAGE: {
+      return state.map(message => {
+        if (message._id === action.id)
+          return { ...message, isSeen: true };
+
+        return message;
+      });
     }
 
     default:

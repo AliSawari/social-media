@@ -20,7 +20,6 @@ const Logout = lazy(() => import("./pages/Logout/Logout"));
 function App() {
 
 
-  console.log("App  rendered");
 
   const routes = useRoutes([
     {

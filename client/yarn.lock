@@ -8063,6 +8063,13 @@ react-toastify@^8.1.1:
   dependencies:
     clsx "^1.1.1"
 
+react-visibility-sensor-v2@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/react-visibility-sensor-v2/-/react-visibility-sensor-v2-1.0.0.tgz#f74bb60b32c2f8a7efa5bf57de88fa2158b4e0b6"
+  integrity sha512-yEp5gxAGd3v/Z+9QT9ZmfVLQH4CEU6qhXnKvX2y0W++vtLskXLFs6RhMDKkBvA8z1mVmV6Jo1nHgts1ILZ/Vnw==
+  dependencies:
+    prop-types "^15.7.2"
+
 react-webcam@^6.0.1:
   version "6.0.1"
   resolved "https://registry.yarnpkg.com/react-webcam/-/react-webcam-6.0.1.tgz#6f81f9be7b208a351a42af3288ef1149bd1eec36"

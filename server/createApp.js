@@ -108,7 +108,12 @@ function createApp() {
       const userComment = await UserModel.findById(user);
       const userId = post.user.toHexString();
       socket.to(userId).emit("user:notification", { message: `${userComment.fullname} commented in your post` })
-    })
+    });
+
+    socket.on("message:seen", async ({ id, userId }) => {
+      await ChatModel.findByIdAndUpdate(id, { isSeen: true });
+      socket.to(userId).emit("client-message:seen", { id });
+    });
   });
 
   app.use("/public", express.static("public"));
