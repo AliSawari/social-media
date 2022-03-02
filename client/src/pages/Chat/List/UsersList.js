@@ -27,9 +27,12 @@ const UsersList = () => {
 
     const renderUsers = () => {
 
-        if (chats === undefined)
+        if (chats === null)
             return <UserItemLoading count={5} />
 
+        if(chats.length === 0){
+            return <p className='w-full p-5 text-center'>you did'nt chat with anybody</p>
+        }
         return chats.sort((a, b) => { return (a.updatedAt > b.updatedAt) ? -1 : 1 }).map(item => {
             let user;
             if (item.sender._id === id)

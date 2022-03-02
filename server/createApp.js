@@ -93,9 +93,9 @@ function createApp() {
       socket.to(userId).emit("user:notification", { message: `${userComment.fullname} commented in your post` })
     });
 
-    socket.on("message:seen", async ({ id, chatId, userId }) => {
+    socket.on("message:seen", async ({ id, chatId, sender }) => {
       await ChatModel.updateOne({ _id: chatId, "messages._id": id }, { $set: { "messages.$.isSeen": true } });
-      socket.to(userId).emit("client-message:seen", { chatId, id });
+      socket.to(sender).emit("client-message:seen", { chatId, id });
     });
   });
 

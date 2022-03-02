@@ -1,18 +1,20 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import UserItem from "./UserItem";
 import { useGetUserId } from '../../../hooks/useGetUserId'
 import { MdOutlineChat } from 'react-icons/md'
 import EmptySectionMessage from '../../../components/EmptySectionMessage/EmptySectionMessage'
 import httpClient from '../../../api/client'
 import UserItemLoading from "../../../components/SkeletonLoading/UserItemLoading";
+import { ChatContext } from "../../../context/providers/ChatProvider";
+import { setChats } from "../../../context/actions/ChatActions";
 const UserChatsHistory = () => {
   const { id } = useGetUserId();
-  const [users, setUsers] = useState(null);
+  const { dispatch, chats } = useContext(ChatContext);
   useEffect(() => {
     const fetchData = async () => {
       try {
         const { data: users } = await httpClient.get(`chat/list/${id}`);
-        setUsers(users);
+        dispatch(setChats(users));
       } catch (error) {
         console.log(error);
       }
@@ -24,16 +26,16 @@ const UserChatsHistory = () => {
 
   const renderChats = () => {
 
-    if (users === null) {
+    if (chats === null) {
       return <UserItemLoading count={2} />
     }
 
-    if (users.length === 0) {
+    if (chats.length === 0) {
       return <EmptySectionMessage message="You have not any follower." />
     }
 
 
-    return users.map((item) => {
+    return chats.map((item) => {
       let user;
       if (item.sender._id === id)
         user = item.receiver;

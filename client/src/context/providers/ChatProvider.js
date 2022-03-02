@@ -10,8 +10,8 @@ import { getSetSeenMessage, setNewChat, setNewMessage } from "../actions/ChatAct
 
 const ChatProvider = ({ children }) => {
 
-  const initialState = [];
-  const [chats, dispatch] = useReducer(reducer, initialState)
+  const initialState = null;
+  const [chats, dispatch] = useReducer(reducer, initialState);
 
   const { id } = useGetUserId();
   let socket = io("http://localhost:4000", {
@@ -50,8 +50,6 @@ const ChatProvider = ({ children }) => {
     socket.on("client-message:seen", ({ id, chatId }) => {
       dispatch(getSetSeenMessage(chatId, id));
     })
-
-
   }, []);
 
 

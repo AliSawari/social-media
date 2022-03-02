@@ -4,13 +4,16 @@ import moment from 'moment';
 import VisibilitySensor from 'react-visibility-sensor-v2';
 import { ChatContext } from '../../../context/providers/ChatProvider';
 import { RiCheckFill, RiCheckDoubleLine } from 'react-icons/ri';
+import { getSetSeenMessage } from "../../../context/actions/ChatActions";
 const MessageItem = ({ _id, message, sender, createdAt, fontSize, isSeen, chatId }) => {
   const { socket } = useContext(ChatContext);
   const time = moment(createdAt).format("h:mm a");
   const { id } = useGetUserId();
+  const { dispatch } = useContext(ChatContext);
   const handleChangeVisibility = (isVisibility) => {
     if (isVisibility === true && isSeen == false && sender !== id) {
-      socket.emit("message:seen", { id: _id, chatId, userId: sender });
+      dispatch(getSetSeenMessage(chatId, _id));
+      socket.emit("message:seen", { id: _id, chatId, sender });
     }
   };
 

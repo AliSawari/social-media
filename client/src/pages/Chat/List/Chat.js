@@ -24,6 +24,9 @@ const List = () => {
       );
 
 
+    if(chats === null)
+        return "";
+      
     const chat = chats.find(item => (item.sender._id === sender && item.receiver._id === id) || (item.sender._id === id && item.receiver._id === sender));
     return <>
       <ChatHeader id={id} />
