@@ -1,20 +1,22 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { useLocation } from 'react-router';
 import httpClient from "../../../api/client";
 import { useGetUserId } from '../../../hooks/useGetUserId'
 import UserItem from "../../Main/LeftSide/UserItem";
 import UserItemLoading from '../../../components/SkeletonLoading/UserItemLoading';
+import { ChatContext } from '../../../context/providers/ChatProvider';
+import { setChats } from '../../../context/actions/ChatActions';
 const UsersList = () => {
     const location = useLocation();
     const { id } = useGetUserId();
-    const [users, setUsers] = useState(null);
+    const { chats, dispatch } = useContext(ChatContext);
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const { data } = await httpClient.get(
-                    `converstation/list/${id}`
+                const { data: chats } = await httpClient.get(
+                    `chat/list/${id}`
                 );
-                setUsers(data && data.contacts ? data.contacts : []);
+                dispatch(setChats(chats));
             } catch (error) {
                 console.log(error);
             }
@@ -24,17 +26,20 @@ const UsersList = () => {
     }, [location]);
 
     const renderUsers = () => {
-        if (users === null) {
+
+        if (chats === undefined)
             return <UserItemLoading count={5} />
-        }
 
-        if (users.length === 0) {
-            return <p className='w-full text-sm text-violet-600 text-center font-main items-center'>No Chats Yet , Get started by messaging a user</p>;
-        }
+        return chats.sort((a, b) => { return (a.updatedAt > b.updatedAt) ? -1 : 1 }).map(item => {
+            let user;
+            if (item.sender._id === id)
+                user = item.receiver;
+            else
+                user = item.sender;
 
-        return users.map(item => (
-            <UserItem key={item.user._id} message={item.message} {...item.user} />
-        ));
+            return <UserItem key={item._id}  {...user} messages={item.messages} message={item.lastMessage} />
+
+        });
     }
     return <div className="w-2/12 mt-24 bg-neutral-900 rounded p-5 shadow-md">
         {renderUsers()}

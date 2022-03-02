@@ -37,7 +37,7 @@ const PostOperations = ({ likes, id }) => {
     }
   }
   return (
-    <div className="w-full flex py-2 justify-between">
+    <div className="flex py-2 justify-between">
       <div className="flex gap-3">
         <button className="post-operation-button flex items-center gap-1" onClick={handleClickLike}>
           {state.isLiked ? <IoIosHeart /> : <IoIosHeartEmpty />}

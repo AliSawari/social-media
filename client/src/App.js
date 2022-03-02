@@ -16,12 +16,17 @@ const ChatList = lazy(() => import("./pages/Chat/List/Chat"));
 const Settings = lazy(() => import("./pages/Settings/Settings"));
 const NotificationList = lazy(() => import("./pages/Notification/List/List"));
 const Saved = lazy(() => import("./pages/Saved/Saved"));
+const Welcome = lazy(() => import("./pages/Welcome/Welcome"));
 const Logout = lazy(() => import("./pages/Logout/Logout"));
 function App() {
 
 
 
   const routes = useRoutes([
+    {
+      path: "/welcome",
+      element: <Welcome />
+    },
     {
       path: "/auth", children: [
         { path: "login", element: <LoginPage /> },
@@ -114,8 +119,8 @@ function App() {
 
   return (
     <Suspense fallback={<Loading />}>
-      <UserProvider>      
-          {routes}        
+      <UserProvider>
+        {routes}
       </UserProvider>
     </Suspense>
   );

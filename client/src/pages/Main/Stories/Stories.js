@@ -25,7 +25,6 @@ const Stories = () => {
     fetchData();
   }, []);
 
-  console.log("Stories rendered", userStories);
 
 
 

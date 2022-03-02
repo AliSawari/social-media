@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import UserItem from "./UserItem";
 import { useGetUserId } from '../../../hooks/useGetUserId'
 import { MdOutlineChat } from 'react-icons/md'
-import Loading from '../../../components/Loading/Loading'
 import EmptySectionMessage from '../../../components/EmptySectionMessage/EmptySectionMessage'
 import httpClient from '../../../api/client'
 import UserItemLoading from "../../../components/SkeletonLoading/UserItemLoading";
@@ -13,7 +12,9 @@ const UserChatsHistory = () => {
     const fetchData = async () => {
       try {
         const { data: users } = await httpClient.get(`converstation/list/${id}`);
-        setState(users === null ? [] : users.contacts);
+        const contacts = users.contacts;
+        contacts.sort((a, b) => a.timestamp - b.timestamp).reverse();
+        setState(users === null ? [] : contacts);
       } catch (error) {
         console.log(error);
       }

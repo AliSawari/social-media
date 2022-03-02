@@ -7,10 +7,10 @@ import PostOperations from "./PostOperations";
 const PostItem = ({ _id: id, user, description, image, likes, link }) => {
   return (
     <div className="w-full rounded bg-neutral-800 shadow-md p-4">
-      <PostItemHeader id={id} user={user} link={link}  />
+      <PostItemHeader id={id} user={user} link={link} />
       <PostMedia src={`http://localhost:4000/public/images/${image}`} />
-      <PostOperations id={id} user={user} likes={likes} />
       <PostContent description={description} />
+      <PostOperations id={id} user={user} likes={likes} />
       <PostComments id={id} />
     </div>
   );

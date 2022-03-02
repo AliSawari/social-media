@@ -10,7 +10,6 @@ const UserProvider = ({ children }) => {
     data: undefined
   };
   const [state, dispatch] = useReducer(reducer, initialState);
-  console.log("User provider rendered" , state);
   return (
     <UserContext.Provider value={{ state, dispatch }}>
       {children}

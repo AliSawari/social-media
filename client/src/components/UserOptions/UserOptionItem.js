@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const UserOptionItem = ({ title, link }) => {
   return (
     <li className="user-option-item">
-      <Link to={link}>{title}</Link>
+      <Link to={link} className="font-main">{title}</Link>
     </li>
   );
 };

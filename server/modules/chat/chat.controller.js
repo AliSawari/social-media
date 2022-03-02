@@ -21,6 +21,28 @@ const handleGetMessages = async (req, res) => {
   }
 };
 
+const getChats = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const chats = await ChatModel.find({
+      $or: [
+        { sender: id },
+        { receiver: id },
+      ],
+    })
+      .populate("sender", "fullname  profile")
+      .populate("receiver", "fullname  profile");
+
+    res.status(200).json(chats);
+  } catch (error) {
+    res.status(500).json({
+      message: "internal server error",
+      error,
+    });
+  }
+};
+
 module.exports = {
   handleGetMessages,
+  getChats
 };

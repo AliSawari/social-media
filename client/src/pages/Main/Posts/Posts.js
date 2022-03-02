@@ -6,7 +6,6 @@ import PostLoading from "../../../components/SkeletonLoading/PostLoading";
 const Posts = () => {
   const { id } = useGetUserId();
   const [posts, setPosts] = useState(null);
-  console.log("Posts rendered" , posts)
   useEffect(() => {
     const fetchData = async () => {
       try {

@@ -3,37 +3,17 @@ import { useParams } from "react-router";
 import Header from "../../Main/Header/Header";
 import MessageSender from "./MessageSender";
 import { useGetUserId } from "../../../hooks/useGetUserId";
-import httpClient from "../../../api/client";
 import UsersList from "./UsersList";
 import ChatHeader from "./ChatHeader";
 import MessagesList from "./MessagesList";
 import { ChatContext } from '../../../context/providers/ChatProvider';
-import { getSetMessages } from "../../../context/actions/ChatActions";
 const List = () => {
 
   const { id } = useParams();
   const { id: sender } = useGetUserId();
-  const { dispatch, messages } = useContext(ChatContext);
-  const [user, setUser] = useState(null);
-  useEffect(() => {
-    if (!id) {
-      return;
-    }
-    const fetchData = async () => {
-      try {
-        const { data: messages } = await httpClient.get(
-          `chat/messages/${sender}/${id}`
-        );
-        const { data: user } = await httpClient.get(`users/user/${id}`);
-        setUser(user);
-        dispatch(getSetMessages(messages));
-      } catch (error) {
-        console.log(error);
-      }
-    };
+  const { chats } = useContext(ChatContext);
 
-    fetchData();
-  }, [id]);
+
 
 
 
@@ -47,13 +27,13 @@ const List = () => {
         </div>
       );
 
+
+    const chat = chats.find(item => (item.sender._id === sender && item.receiver._id === id) || (item.sender._id === id && item.receiver._id === sender));
     return <>
-      <ChatHeader user={user} id={id} />
-      <MessagesList messages={messages} />
+      <ChatHeader id={id} />
+      <MessagesList messages={chat === undefined ? [] : chat.messages} chatId={chat === undefined ? "" : chat._id} />
       <MessageSender id={id} />
     </>
-
-
 
   };
   return (

@@ -2,7 +2,7 @@ import React from "react";
 
 const PostContent = ({ description }) => {
   return (
-    <div className="w-full py-2">
+    <div className="w-1/2 py-2">
       <p className="text-white font-main">{description}</p>
     </div>
   );

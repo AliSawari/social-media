@@ -3,7 +3,7 @@ const Converstation = require("./conversation.model");
 const getUserContacts = async (req, res) => {
     try {
         const { id } = req.params;
-        const list = await Converstation.findOne({ user: id }).populate("contacts.user").sort({ "contacts.timestamp": 1 });
+        const list = await Converstation.findOne({ user: id }).populate("contacts.user");                
         res.status(200).json(list);
     } catch (error) {
         console.log(error);

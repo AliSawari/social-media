@@ -30,8 +30,8 @@ const SearchBox = () => {
   const renderUsers = () => {
     if (data === null)
       return (
-        <div className="w-full h-16 p-5">
-            <UserItemLoading count={5} />
+        <div className="w-full h-auto p-5">
+            <UserItemLoading count={3} />
         </div>
       );
 

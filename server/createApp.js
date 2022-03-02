@@ -45,51 +45,34 @@ function createApp() {
     socket.on("user:connect", ({ id }) => {
       socket.join(id);
     });
+
     socket.on("send message", async ({ message, sender, receiver }) => {
-
-
-      const newChat = await ChatModel.create({
-        message,
-        sender,
-        receiver,
-      });
-
-
-      const isSenderConverstationExists = await Converstation.findOne({ user: sender });
-      const isReceiverConverstationExists = await Converstation.findOne({ user: receiver });
-
 
       const timestamp = moment.now();
 
-
-      // create or add new contact
-      if (isSenderConverstationExists) {
-        if (!isSenderConverstationExists.contacts.find(user => user.user == receiver)) {
-          await Converstation.updateOne({ user: sender }, { $push: { contacts: { user: receiver, timestamp, message: "" } } });
-        }
+      const conversation = await ChatModel.findOne({ $or: [{ sender: receiver, receiver: sender }, { sender: sender, receiver: receiver }] });
+      let chatOptions = {};
+      if (conversation) {
+        chatOptions.data = await ChatModel.findOneAndUpdate({ _id: conversation._id }, { lastMessage: message, $push: { messages: { sender, message, timestamp } } }, { new: true }).populate("sender", "profile fullname").populate("receiver", "profile  fullname");
+        chatOptions.type = "update";
       } else {
-        await Converstation.create({ user: sender, contacts: [{ user: receiver, timestamp, message: "" }] });
+        const newChat = new ChatModel({
+          sender,
+          receiver,
+          lastMessage: message,
+          messages: [
+            { sender, message, timestamp }
+          ]
+        });
+        const { _id } = await newChat.save();
+        chatOptions.data = await ChatModel.findById(_id).populate("sender", "profile fullname").populate("receiver", "profile  fullname");
+        chatOptions.type = "new";
       }
 
-      if (isReceiverConverstationExists) {
-        if (!isReceiverConverstationExists.contacts.find(user => user.user == sender)) {
-          await Converstation.updateOne({ user: receiver }, { $push: { contacts: { user: sender, timestamp, message: "" } } });
-        }
-      } else {
-        await Converstation.create({ user: receiver, contacts: [{ user: sender, timestamp, message: "" }] });
-      }
 
-      // set last chats
-      await Converstation.findOneAndUpdate({ user: sender, contacts: { $elemMatch: { user: receiver } } }, { $set: { "contacts.$.message": message } })
-      await Converstation.findOneAndUpdate({ user: receiver, contacts: { $elemMatch: { user: sender } } }, { $set: { "contacts.$.message": message } })
-
-
-      const chat = await ChatModel.findById(newChat._id)
-        .populate("sender", "fullname username")
-        .populate("receiver", "fullname username");
-
-      socket.to(receiver).emit("user:notification", { message: `you have new message by ${chat.sender.fullname}`, sender });
-      socket.to([receiver, sender]).emit("send message", chat);
+      const userSender = await UserModel.findById(sender);
+      socket.to(receiver).emit("user:notification", { message: `you have new message by ${userSender.fullname}` });
+      socket.to([receiver, sender]).emit("send message", chatOptions);
     });
 
 
@@ -110,9 +93,9 @@ function createApp() {
       socket.to(userId).emit("user:notification", { message: `${userComment.fullname} commented in your post` })
     });
 
-    socket.on("message:seen", async ({ id, userId }) => {
-      await ChatModel.findByIdAndUpdate(id, { isSeen: true });
-      socket.to(userId).emit("client-message:seen", { id });
+    socket.on("message:seen", async ({ id, chatId, userId }) => {
+      await ChatModel.updateOne({ _id: chatId, "messages._id": id }, { $set: { "messages.$.isSeen": true } });
+      socket.to(userId).emit("client-message:seen", { chatId, id });
     });
   });
 

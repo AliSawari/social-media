@@ -6,19 +6,18 @@ export const ChatContext = createContext();
 import { ToastContainer, toast } from "react-toastify";
 import reducer from '../reducers/ChatReducer';
 import "react-toastify/dist/ReactToastify.css";
-import { getSendMessage, getSetSeenMessage } from "../actions/ChatActions";
+import { getSetSeenMessage, setNewChat, setNewMessage } from "../actions/ChatActions";
 
 const ChatProvider = ({ children }) => {
 
   const initialState = [];
-  const [messages, dispatch] = useReducer(reducer, initialState)
+  const [chats, dispatch] = useReducer(reducer, initialState)
 
   const { id } = useGetUserId();
   let socket = io("http://localhost:4000", {
     transports: ["websocket"],
     upgrade: false,
   });
-  console.log("Chat provider rendered");
 
   useEffect(() => {
     socket.emit("user:connect", { id });
@@ -37,23 +36,27 @@ const ChatProvider = ({ children }) => {
         theme: "dark",
       });
     });
-  
-    socket.on("send message", (data) => {
-      dispatch(getSendMessage(data));
+
+    socket.on("send message", ({ type, data }) => {
+      if (type === "new") {
+        dispatch(setNewChat(data));
+      } else {
+        dispatch(setNewMessage(data));
+      }
     });
 
-  
-  
-    socket.on("client-message:seen", ({ id }) => {
-      dispatch(getSetSeenMessage(id));
+
+
+    socket.on("client-message:seen", ({ id, chatId }) => {
+      dispatch(getSetSeenMessage(chatId, id));
     })
 
-    
+
   }, []);
 
 
   return (
-    <ChatContext.Provider value={{ socket, messages, dispatch }}>
+    <ChatContext.Provider value={{ socket, chats, dispatch }}>
       <ToastContainer />
       {children}
     </ChatContext.Provider>

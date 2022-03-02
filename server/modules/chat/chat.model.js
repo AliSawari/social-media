@@ -2,9 +2,6 @@ const mongoose = require("../../database/connection");
 
 const ChatSchema = new mongoose.Schema(
   {
-    message: {
-      type: String,
-    },
     sender: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "users",
@@ -14,9 +11,19 @@ const ChatSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "users",
     },
-    isSeen: {
-      type: Boolean,
-      default: false
+    messages: [
+      {
+        sender: { type: mongoose.Schema.Types.ObjectId },
+        message: { type: String },
+        timestamp: { type: Number },
+        isSeen: {
+          type: Boolean,
+          default: false
+        }
+      }
+    ],
+    lastMessage: {
+      type: String
     }
   },
   { timestamps: true }

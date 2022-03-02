@@ -1,7 +1,7 @@
 import React, { useContext, useRef, useEffect } from 'react';
 import { UserContext } from '../../../context/providers/UserProvider';
 import MessageItem from './MessageItem';
-const MessagesList = ({ messages }) => {
+const MessagesList = ({ messages , chatId }) => {
     const { state: user } = useContext(UserContext);
     const chatListRef = useRef(null);
     useEffect(() => {
@@ -19,7 +19,7 @@ const MessagesList = ({ messages }) => {
         ref={chatListRef}
     >
         <div className='flex flex-col justify-end'>
-            {messages.map((item, index) => <MessageItem key={index} fontSize={user.data ? user.data.chatSettings.fontSize : 15} {...item} />)}
+            {messages.map((item, index) => <MessageItem chatId={chatId} key={index} fontSize={user.data ? user.data.chatSettings.fontSize : 15} {...item} />)}
         </div>
     </div>
 
