@@ -11,7 +11,6 @@ const StoriesModal = ({ users }) => {
     const [user, setUser] = useState(null);
     const id = searchParams.get("story");
     const navigate = useNavigate();
-    console.log("Stories Modal rendered");
     useEffect(() => {
         const fetchData = async () => {
             try {

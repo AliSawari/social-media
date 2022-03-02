@@ -7,14 +7,12 @@ import httpClient from '../../../api/client'
 import UserItemLoading from "../../../components/SkeletonLoading/UserItemLoading";
 const UserChatsHistory = () => {
   const { id } = useGetUserId();
-  const [state, setState] = useState(null);
+  const [users, setUsers] = useState(null);
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const { data: users } = await httpClient.get(`converstation/list/${id}`);
-        const contacts = users.contacts;
-        contacts.sort((a, b) => a.timestamp - b.timestamp).reverse();
-        setState(users === null ? [] : contacts);
+        const { data: users } = await httpClient.get(`chat/list/${id}`);
+        setUsers(users);
       } catch (error) {
         console.log(error);
       }
@@ -26,18 +24,23 @@ const UserChatsHistory = () => {
 
   const renderChats = () => {
 
-    if (state === null) {
+    if (users === null) {
       return <UserItemLoading count={2} />
     }
 
-    if (state.length === 0) {
+    if (users.length === 0) {
       return <EmptySectionMessage message="You have not any follower." />
     }
 
 
-    return state.map((item) => (
-      <UserItem message={item.message} key={item._id} {...item.user} />
-    ));
+    return users.map((item) => {
+      let user;
+      if (item.sender._id === id)
+        user = item.receiver;
+      else
+        user = item.sender;
+      return <UserItem message={item.lastMessage} key={item._id} {...user} />
+    });
   }
   return (
     <div className="w-full max-h-auto pb-3 h-72 rounded overflow-hidden bg-neutral-800 shadow-sm">

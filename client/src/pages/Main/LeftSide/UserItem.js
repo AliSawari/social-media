@@ -6,7 +6,7 @@ import { useGetUserId } from "../../../hooks/useGetUserId";
 const UserItem = ({ _id, profile, fullname, message, messages }) => {
   const mainProfile = useShowUserProfile(profile);
   const { id } = useGetUserId();
-  const unreadMessagesLength = messages.filter(item => item.isSeen === false && item.sender !== id).length;
+  const unreadMessagesLength = messages && messages.filter(item => item.isSeen === false && item.sender !== id).length;
   return (
     <Link to={`/chat/list/${_id}`}>
       <div className="left-sides-header">

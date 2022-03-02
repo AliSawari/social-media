@@ -13,10 +13,6 @@ const List = () => {
   const { id: sender } = useGetUserId();
   const { chats } = useContext(ChatContext);
 
-
-
-
-
   const renderMessagesBox = () => {
     if (!id)
       return (

@@ -11,7 +11,6 @@ const ChatHeader = ({ id }) => {
         const fetchData = async () => {
             try {
                 const { data: { profile, fullname, username } } = await httpClient.get(`users/user/${id}`);
-                console.log(profile, fullname, username);
                 setUser({ profile, fullname, username });
             } catch (error) {
                 console.log(error);
