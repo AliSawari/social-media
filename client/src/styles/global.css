@@ -4,7 +4,7 @@
 @tailwind utilities;
 
 body {
-  background: #222;
+  background: #fff;
 }
 
 @layer components {
@@ -13,11 +13,11 @@ body {
   }
 
   .active-navbar-item {
-    @apply navbar-item text-white bg-violet-800 hover:bg-violet-900;
+    @apply navbar-item text-violet-600  w-full py-4;
   }
-
+  
   .navbar-item {
-    @apply w-7 h-7 rounded flex justify-center items-center text-violet-800 cursor-pointer text-xl;
+    @apply p-3 h-10 rounded flex justify-start py-4 items-center text-gray-700 cursor-pointer text-xl w-full hover:bg-violet-100 transition;
   }
 
   .left-sides-header {
@@ -88,3 +88,6 @@ body {
   display: none !important;
 }
 
+.h-full-vh{
+  height: 100vh;
+}

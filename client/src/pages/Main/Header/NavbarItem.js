@@ -1,16 +1,16 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 
-const NavbarItem = ({ children, link }) => {
+const NavbarItem = ({ children, link, title }) => {
+  const getActiveClassName = ({ isActive }) =>
+    isActive ? "active-navbar-item" : "navbar-item";
   return (
-    <li>
+    <li className="w-full">
       <NavLink
         to={link}
-        className={({ isActive }) =>
-          isActive ? "active-navbar-item" : "navbar-item"
-        }
+        className={getActiveClassName}
       >
-        {children}
+        {children} <span className="text-sm ml-2">{title}</span>
       </NavLink>
     </li>
   );

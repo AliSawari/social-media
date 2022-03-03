@@ -5,7 +5,7 @@ import { FiUsers } from "react-icons/fi";
 import NavbarItem from "./NavbarItem";
 import { ChatContext } from "../../../context/providers/ChatProvider";
 import { useGetUserId } from "../../../hooks/useGetUserId";
-const LeftNavbar = () => {
+const Navbar = () => {
 
   const { id } = useGetUserId();
   const { chats } = useContext(ChatContext);
@@ -20,28 +20,27 @@ const LeftNavbar = () => {
   }
 
   return (
-    <div className="flex py-2 pl-6">
-      <ul className="flex justify-center gap-5">
-        <NavbarItem link="/">
+    <div className="flex py-2 pl-3">
+      <ul className="w-full flex flex-col gap-5">
+        <NavbarItem link="/" title={"Home"}>
           <IoHomeOutline />
         </NavbarItem>
 
-        <NavbarItem link="/explore">
+        <NavbarItem link="/explore" title={"Explore"}>
           <MdOutlineExplore />
         </NavbarItem>
 
-        <NavbarItem link="/followers">
+        <NavbarItem link="/followers" title={"Followers"}>
           <FiUsers />
         </NavbarItem>
 
 
-        <NavbarItem link="/chat/list">
+        <NavbarItem link="/chat/list" title={"Direct Message"}>
           <MdOutlineChat marginright="5px" />
-          <span className="text-sm ">{unReadMessagesLength}</span>
         </NavbarItem>
       </ul>
     </div>
   );
 };
 
-export default LeftNavbar;
+export default Navbar;

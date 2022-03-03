@@ -1,13 +1,14 @@
 import React from "react";
-import Followers from "./Followers";
+import Profile from '../Profile/Profile'
 import UserChatsHistory from "./UserChatsHistory";
+import Navbar from '../Header/Navbar';
 const LeftSide = () => {
-  console.log("Left Side rendered")
   return (
-    <div className="w-1/6 relative mt-32">
-      <div className="flex fixed w-1/6 flex-col">
+    <div className="w-1/6 relative bg-gray-100 py-5 px-3">
+      <div className="flex w-full flex-col ">
+        <Profile />
+        <Navbar />
         <UserChatsHistory />
-        <Followers />
       </div>
     </div>
   );

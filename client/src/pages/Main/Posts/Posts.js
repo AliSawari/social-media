@@ -32,7 +32,11 @@ const Posts = () => {
 
     return posts.map((item) => <PostItem {...item} key={item._id} />);
   };
-  return <div className="w-full h-auto p-4 flex gap-5 flex-col">{renderPosts()}</div>;
+  return <div className="w-full h-auto py-4 flex gap-5 flex-col">
+    <div className="w-full mt-3">
+      <h3 className="font-main text-lg">Posts</h3>
+    </div>
+    {renderPosts()}</div>;
 };
 
 export default Posts

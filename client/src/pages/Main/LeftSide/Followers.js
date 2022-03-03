@@ -4,7 +4,6 @@ import UserItem from "./UserItem";
 import httpClient from "../../../api/client";
 import { useGetUserId } from "../../../hooks/useGetUserId";
 import UserItemLoading from "../../../components/SkeletonLoading/UserItemLoading";
-import { Link } from "react-router-dom";
 import EmptySectionMessage from "../../../components/EmptySectionMessage/EmptySectionMessage";
 const Followers = () => {
   const { id } = useGetUserId();
@@ -35,12 +34,9 @@ const Followers = () => {
     return state.map((item) => <UserItem key={item._id} {...item.user} />);
   };
   return (
-    <div className="w-full max-h-auto h-72 mt-4 pb-3 rounded bg-neutral-800 shadow-sm">
-      <div className="flex justify-between p-4 bg-gradient-to-l from-violet-800 to-violet-900">
-        <h3 className="font-main text-white">Followers</h3>
-        <Link to="/followers" className="text-white text-xl">
-          <FiUsers />
-        </Link>
+    <div className="w-full max-h-auto h-72 mt-4 pb-3 rounded">
+      <div className="flex justify-between p-4">
+        <h3 className="font-main text-gray-700 flex items-center gap-2"><FiUsers fontSize={20} className="text-violet-600" />Followers</h3>
       </div>
       {renderUsers()}
     </div>

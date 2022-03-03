@@ -32,9 +32,14 @@ const Stories = () => {
     return userStories.users.map(item => <StoryUserItem key={item._id} {...item} />)
   }
   return (
-    <div className="w-full overflow-hidden h-2/4 px-4 flex mt-20">
+    <div className="w-full overflow-hidden h-auto flex flex-col pt-4">
+      <div className="w-full">
+        <h3 className="font-main text-lg">Stories</h3>
+      </div>
+      <div className="w-full flex">
       <AddStory userStories={userStories.stories} />
-      {renderUserStories()}
+        {renderUserStories()}
+      </div>
       <StoriesModal users={userStories.users} />
     </div>
   );

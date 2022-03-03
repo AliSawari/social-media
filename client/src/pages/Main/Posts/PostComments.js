@@ -93,9 +93,9 @@ const PostComments = ({ id }) => {
     setState(prevState => !prevState)
   }
   return (
-    <div className="w-full">
+    <div className="w-full  py-4">
       <div className="w-full">
-        <button className="bg-transparent text-neutral-600 font-main font-thin text-sm" onClick={handleClickToggleCommentList}>
+        <button className="bg-transparent text-neutral-600 py-3 font-main font-thin text-sm" onClick={handleClickToggleCommentList}>
           Show Comments
         </button>
         {state ? (
@@ -105,10 +105,10 @@ const PostComments = ({ id }) => {
         ) : null}
       </div>
 
-      <div className="w-full py-3">
+      <div className="w-full">
         <form onSubmit={handleSubmitForm}>
           <div className="w-full relative">
-            <input value={text} onChange={handleChangeInputValue} type="text" className="w-full h-10 rounded bg-neutral-900 outline-none p-2 text-white font-main" placeholder="Add a comment..." />
+            <input value={text} onChange={handleChangeInputValue} type="text" className="w-full h-10 rounded bg-gray-100 text-sm outline-none p-2 text-gray-700 font-main" placeholder="Add a comment..." />
             <button className="absolute text-violet-600 top-0 w-12 text-center flex items-center h-10 -right-5">
               <AiOutlineSend fontSize={20} />
             </button>

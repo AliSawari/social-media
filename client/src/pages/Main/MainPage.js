@@ -1,22 +1,22 @@
 import React from "react";
 import MainLayout from "../../components/MainLayout";
-import Header from "./Header/Header";
+import SearchBox from "./Header/SearchBox";
 import LeftSide from "./LeftSide/LeftSide";
 import Posts from "./Posts/Posts";
-import Profile from "./Profile/Profile";
+import RightSide from "./RightSide/RightSide";
 import Stories from "./Stories/Stories";
 
 const MainPage = () => {
   return (
     <>
-      <Header />
       <MainLayout>
         <LeftSide />
         <div className="w-4/6 px-14 flex flex-col">
+          <SearchBox />
           <Stories />
           <Posts />
         </div>
-        <Profile />
+        <RightSide />
       </MainLayout>
     </>
   );

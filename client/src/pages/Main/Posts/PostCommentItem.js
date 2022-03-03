@@ -41,18 +41,16 @@ const PostCommentItem = ({ message, user, childrens, depth, removeComment, _id, 
 
 
 
-    return <div className="w-full h-auto flex flex-col items-center justify-start gap-4 p-3 rounded my-5 border border-neutral-900" style={{ marginLeft: `${depth * 10}px` }}>
+    return <div className="w-full h-auto bg-gray-100 flex flex-col items-center justify-start gap-4 p-3 rounded my-5" style={{ marginLeft: `${depth * 10}px` }}>
         <div className='w-full flex'>
             <div className="w-7/12 flex justify-start gap-3 items-center">
                 <img
-                    src={mainProfile}
-                    width="30"
-                    height="30"
+                    src={mainProfile}                    
                     alt="profile user"
-                    className="rounded-lg border-1"
+                    className="rounded-lg border-1 w-10 h-10"
                 />
                 <h3 className='font-main text-violet-500 text-sm'>{user.fullname}</h3>
-                <p className="font-main text-white">{message}</p>
+                <p className="font-main text-gray-700">{message}</p>
             </div>
             <div className="w-5/12 text-right">
                 {user._id === id ? (

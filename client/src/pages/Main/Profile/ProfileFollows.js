@@ -31,11 +31,11 @@ const ProfileFollows = ({ followers, followings }) => {
         ))}
       </Modal>
       <div onClick={handleClickToggleShowFollowersModal} className="cursor-pointer">
-        <h3 className="text-md font-main text-white">{followers.length}</h3>
+        <h3 className="text-md font-main text-black">{followers.length}</h3>
         <span className="text-sm font-main text-violet-500">Followers</span>
       </div>
       <div onClick={handleClickToggleShowFollowingsModal} className="cursor-pointer">
-        <h3 className="text-md font-main text-white">{followings.length}</h3>
+        <h3 className="text-md font-main text-black">{followings.length}</h3>
         <span className="text-sm font-main text-violet-500">Followings</span>
       </div>
     </div>

@@ -41,16 +41,13 @@ const UserChatsHistory = () => {
         user = item.receiver;
       else
         user = item.sender;
-      return <UserItem message={item.lastMessage} key={item._id} {...user} />
+      return <UserItem message={item.lastMessage} messages={item.messages} key={item._id} {...user} />
     });
   }
   return (
-    <div className="w-full max-h-auto pb-3 h-72 rounded overflow-hidden bg-neutral-800 shadow-sm">
-      <div className="flex justify-between p-4 bg-gradient-to-l from-violet-800 to-violet-900">
-        <h3 className="font-main text-white">Last Chats</h3>
-        <button className="text-white text-xl">
-          <MdOutlineChat />
-        </button>
+    <div className="w-full max-h-auto pb-3 h-72 rounded overflow-hidden py-5">
+      <div className="flex justify-between p-4">
+        <h3 className="font-main text-gray-800 flex items-center gap-2"><MdOutlineChat fontSize={20} className="text-violet-600" />Last Messages</h3>   
       </div>
       {renderChats()}
     </div>
