@@ -20,7 +20,7 @@ const Navbar = () => {
   }
 
   return (
-    <div className="flex py-2 pl-3">
+    <div className="flex py-2 pl-3 my-8">
       <ul className="w-full flex flex-col gap-5">
         <NavbarItem link="/" title={"Home"}>
           <IoHomeOutline />

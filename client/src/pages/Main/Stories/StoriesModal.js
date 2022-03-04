@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useSearchParams, useNavigate } from 'react-router-dom';
 import httpClient from '../../../api/client';
 import Modal from '../../../components/Modal/Modal';
-import UserItem from '../LeftSide/UserItem';
+import UserItem from '../LeftSideBar/UserItem';
 import StoryContentSlider from './StoryContentSlider';
 import StoryLoading from '../../../components/SkeletonLoading/StoryLoading';
 const StoriesModal = ({ users }) => {

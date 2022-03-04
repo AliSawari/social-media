@@ -2,7 +2,7 @@ import React from "react";
 import Profile from '../Profile/Profile'
 import UserChatsHistory from "./UserChatsHistory";
 import Navbar from '../Header/Navbar';
-const LeftSide = () => {
+const LeftSideBar = () => {
   return (
     <div className="w-1/6 relative bg-gray-100 py-5 px-3">
       <div className="flex w-full flex-col ">
@@ -14,4 +14,4 @@ const LeftSide = () => {
   );
 };
 
-export default LeftSide;
+export default LeftSideBar;

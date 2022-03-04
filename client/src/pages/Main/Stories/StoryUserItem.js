@@ -15,7 +15,7 @@ const StoryItem = ({ _id: id, fullname, profile: userProfile }) => {
             height={50}
             className="rounded-full p-1 bg-gradient-to-l from-violet-800 to-violet-900 w-20 h-20 object-cover"
           />
-          <h3 className="py-2 text-sm text-center font-main text-white">{fullname}</h3>
+          <h3 className="py-2 text-sm text-center font-main text-gray-700">{fullname}</h3>
         </div>
 
       </div>

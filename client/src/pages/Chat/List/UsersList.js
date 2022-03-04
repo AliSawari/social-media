@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import { useLocation } from 'react-router';
 import httpClient from "../../../api/client";
 import { useGetUserId } from '../../../hooks/useGetUserId'
-import UserItem from "../../Main/LeftSide/UserItem";
+import UserItem from "../../Main/LeftSideBar/UserItem";
 import UserItemLoading from '../../../components/SkeletonLoading/UserItemLoading';
 import { ChatContext } from '../../../context/providers/ChatProvider';
 import { setChats } from '../../../context/actions/ChatActions';

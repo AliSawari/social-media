@@ -24,11 +24,10 @@ const Profile = () => {
   }, []);
   return (
     <div className="w-1/6 h-auto">
-      <div className="w-72 p-3 h-96 overflow-hidden rounded" >
+      <div className="w-72 p-3 h-auto overflow-hidden rounded" >
         {user ? (<>
           <ProfileUserInfo profile={user.profile} fullname={user.fullname} bio={user.bio} />
-          <ProfileFollows followers={user.followers} followings={user.followings} />
-          <ProfileAddPostLink />
+          <ProfileFollows followers={user.followers} followings={user.followings} />          
         </>) : <ProfileLoading />}
       </div>
     </div>

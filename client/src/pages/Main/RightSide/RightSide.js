@@ -1,5 +1,5 @@
 import React from 'react'
-import Followers from '../LeftSide/Followers';
+import Followers from '../LeftSideBar/Followers';
 import Links from '../Links/Links';
 const RightSide = () => {
   return (

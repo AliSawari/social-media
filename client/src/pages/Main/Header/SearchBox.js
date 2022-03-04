@@ -46,7 +46,7 @@ const SearchBox = () => {
     return data.map((item) => <SearchUserItem key={item._id} {...item} />);
   };
   return (
-    <div className="w-full relative flex justify-end flex-col items-center py-5">
+    <div className="w-1/2 relative flex justify-end flex-col items-center py-5">
       <form className="w-full flex justify-center box-border" onSubmit={handleSearchForm}>
         <div className="w-full relative">
           <input

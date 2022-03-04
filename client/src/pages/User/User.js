@@ -8,7 +8,7 @@ import httpClient from "../../api/client";
 import UserPosts from "./UserPosts";
 import { useGetUserId } from "../../hooks/useGetUserId";
 import MainLayout from "../../components/MainLayout";
-import LeftSide from "../Main/LeftSide/LeftSide";
+import LeftSide from "../Main/LeftSideBar/LeftSideBar";
 import { FiSettings } from "react-icons/fi";
 const User = () => {
   const { username } = useParams();

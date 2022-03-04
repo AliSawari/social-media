@@ -96,11 +96,9 @@ const PostItemHeader = ({ user, link, id }) => {
       <SharePostModal link={link} show={showSharePostModal} closeReportModal={handleHideSharePostModal} />
       <div className="flex gap-3 items-center">
         <img
-          src={mainProfile}
-          width="42px"
-          height="42px"
+          src={mainProfile}          
           alt={user.fullname}
-          className="rounded-lg bg-violet-600 p-1 h-10 w-10 object-cover"
+          className="rounded-full p-1 h-16 w-16 object-cover"
         />
         <Link to={`/@${user.username}`}>
           <h3 className="text-violet-700 text-md font-main">{user.fullname}</h3>

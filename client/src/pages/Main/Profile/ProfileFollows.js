@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Modal from "../../../components/Modal/Modal";
-import UserInfo from '../LeftSide/UserItem';
+import UserInfo from '../LeftSideBar/UserItem';
 const ProfileFollows = ({ followers, followings }) => {
   const [showFollowerModal, setShowFollowerModal] = useState(false);
   const [showFollowingModal, setShowFollowingModal] = useState(false);
