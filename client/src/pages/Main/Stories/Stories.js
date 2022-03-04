@@ -33,11 +33,11 @@ const Stories = () => {
   }
   return (
     <div className="w-full overflow-hidden h-auto flex flex-col pt-4">
-      <div className="w-full">
+      <div className="w-full mb-8">
         <h3 className="font-main text-lg">Stories</h3>
       </div>
       <div className="w-full flex">
-      <AddStory userStories={userStories.stories} />
+        <AddStory userStories={userStories.stories} />
         {renderUserStories()}
       </div>
       <StoriesModal users={userStories.users} />

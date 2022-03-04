@@ -101,8 +101,8 @@ const PostItemHeader = ({ user, link, id }) => {
           className="rounded-full p-1 h-16 w-16 object-cover"
         />
         <Link to={`/@${user.username}`}>
-          <h3 className="text-violet-700 text-md font-main">{user.fullname}</h3>
-          <p className="text-xs text-gray-600 font-main">@{user.username}</p>
+          <h3 className="text-gray-800 text-md font-main">{user.fullname}</h3>
+          <p className="text-xs text-gray-500 font-main">@{user.username}</p>
         </Link>
       </div>
       <div className="flex items-center">

@@ -14,9 +14,10 @@ const TopNavbar = () => {
   const fullname = user.data?.fullname
   return (
     <div className="w-1/2 flex justify-end items-center gap-4">
-      <div>
-        <Link to="/post/add" className='text-gray-700'>
+      <div className='bg-violet-700 py-2 px-3 transition-all hover:bg-violet-900 rounded '>
+        <Link to="/post/add" className='gap-2 font-main flex text-sm text-white justify-center items-center'>
           <IoIosAddCircleOutline fontSize={26} />
+          Create Post
         </Link>
       </div>
       <Notifications haveNotifications={true} />

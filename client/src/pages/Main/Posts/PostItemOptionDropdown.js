@@ -15,7 +15,7 @@ const PostItemOptionDropdown = ({ title, link, clickButton, type = "link" }) => 
         </button>
     }
     return (
-        <li className='w-full text-center text-white font-main py-2 rounded text-sm hover:text-violet-600 transition my-6'>
+        <li className='w-full text-center text-gray-700 font-main py-2 rounded text-sm hover:text-violet-600 transition my-6'>
             {renderContent()}
         </li>
     )

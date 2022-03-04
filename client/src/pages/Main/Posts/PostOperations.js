@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { IoIosHeart, IoIosHeartEmpty } from "react-icons/io";
 import { BiCommentDetail } from "react-icons/bi";
-import { AiOutlineSave } from "react-icons/ai";
+import { BsBookmarkCheck } from "react-icons/bs";
 import { useGetUserId } from '../../../hooks/useGetUserId'
 import { useSocketConnection } from '../../../hooks/useSocketConnection'
 import httpClient from "../../../api/client";
@@ -53,7 +53,7 @@ const PostOperations = ({ likes, id }) => {
 
       <div>
         <button className={`post-operation-button ${save ? 'bg-violet-700 text-white' : ''}`} onClick={handleClickSavePost}>
-          <AiOutlineSave />
+          <BsBookmarkCheck />
         </button>
       </div>
     </div>

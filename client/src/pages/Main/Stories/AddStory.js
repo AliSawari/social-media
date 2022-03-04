@@ -5,12 +5,14 @@ import { Link } from 'react-router-dom';
 import { UserContext } from '../../../context/providers/UserProvider'
 import { AiOutlinePlus, AiFillEye } from "react-icons/ai";
 import { useGetUserId } from "../../../hooks/useGetUserId";
+import { useShowUserProfile } from "../../../hooks/useShowUserProfile";
 const AddStory = ({ userStories }) => {
 
 
   const { id } = useGetUserId();
   const { state: { data } } = useContext(UserContext);
   const [state, setState] = useState(false);
+  const mainProfile = useShowUserProfile(data?.profile);
   const toggleShowModal = () => {
     setState((prevState) => !prevState);
   };
@@ -23,19 +25,24 @@ const AddStory = ({ userStories }) => {
         <AddStoryForm closeModal={toggleShowModal} />
       </Modal>
 
-      <div className="h-32 rounded relative flex justify-center items-center">
-        {data && <div className="z-30 flex justify-center flex-col relative items-center">
 
+      <div className="h-32 px-3 rounded relative flex justify-center items-center">
+        <div className="z-30 flex justify-center flex-col items-center">
           <div className="relative">
-              <AiOutlinePlus fontSize={25} className="text-gray-700 text-center w-full" onClick={toggleShowModal} />
-            <div className="cursor-pointer gap-1 top-0 left-0 flex flex-col justify-center items-center w-20 h-20  z-50" >
-              {userStories.length ? <Link to={`/?story=${id}`}>
-                <AiFillEye fontSize={25} className="text-gray-700" />
-              </Link> : []}
-              <h3 className="py-2 text-sm text-center font-main text-gray-700">Your Story</h3>
-            </div>
+            <Link to={`?story=${id}`}>
+              <img
+                src={mainProfile}
+                alt="profile"
+                width={50}
+                height={50}
+                className="rounded-full w-20 h-20 object-cover"
+              />
+            </Link>
+            <AiOutlinePlus fontSize={25} className="text-center absolute bottom-0 right-1 rounded-full bg-violet-700 text-white cursor-pointer" onClick={toggleShowModal} />
           </div>
-        </div>}
+          <h3 className="py-2 text-sm text-center font-main text-gray-700">{data?.fullname}</h3>
+        </div>
+
       </div>
     </>
   );

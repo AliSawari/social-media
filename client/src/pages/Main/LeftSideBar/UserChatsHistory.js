@@ -47,7 +47,7 @@ const UserChatsHistory = () => {
   return (
     <div className="w-full max-h-auto pb-3 h-72 rounded overflow-hidden py-5">
       <div className="flex justify-between p-4">
-        <h3 className="font-main text-gray-800 flex items-center gap-2"><MdOutlineChat fontSize={20} className="text-violet-600" />Last Messages</h3>   
+        <h3 className="font-main text-gray-800 flex items-center gap-2"><MdOutlineChat fontSize={20} className="text-violet-600" />Messages</h3>   
       </div>
       {renderChats()}
     </div>
