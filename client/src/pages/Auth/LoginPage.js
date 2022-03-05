@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -9,8 +9,10 @@ import AuthLayout from "../../components/AuthLayout";
 import httpClient from "../../api/client";
 import { UserContext } from "../../context/providers/UserProvider";
 import { loginUser } from "../../context/actions/UserActions";
+import InterestsModal, { Item } from './Interests/InterestsModal';
 const LoginPage = () => {
   const { state, dispatch } = useContext(UserContext);
+  const [data, setData] = useState(null);
   const navigate = useNavigate();
   useEffect(() => {
     if (state.auth) navigate("/");
@@ -33,12 +35,20 @@ const LoginPage = () => {
     resolver: yupResolver(schema),
   });
 
+  const setUserInfo = (data) => {
+    localStorage.setItem("social-media-hamidreza", JSON.stringify(data));
+    dispatch(loginUser(data));
+  }
+
   const handleSubmitForm = async (values) => {
     try {
       const { data } = await httpClient.post("users/login", values);
-      localStorage.setItem("social-media-hamidreza", JSON.stringify(data));
+      if (data.interests.length) {
+        setUserInfo(data);
+      } else {
+        setData(data);
+      }
 
-      dispatch(loginUser(data));
     } catch (error) {
       console.log(error);
       if (error.response.status === 401) {
@@ -61,6 +71,7 @@ const LoginPage = () => {
       title="Login Page"
       description={"Fugiat consectetur mollit elit dolor ullamco aliqua."}
     >
+      <InterestsModal data={data} setUserInfo={setUserInfo} />
       <form className="my-5" onSubmit={handleSubmit(handleSubmitForm)}>
         <Input
           type="text"
@@ -76,7 +87,7 @@ const LoginPage = () => {
           register={register}
           name="password"
         />
-        <button className="auth-button">LOGIN</button>
+        <button className="button">LOGIN</button>
         <Link
           className="text-center w-full text-neutral-400 font-main text-sm pt-4  block"
           to="/auth/register"

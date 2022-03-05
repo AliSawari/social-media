@@ -1,6 +1,9 @@
 const { Schema } = require("mongoose");
 const mongoose = require("../../database/connection");
 
+const limitInterestsLength = (items) => {
+  return items.length <= 5;
+};
 const UserSchema = new mongoose.Schema({
   fullname: {
     type: String,
@@ -19,7 +22,7 @@ const UserSchema = new mongoose.Schema({
   },
   profile: { type: String, default: "" },
   bio: { type: String, default: "" },
-  saveds: [{ type: Schema.Types.ObjectId, ref: "posts" }],  
+  saveds: [{ type: Schema.Types.ObjectId, ref: "posts" }],
   chatSettings: {
     type: Object,
     default: {
@@ -32,6 +35,10 @@ const UserSchema = new mongoose.Schema({
     default: {
       private: false
     }
+  },
+  interests: {
+    type: Array,
+    validate: [limitInterestsLength, '{PATH} exceeds the limit of 5']
   }
 });
 

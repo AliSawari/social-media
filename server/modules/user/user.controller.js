@@ -48,6 +48,7 @@ const login = async (req, res) => {
 
       return res.status(200).json({
         id: user._id,
+        interests: user.interests,
         token,
       });
     } else {
@@ -79,6 +80,7 @@ const getUser = async (req, res) => {
       fullname: user.fullname,
       profile: user.profile,
       bio: user.bio,
+      interests: user.interests,
       chatSettings: user.chatSettings,
       settings: user.settings,
       username: user.username,
@@ -290,6 +292,22 @@ const getPrivate = async (req, res) => {
     });
   }
 };
+
+const setInterests = async (req, res) => {
+  try {
+    const { data, id } = req.body;
+    await User.findByIdAndUpdate(id, { $push: { interests: data } });
+    return res.status(200).json({ message: "interests set!" });
+
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      message: "internal server error",
+      error,
+    });
+  }
+};
+
 module.exports = {
   register,
   login,
@@ -302,5 +320,6 @@ module.exports = {
   changePassword,
   setChatFontSize,
   setPrivate,
-  getPrivate
+  getPrivate,
+  setInterests
 };

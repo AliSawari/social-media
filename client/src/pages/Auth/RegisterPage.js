@@ -32,6 +32,7 @@ const RegisterPage = () => {
   const handleSubmitForm = async (values) => {
     try {
       await httpClient.post("users/register", values);
+      navigate("/auth/login");
     } catch (error) {
       console.log(error);
       swal.fire({
@@ -68,7 +69,7 @@ const RegisterPage = () => {
           placeholder="Type  Password"
           errors={errors}
         />
-        <button className="auth-button" type="submit">
+        <button className="button" type="submit">
           Register
         </button>
         <Link

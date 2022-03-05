@@ -13,6 +13,7 @@ const reportRoutes = require("./modules/reports/report.routes");
 const saveRoutes = require("./modules/saves/save.routes");
 const commentRoutes = require("./modules/comments/comment.routes");
 const backgroundRoutes = require("./modules/backgrounds/background.routes");
+const interestsRoutes = require("./modules/interests/interest.routes");
 const moment = require("moment");
 const fileUpload = require("express-fileupload");
 const cors = require("cors");
@@ -119,6 +120,7 @@ function createApp() {
   app.use("/api/v1/save/", saveRoutes);
   app.use("/api/v1/comments/", commentRoutes);
   app.use("/api/v1/backgrounds/", backgroundRoutes);
+  app.use("/api/v1/interests/", interestsRoutes);
 
   server.listen(config.get("PORT") || 4000, () => {
     console.log(`server running on port ${config.get("PORT") || 4000}`);

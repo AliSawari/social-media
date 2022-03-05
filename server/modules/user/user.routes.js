@@ -8,10 +8,11 @@ const {
   changeProfile,
   getFollowers,
   checkExistsPassword,
-  changePassword ,
-  setChatFontSize ,
-  setPrivate , 
-  getPrivate
+  changePassword,
+  setChatFontSize,
+  setPrivate,
+  getPrivate,
+  setInterests
 } = require("./user.controller");
 const router = express.Router();
 
@@ -28,5 +29,6 @@ router.post("/exists-password", checkExistsPassword);
 router.post("/change-password", changePassword);
 router.post("/set-chat-font-size", setChatFontSize);
 router.post("/set-private", setPrivate);
+router.post("/set-interests", setInterests);
 
 module.exports = router;

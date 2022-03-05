@@ -28,11 +28,11 @@ body {
     @apply text-xl text-violet-600 border p-1 rounded border-violet-700 hover:bg-violet-900;
   }
 
-  .auth-input {
-    @apply text-sm w-full bg-transparent border border-violet-900 h-10 my-2 font-main text-white px-2 outline-none;
+  .input {
+    @apply text-sm w-full bg-transparent border border-violet-900 h-10 my-2 font-main text-gray-700 px-2 outline-none;
   }
 
-  .auth-button {
+  .button {
     @apply w-full text-white font-main text-sm hover:bg-violet-900 transition bg-violet-800 py-3 rounded;
   }
 
