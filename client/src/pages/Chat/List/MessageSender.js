@@ -26,7 +26,7 @@ const MessageSender = ({ id: receiver }) => {
 
 
   return receiver ? (
-    <div className="w-full h-12 bg-neutral-800 absolute bottom-0 right-0 flex justify-between items-center px-2">
+    <div className="w-full h-12 bg-gray-200 absolute bottom-0 right-0 flex justify-between items-center px-2">
       <SendEmojiPicker onEmojiSelect={handleSelectEmoji} />
       <SendMessageInput text={text} onChange={handleChangText} onSubmit={handleSendMessage} />
       <SendMessageButton onSubmit={handleSendMessage} />

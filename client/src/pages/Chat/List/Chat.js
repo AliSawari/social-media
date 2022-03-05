@@ -1,9 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router";
-import Header from "../../Main/Header/Header";
+import MainLayout from "../../../components/MainLayout";
 import MessageSender from "./MessageSender";
 import { useGetUserId } from "../../../hooks/useGetUserId";
 import UsersList from "./UsersList";
+import LeftSideBar from "../../Main/LeftSideBar/LeftSideBar";
 import ChatHeader from "./ChatHeader";
 import MessagesList from "./MessagesList";
 import { ChatContext } from '../../../context/providers/ChatProvider';
@@ -17,16 +18,16 @@ const List = () => {
     if (!id)
       return (
         <div className="w-full h-full  flex justify-center items-center font-main text-violet-600">
-          <span className="bg-neutral-900 p-2 rounded-md">
+          <span className="p-2 rounded-md">
             Select a chat to start messaging
           </span>
         </div>
       );
 
 
-    if(chats === null)
-        return "";
-      
+    if (chats === null)
+      return "";
+
     const chat = chats.find(item => (item.sender._id === sender && item.receiver._id === id) || (item.sender._id === id && item.receiver._id === sender));
     return <>
       <ChatHeader id={id} />
@@ -36,15 +37,15 @@ const List = () => {
 
   };
   return (
-    <>
-      <Header />
-      <div className="py-5 w-full flex justify-around">
-        <UsersList />
-        <div className="w-9/12 h-[calc(100vh-9rem)] shadow-md relative bg-neutral-900 mt-24">
+    <MainLayout>
+      <LeftSideBar />
+      <div className="w-4/6 flex justify-around">
+        <div className="w-full h-full-vh relative bg-gray-200 ">
           {renderMessagesBox()}
         </div>
       </div>
-    </>
+      <UsersList />
+    </MainLayout>
   );
 };
 

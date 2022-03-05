@@ -8,7 +8,7 @@ const MessageSenderInput = ({ text, onChange, onSubmit }) => {
     return <div className="w-10/12">
         <input
             type="text"
-            className="w-full h-12 bg-transparent outline-none text-white font-main"
+            className="w-full h-12 bg-transparent outline-none text-gray-700 font-main"
             placeholder="Type a message..."
             value={text}
             onChange={onChange}

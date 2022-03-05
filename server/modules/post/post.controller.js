@@ -124,4 +124,20 @@ const deletePost = async (req, res) => {
 };
 
 
-module.exports = { add, getFollowingPosts, likePost, deletePost };
+const getExplorePosts = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const user = await User.findById(id);
+    const posts = await Post.find({ tags: { $in: user.interests } }).populate("user");
+    return res.status(200).json(posts);
+    console.log(posts);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      message: "internal server error",
+      error,
+    });
+  }
+};
+
+module.exports = { add, getFollowingPosts, likePost, deletePost, getExplorePosts };

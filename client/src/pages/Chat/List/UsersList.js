@@ -44,7 +44,7 @@ const UsersList = () => {
 
         });
     }
-    return <div className="w-2/12 mt-24 bg-neutral-900 rounded p-5 shadow-md">
+    return <div className="w-1/6  bg-gray-200 rounded  shadow-md">
         {renderUsers()}
     </div>
 };

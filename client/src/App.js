@@ -3,6 +3,7 @@ import { useRoutes } from "react-router";
 import Loading from "./components/Loading/Loading";
 import UserProvider from "./context/providers/UserProvider";
 import PrivateRoute from "./components/PrivateRoute";
+const Explore = lazy(() => import("./pages/Explore/Explore"));
 const Privacy = lazy(() => import("./pages/Settings/Privacy/Privacy"));
 const ChangePassword = lazy(() => import("./pages/Settings/ChangePassword"));
 const ChatSettings = lazy(() => import("./pages/Settings/ChatSettings/ChatSettings"));
@@ -105,9 +106,13 @@ function App() {
       ]
     },
     {
+      path: "/explore",
+      element: <PrivateRoute><Explore /></PrivateRoute>
+    },
+    {
       path: "@:username",
       element: <PrivateRoute> <User /></PrivateRoute>
-    }
+    },
   ]);
 
 
