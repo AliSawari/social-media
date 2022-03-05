@@ -13,5 +13,7 @@ export const useSelectImage = () => {
       reader.readAsDataURL(target.files[0]);
     }
   };
-  return [image, convertImageToBase64 , setImage];
+
+
+  return [image, convertImageToBase64, setImage];
 };

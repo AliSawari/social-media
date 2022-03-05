@@ -1,13 +1,14 @@
 import React from "react";
-import Header from "../Main/Header/Header";
 import AddPostForm from "./AddPostForm";
-
+import LeftSide from '../Main/LeftSideBar/LeftSideBar';
+import RightSide from '../Main/RightSide/RightSide';
 const AddPostPage = () => {
   return (
-    <>
-      <Header />
+    <div className="flex justify-between">
+      <LeftSide />
       <AddPostForm />
-    </>
+      <RightSide />
+    </div>
   );
 };
 

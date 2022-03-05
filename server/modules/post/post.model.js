@@ -24,6 +24,10 @@ const PostSchema = new mongoose.Schema({
   link: {
     type: String,
     default: () => Math.random().toString(36).slice(5)
+  },
+  tags: {
+    type: Array,
+    default: []
   }
 });
 

@@ -10,6 +10,7 @@ const Notification = require("../notification/notification.model");
 const add = async (req, res) => {
   try {
     const { image } = req.files;
+    const { tags, description, user } = req.body;
     const fileName = Math.ceil(Math.random() * 200000) + image.name;
     const uploadedPath = path.resolve(
       __dirname,
@@ -26,7 +27,9 @@ const add = async (req, res) => {
 
     const timestamp = moment.now();
     const postDocument = {
-      ...req.body,
+      description,
+      tags: tags.split(","),
+      user,
       image: fileName,
       timestamp,
     };
