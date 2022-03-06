@@ -43,11 +43,10 @@ const User = () => {
     return <UserPosts user={state} />
   }
   return state !== null ? (
-    <>
-      <Header />
+    <>      
       <MainLayout>
         <LeftSide />
-        <div className="w-5/6 h-96 user-bg mt-32 p-4">
+        <div className="w-5/6 h-96 bg-svg p-4">
           <div className="w-full flex justify-between items-center h-96">
             <div className="w-1/2 flex items-center justify-start">
               <UserProfile profile={state.profile} />

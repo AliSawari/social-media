@@ -128,7 +128,7 @@ const getExplorePosts = async (req, res) => {
   try {
     const { id } = req.params;
     const user = await User.findById(id);
-    const posts = await Post.find({ tags: { $in: user.interests } }).populate("user");
+    const posts = await Post.find({ tags: { $in: user.interests } }).populate("user").sort("-timestamp");
     return res.status(200).json(posts);
     console.log(posts);
   } catch (error) {
