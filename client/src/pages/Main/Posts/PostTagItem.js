@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 const PostTagItem = ({ title }) => {
     return (
         <Link to={`/interest/${title}`}>
-            <div className='bg-gray-200 text-sm p-2 rounded'>{title}</div>
+            <div className='text-violet-600 font-main text-sm p-2 rounded font-bold'>#{title}</div>
         </Link>
     )
 }

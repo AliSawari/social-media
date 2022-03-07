@@ -2,6 +2,7 @@ import React from 'react';
 import httpClient from '../../../api/client';
 import { useNavigate } from 'react-router-dom'
 import { useGetUserId } from '../../../hooks/useGetUserId';
+import moment from 'moment';
 const Notifications = ({ list, title }) => {
 
     const navigate = useNavigate();
@@ -22,10 +23,10 @@ const Notifications = ({ list, title }) => {
             </div>
         }
         return list.map(item => (
-            <div key={item._id} className='w-full hover:bg-neutral-900 transition h-auto border-l-2 py-3 px-3 font-main flex justify-between border-l-violet-600'>
+            <div key={item._id} className='w-full hover:bg-gray-100 transition h-auto border-l-2 py-3 px-3 font-main flex justify-between border-l-violet-600'>
                 <h3 className='text-violet-500'>{item.message}</h3>
-                <span className='text-white'>
-                    {item.createdAt}
+                <span className='text-black'>
+                    {moment(item.createdAt).format("YYYY/MM/DD h:mm a")}
                     {item.request.status ? (<div>
                         <button className='p-2 border border-green-600 m-2 rounded text-green-600 hover:bg-green-600 hover:text-white'
                             onClick={() => handleClickAcceptRequest(item.request.follower, "request-accepted")}>accept</button>

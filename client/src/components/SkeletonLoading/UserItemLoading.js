@@ -1,17 +1,17 @@
 import React from 'react'
-import SkeletonLoading from './SkeletonLoading';
+import Skeleton from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
 const UserItemLoading = ({ count = 1 }) => {
-    const renderItems = () => {
-        const loadings = [];
-        for (let i = 0; i < count; i++) {
-            loadings.push(<SkeletonLoading key={i} />)
-        }
-        return loadings;
-    }
+   
     return (
-        <div className='px-3 py-3'>
-            {renderItems()}
-        </div>
+        <div className='w-full px-3 py-3'>
+            <div>
+                <Skeleton circle width={40} height={40} />
+            </div>
+            <div>
+                <Skeleton  />
+            </div>
+        </div> 
     )
 }
 

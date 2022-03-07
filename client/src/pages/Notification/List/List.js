@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import Header from '../../Main/Header/Header';
+import LeftSideBar from '../../Main/LeftSideBar/LeftSideBar';
+import RightSideBar from '../../Main/RightSide/RightSide';
 import httpClient from '../../../api/client';
 import { useGetUserId } from '../../../hooks/useGetUserId';
 import Notifications from './Notifications';
@@ -23,11 +24,11 @@ const List = () => {
         fetchData();
     }, [])
     const [show, setShow] = useState(false);
-    return <>
-        <Header />
-        <div className='w-full h-auto flex justify-center py-10'>
+    return <div className='flex'>        
+     <LeftSideBar />
+        <div className='w-full h-auto flex justify-center '>
             <div className='w-4/6 p-3'>
-                <div className='w-full  mt-32'>
+                <div className='w-full pt-10'>
                     <div className="inline-flex rounded-md shadow-sm" role="group">
                         <button type="button" onClick={() => { setShow(false) }} className="py-2 px-4 text-sm font-medium  bg-violet-600 hover:bg-violet-700 text-white font-main rounded-l-lg ">
                             Un Read Notifications
@@ -44,7 +45,8 @@ const List = () => {
                 </div>
             </div>
         </div>
-    </>;
+        <RightSideBar />
+    </div>;
 };
 
 export default List;

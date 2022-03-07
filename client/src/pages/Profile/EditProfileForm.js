@@ -161,7 +161,7 @@ const ProfileForm = () => {
         errors={errors}
       />
 
-      <button className="auth-button" type="submit">
+      <button className="button" type="submit">
         Save
       </button>
     </form>

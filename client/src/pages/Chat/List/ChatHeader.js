@@ -21,7 +21,7 @@ const ChatHeader = ({ id }) => {
     }, [id]);
     return id && user ? (
         <div className="w-full flex items-center justify-between h-16 bg-gray-100 absolute top-0 z-30">
-            {user ? <Link to={`/@${user.username}`}>
+            <Link to={`/@${user.username}`}>
                 <div className="px-5 flex gap-1 items-center">
                     <img
                         src={profile}
@@ -31,10 +31,12 @@ const ChatHeader = ({ id }) => {
                         {user.fullname}
                     </h3>
                 </div>
-            </Link> : <UserItemLoading />}
+            </Link>
         </div>
     ) : (
-        []
+        <div className="w-full bg-gray-100"> 
+            <UserItemLoading />
+        </div>
     );
 };
 

@@ -11,7 +11,8 @@ const ChatBackground = () => {
     const settings = {
         infinite: true,
         speed: 500,
-        slidesToShow: 3,
+        slidesToShow: 1,
+        width: "40px",
         slidesToScroll: 1
     };
 
@@ -29,7 +30,7 @@ const ChatBackground = () => {
         fetchData();
     }, []);
     return (
-        <div className='w-full h-auto'>
+        <div className='w-full h-auto overflow-hidden'>
             <h3 className='font-main text-violet-500 mb-3 pl-7'>Chat Background</h3>
             <Slider {...settings} className="px-10">
                 {backgrounds.map(background => (

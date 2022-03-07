@@ -5,7 +5,7 @@ import EditProfileForm from "./EditProfileForm";
 const Profile = () => {
   return (
     <>
-      <Header />
+      
       <div className="w-96 h-96  absolute top-0 right-0 left-0 bottom-0 m-auto">
         <h3 className="font-main text-center block text-2xl text-violet-500">
           Edit Profile

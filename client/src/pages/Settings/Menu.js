@@ -6,7 +6,7 @@ import {AiOutlineBell} from 'react-icons/ai';
 
 const Menu = () => {
   return (
-    <div className='w-1/6 h-full bg-neutral-900 mt-52 rounded'>
+    <div className='w-1/6 h-full bg-gray-200'>
       <MenuItem title="Change Password" link="/settings/change_password" Icon={MdPassword} />
       <MenuItem title="Chat Settings" link="/settings/chat_settings" Icon={RiMailSettingsLine} />
       <MenuItem title="Notifications" link="/settings/notifications" Icon={AiOutlineBell} />

@@ -19,7 +19,7 @@ const ChatBackgroundItem = ({ image }) => {
         }
     }
     return (
-        <div className='w-full h-48 p-1 overflow-hidden cursor-pointer' onClick={handleChangeChatBackground}>
+        <div className='w-40 h-48 p-1 overflow-hidden cursor-pointer' onClick={handleChangeChatBackground}>
             <img src={`http://localhost:4000/public/backgrounds/${image}`} className='rounded-3xl w-full h-full object-cover' />
         </div>
     )

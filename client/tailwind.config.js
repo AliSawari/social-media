@@ -1,4 +1,4 @@
-module.exports = {  
+module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     fontFamily: {
@@ -6,7 +6,8 @@ module.exports = {
     },
     extend: {
       height: {
-        "128": "40rem"
+        "128": "40rem",
+        "100": "30rem"
       }
     }
   },

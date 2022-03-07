@@ -40,7 +40,7 @@ const List = () => {
     <MainLayout>
       <LeftSideBar />
       <div className="w-4/6 flex justify-around">
-        <div className="w-full h-full-vh relative bg-gray-200 ">
+        <div className="w-full h-full-vh relative bg-gray-100 ">
           {renderMessagesBox()}
         </div>
       </div>

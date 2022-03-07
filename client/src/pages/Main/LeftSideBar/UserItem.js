@@ -19,7 +19,7 @@ const UserItem = ({ _id, profile, fullname, message, messages }) => {
             />
           </div>
           <div className="w-5/6 flex flex-col justify-center">
-            <h3 className="font-main text-sm text-black flex justify-between w-full">{fullname} {unreadMessagesLength ? <span className="font-main w-6 h-6 rounded-md text-neutral-900 flex justify-center items-center  bg-violet-800">{unreadMessagesLength}</span> : ""}</h3>
+            <h3 className="font-main text-sm text-black flex justify-between w-full">{fullname} {unreadMessagesLength ? <span className="font-main w-6 h-6 text-sm rounded-md text-white flex justify-center items-center  bg-purple-600">{unreadMessagesLength}</span> : ""}</h3>
             {message && <p className="text-xs text-violet-400 font-main">{message}</p>}
           </div>
         </div>

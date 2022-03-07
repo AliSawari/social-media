@@ -24,7 +24,7 @@ const TopNavbar = () => {
       <UserDropdownMenu profile={profile} fullname={fullname}>
         <Item Icon={FaUserAlt} link="/user/profile">Profile</Item>
         <Item Icon={BsSave} link="/user/saved">Saveds</Item>
-        <Item Icon={IoSettingsOutline} link="/setting/main">Settings</Item>
+        <Item Icon={IoSettingsOutline} link="/settings/main">Settings</Item>
         <Item Icon={AiOutlineLogout} link="/user/logout">Logout</Item>
       </UserDropdownMenu>
 

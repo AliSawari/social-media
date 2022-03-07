@@ -26,15 +26,12 @@ const ChatSettings = () => {
     return (
         <SettingsLayout >
             <div className='w-full flex justify-between h-full'>
-                <div className='bg-neutral-900 w-4/6 h-full relative'>
+                <div className='bg-gray-200 w-4/6 h-full relative'>
                     <MessagesList messages={fakeMessages} />
                 </div>
-                <div className='bg-neutral-900  w-2/6 h-full relative rounded-lg'>
+                <div className='bg-gray-200  w-2/6 h-full relative rounded-lg'>
                     <FontSize />
                     <ChatBackground />
-                    <div className='w-full px-4 my-5'>
-                        <button className='auth-button'>Export Theme</button>
-                    </div>
                 </div>
             </div>
         </SettingsLayout>

@@ -51,7 +51,7 @@ const ChangePassword = () => {
 
     return (
         <SettingsLayout>
-            <div className='w-full h-full flex justify-center flex-col items-center bg-neutral-900 rounded-md'>
+            <div className='w-full h-full flex justify-center flex-col items-center bg-gray-100 rounded-md'>
                 <div className='flex flex-col items-center py-5 w-2/6'>
                     <span className='w-14 h-14 text-violet-700 flex border border-violet-700 mb-5 justify-center items-center rounded-full'>
                         <RiKey2Line fontSize={32} />
@@ -61,10 +61,10 @@ const ChangePassword = () => {
                 </div>
                 <div className='w-2/6'>
                     <form onSubmit={handleSubmit(handleSubmitForm)}>
-                        <Input register={register} errors={errors} name="password" type="password" placeholder='Old Password' className='auth-input' />
-                        <Input register={register} errors={errors} name="rePassword" type="password" placeholder='New Password' className='auth-input' />
-                        <Input register={register} errors={errors} name="confirmRePassword" type="password" placeholder='Confirm New Password' className='auth-input' />
-                        <button className='auth-button'>Change Password</button>
+                        <Input register={register} errors={errors} name="password" type="password" placeholder='Old Password' className='input' />
+                        <Input register={register} errors={errors} name="rePassword" type="password" placeholder='New Password' className='input' />
+                        <Input register={register} errors={errors} name="confirmRePassword" type="password" placeholder='Confirm New Password' className='input' />
+                        <button className='button'>Change Password</button>
                     </form>
                 </div>
             </div>
