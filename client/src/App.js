@@ -1,8 +1,9 @@
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, useEffect, useState } from "react";
 import { useRoutes } from "react-router";
 import Loading from "./components/Loading/Loading";
 import UserProvider from "./context/providers/UserProvider";
 import PrivateRoute from "./components/PrivateRoute";
+import Offline from "./components/Offline/Offline";
 const Explore = lazy(() => import("./pages/Explore/Explore"));
 const Privacy = lazy(() => import("./pages/Settings/Privacy/Privacy"));
 const ChangePassword = lazy(() => import("./pages/Settings/ChangePassword"));
@@ -21,7 +22,20 @@ const Welcome = lazy(() => import("./pages/Welcome/Welcome"));
 const Logout = lazy(() => import("./pages/Logout/Logout"));
 function App() {
 
+  const [offline, setOffline] = useState(false);
 
+  useEffect(() => {
+
+    window.addEventListener("offline", () => {
+      setOffline(true);
+    });
+
+    window.addEventListener("online", () => {
+      setOffline(false);
+    });
+
+
+  }, []);
 
   const routes = useRoutes([
     {
@@ -119,7 +133,7 @@ function App() {
   return (
     <Suspense fallback={<Loading />}>
       <UserProvider>
-        {routes}
+        {!offline ? routes : <Offline />}
       </UserProvider>
     </Suspense>
   );
