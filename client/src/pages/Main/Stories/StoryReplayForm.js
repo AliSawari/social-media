@@ -16,7 +16,7 @@ const StoryReplayForm = ({ receiver, id: storyId }) => {
 
 
     socket.emit("send message", { message: value, sender: id, receiver, story: storyId });
-    inputRef.current.reset();
+    inputRef.current.value = "";
   };
   return <div className='w-full absolute  bottom-3 flex justify-center'>
     <form className='w-96 flex flex-wrap' onSubmit={handleSubmitForm}>
