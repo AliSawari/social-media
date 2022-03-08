@@ -31,6 +31,10 @@ const StoriesModal = ({ users }) => {
             fetchData();
 
 
+        return () => {
+            setStories([]);
+            setUser(null);
+        }
     }, [id]);
 
     const handleNextUserStories = () => {

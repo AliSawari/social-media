@@ -65,9 +65,9 @@ const StoryContentSlider = ({ prevUser , nextUser, stories }) => {
             </button>
 
 
-            <Slider {...settings} className="w-full" ref={c => sliderRef = c}>
+            <Slider {...settings} className="w-full relative" ref={c => sliderRef = c}>
                 {stories.map(story => (
-                    <StoryItemContent key={story._id} {...story} />
+                    <StoryItemContent   key={story._id} {...story} />
                 ))}
             </Slider>
 

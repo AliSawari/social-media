@@ -47,14 +47,14 @@ function createApp() {
       socket.join(id);
     });
 
-    socket.on("send message", async ({ message, sender, receiver }) => {
+    socket.on("send message", async ({ message, sender, receiver, story = null }) => {
 
       const timestamp = moment.now();
 
       const conversation = await ChatModel.findOne({ $or: [{ sender: receiver, receiver: sender }, { sender: sender, receiver: receiver }] });
       let chatOptions = {};
       if (conversation) {
-        chatOptions.data = await ChatModel.findOneAndUpdate({ _id: conversation._id }, { lastMessage: message, $push: { messages: { sender, message, timestamp } } }, { new: true }).populate("sender", "profile fullname").populate("receiver", "profile  fullname");
+        chatOptions.data = await ChatModel.findOneAndUpdate({ _id: conversation._id }, { lastMessage: message, $push: { messages: { sender, message, timestamp, story } } }, { new: true }).populate("sender", "profile fullname").populate("receiver", "profile  fullname").populate("messages.story");
         chatOptions.type = "update";
       } else {
         const newChat = new ChatModel({
@@ -62,11 +62,11 @@ function createApp() {
           receiver,
           lastMessage: message,
           messages: [
-            { sender, message, timestamp }
+            { sender, message, timestamp, story }
           ]
         });
         const { _id } = await newChat.save();
-        chatOptions.data = await ChatModel.findById(_id).populate("sender", "profile fullname").populate("receiver", "profile  fullname");
+        chatOptions.data = await ChatModel.findById(_id).populate("sender", "profile fullname").populate("receiver", "profile  fullname").populate("messages.story");
         chatOptions.type = "new";
       }
 

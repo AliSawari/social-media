@@ -31,7 +31,7 @@ const getChats = async (req, res) => {
       ],
     })
       .populate("sender", "fullname  profile")
-      .populate("receiver", "fullname  profile");
+      .populate("receiver", "fullname  profile").populate("messages.story");
 
     res.status(200).json(chats);
   } catch (error) {

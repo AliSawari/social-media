@@ -190,7 +190,7 @@ const AddStoryForm = ({ closeModal }) => {
             </div>
           </> :
           <>
-            <button className="auth-button w-40 absolute z-50 bottom-0 right-5" onClick={handleClickAddStory}>Add Story</button>
+            <button className="button w-40 absolute z-50 bottom-0 right-5" onClick={handleClickAddStory}>Add Story</button>
             <Stage
               width={"440"}
               height={"650"}

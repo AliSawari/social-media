@@ -12,13 +12,15 @@ const ChatSettings = () => {
         {
             message: "Cillum nostrud eu cillum exercitation qui laboris ad.",
             sender: { _id: id },
-            createdAt: "1 min ago"
+            createdAt: "1 min ago",
+            story: null,
         },
 
         {
             message: "Dolor cupidatat sunt ullamco sit.",
             sender: { _id: "" },
-            createdAt: "2 min ago"
+            createdAt: "2 min ago",
+            story: null,
         },
     ];
 

@@ -30,7 +30,7 @@ const UsersList = () => {
         if (chats === null)
             return <UserItemLoading count={5} />
 
-        if(chats.length === 0){
+        if (chats.length === 0) {
             return <p className='w-full p-5 text-center'>you did'nt chat with anybody</p>
         }
         return chats.sort((a, b) => { return (a.updatedAt > b.updatedAt) ? -1 : 1 }).map(item => {
@@ -45,6 +45,12 @@ const UsersList = () => {
         });
     }
     return <div className="w-1/6  bg-gray-200 rounded  shadow-md">
+        <form>
+
+            <div className='p-3'>
+                <input type="text" placeholder='Search Users' className='w-full h-10 rounded border border-purple-700 bg-transparent outline-none px-3 text-gray-700' />
+            </div>
+        </form>
         {renderUsers()}
     </div>
 };

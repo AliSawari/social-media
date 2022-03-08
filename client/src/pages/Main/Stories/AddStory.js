@@ -8,6 +8,7 @@ import { useGetUserId } from "../../../hooks/useGetUserId";
 import { useShowUserProfile } from "../../../hooks/useShowUserProfile";
 const AddStory = ({ userStories }) => {
 
+  console.log(userStories);
 
   const { id } = useGetUserId();
   const { state: { data } } = useContext(UserContext);
@@ -35,7 +36,7 @@ const AddStory = ({ userStories }) => {
                 alt="profile"
                 width={50}
                 height={50}
-                className="rounded-full w-20 h-20 object-cover"
+                className={`rounded-full w-20 h-20 object-cover ${userStories.length ? 'p-1 bg-gradient-to-l from-violet-800 to-violet-900' : ''}`}
               />
             </Link>
             <AiOutlinePlus fontSize={25} className="text-center absolute bottom-0 right-1 rounded-full bg-violet-700 text-white cursor-pointer" onClick={toggleShowModal} />
