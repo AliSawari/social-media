@@ -133,7 +133,7 @@ const ProfileForm = () => {
               type="button"
               className="z-1 w-full absolute top-2 right-0 bg-purple-700 h-11 font-main text-white rounded cursor-pointer"
             >
-              Change
+              Select Profile
             </button>
             <input
               type="file"

@@ -1,10 +1,9 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext } from 'react';
 import { TiPointOfInterestOutline } from 'react-icons/ti';
 import InterestItem from './InterestItem';
 import { UserContext } from '../../../context/providers/UserProvider';
 import { Link } from 'react-router-dom';
 const Interests = () => {
-    const [interests, setInterests] = useState([]);
     const { state: user } = useContext(UserContext);
     return (
         <div className="w-full max-h-auto h-72 mt-4 pb-3 rounded">
@@ -16,7 +15,7 @@ const Interests = () => {
                     </div>
                     <div>
                         <Link to="/" className='text-xs'>
-                             Add More
+                            Add More
                         </Link>
                     </div>
                 </h3>

@@ -44,9 +44,8 @@ const MessageItem = ({ _id, message, sender, createdAt, fontSize, isSeen, chatId
           {story !== null ? <Link to={`/?story=${story.user}`}>
             <div className="w-72 h-96 mb-3">
               <LazyLoadImage src={`http://localhost:4000/public/images/${story.image}`}
-                style={{ width: "100%", height: "100%", objectFit: "cover" }}
                 placeholder={<div className="p-3"><Skeleton className="w-full h-full" /></div>}
-                className="w-full rounded shadow-md"
+                className="w-full h-full object-cover rounded shadow-md"
               />
             </div>
           </Link> : ""}

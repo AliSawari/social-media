@@ -35,7 +35,7 @@ const Followers = () => {
   };
   return (
     <div className="w-full max-h-auto h-72 mt-4 pb-3 rounded">
-      <div className="flex justify-between p-4">
+      <div className="flex w-full justify-between p-4">
         <h3 className="font-main text-gray-700 flex items-center gap-2"><FiUsers fontSize={20} className="text-violet-600" />Followers</h3>
       </div>
       {renderUsers()}

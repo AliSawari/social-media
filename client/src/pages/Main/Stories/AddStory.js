@@ -8,7 +8,6 @@ import { useGetUserId } from "../../../hooks/useGetUserId";
 import { useShowUserProfile } from "../../../hooks/useShowUserProfile";
 const AddStory = ({ userStories }) => {
 
-  console.log(userStories);
 
   const { id } = useGetUserId();
   const { state: { data } } = useContext(UserContext);

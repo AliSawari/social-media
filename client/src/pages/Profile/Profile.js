@@ -1,22 +1,27 @@
 import React from "react";
-import Header from "../Main/Header/Header";
+import LeftSide from "../Main/LeftSideBar/LeftSideBar";
+import RightSide from "../Main/RightSide/RightSide";
 import EditProfileForm from "./EditProfileForm";
 
 const Profile = () => {
   return (
-    <>
-      
-      <div className="w-96 h-96  absolute top-0 right-0 left-0 bottom-0 m-auto">
+    <div className="flex">
+      <LeftSide />
+      <div className="w-4/6 p-5  h-auto flex justify-center flex-col items-center">
         <h3 className="font-main text-center block text-2xl text-violet-500">
           Edit Profile
         </h3>
-        <p className="font-main text-center block text-sm text-neutral-500">
+        <p className="font-main text-center block text-sm text-neutral-500 mb-5">
           you can change your profile details
         </p>
 
-        <EditProfileForm />
+        <div className="w-3/6">
+          <EditProfileForm />
+        </div>
       </div>
-    </>
+      <RightSide />
+
+    </div>
   );
 };
 
