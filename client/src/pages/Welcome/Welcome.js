@@ -1,24 +1,17 @@
 import React from 'react'
-import logo from '../../assets/images/logo.png'
-import { motion } from 'framer-motion'
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
+import logo from '../../assets/images/logo.png';
 const Welcome = () => {
     return (
-        <div className='w-full h-full-screen flex justify-start items-start'>
-            <div className='relative  flex flex-col items-center bg-svg w-full h-1/2'>
-                <motion.div
-                    layout
-                    initial={{ scale: 0 }}
-                    animate={{ scale: 1 }}
-                    className='absolute -bottom-1/2 p-20 rounded flex justify-center flex-col items-center bg-white'>
-                    <img src={logo} width={128} alt="website logo" />
-                    <h1 className='text-3xl text-violet-800 font-main text-center pt-6 pb-2'>NITROON</h1>
-                    <p className='text-gray-600 font-main text-center text-sm'>Welcome to nitrum social media.</p>
-                    <div className="mt-6 flex gap-5">
-                        <Link to="/auth/login" className='button px-3'>Login</Link>
-                        <Link to="/auth/register" className='button px-3'>Register</Link>
-                    </div>
-                </motion.div>
+        <div className='w-full h-full-vh flex bg-gray-200 justify-start items-start p-12'>
+            <div className='w-full h-full bg-svg rounded-md flex justify-center items-center flex-col'>
+                <img src={logo} alt="Nitrum Logo" width={100} className='mb-5' />
+                <h1 className='text-center text-gray-700 text-3xl mb-3'>NITRUM</h1>
+                <p className='text-center text-gray-700 text-sm'>Welcome to Nitrum social media</p>
+                <div className='py-5 gap-4 flex'>
+                    <Link to="/auth/login" className='button px-3'>Login</Link>
+                    <Link to="/auth/register" className='button px-3'>Register</Link>
+                </div>
             </div>
         </div>
     )
