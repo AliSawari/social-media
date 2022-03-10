@@ -24,37 +24,48 @@ const ChatProvider = ({ children }) => {
     upgrade: false,
   });
 
+
+  const handleOnNotification = ({ message }) => {    
+    const audio = new Audio(notif);
+    audio.play();
+    toast.success(message, {
+      position: "bottom-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      theme: "dark",
+    });
+  };
+
+  const handleSendMessage = ({ type, data }) => {
+    if (type === "new") {
+      dispatch(setNewChat(data));
+    } else {
+      dispatch(setNewMessage(data));
+    }
+  };
+
+  const handleSeenMessage = ({ id, chatId }) => {
+    dispatch(getSetSeenMessage(chatId, id));
+  };
+
+
   useEffect(() => {
     socket.emit("user:connect", { id });
 
+    socket.on("user:notification", handleOnNotification);
 
-    socket.on("user:notification", ({ message }) => {
-      const audio = new Audio(notif);
-      audio.play();
-      toast.success(message, {
-        position: "bottom-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        theme: "dark",
-      });
-    });
+    socket.on("send message", handleSendMessage);
 
-    socket.on("send message", ({ type, data }) => {
-      if (type === "new") {
-        dispatch(setNewChat(data));
-      } else {
-        dispatch(setNewMessage(data));
-      }
-    });
+    socket.on("client-message:seen", handleSeenMessage);
 
-
-
-    socket.on("client-message:seen", ({ id, chatId }) => {
-      dispatch(getSetSeenMessage(chatId, id));
-    })
+    return () => {
+      socket.off("user:notification", handleOnNotification);
+      socket.off("send message", handleSendMessage);
+      socket.off("client-message:seen", handleSeenMessage);
+    }
   }, []);
 
 
