@@ -69,7 +69,7 @@ const LoginPage = () => {
   return (
     <AuthLayout
       title="Login Page"
-      description={"Fugiat consectetur mollit elit dolor ullamco aliqua."}
+      description={"by login you can access all features"}
     >
       <InterestsModal data={data} setUserInfo={setUserInfo} />
       <form className="my-5" onSubmit={handleSubmit(handleSubmitForm)}>
@@ -92,7 +92,7 @@ const LoginPage = () => {
           className="text-center w-full text-neutral-400 font-main text-sm pt-4  block"
           to="/auth/register"
         >
-          do you have'nt an account
+          you haven't an account?
         </Link>
       </form>
     </AuthLayout>

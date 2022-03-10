@@ -1,5 +1,5 @@
 {
   "PORT": 4000 , 
   "MONGO_URI" : "mongodb://localhost:27017/social-media" , 
-  "JWT_PASSWORD" : "man az rah omadam vay vay"
+  "JWT_PASSWORD" : "hamidrezaramzani-jwt-password"
 }
