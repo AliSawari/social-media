@@ -8,17 +8,16 @@ const postRoutes = require("./modules/post/post.routes");
 const followRoutes = require("./modules/follow/follow.routes");
 const chatRoutes = require("./modules/chat/chat.routes");
 const notificationRoutes = require("./modules/notification/notification.routes");
-const converstationRoutes = require("./modules/conversation/conversation.routes");
 const reportRoutes = require("./modules/reports/report.routes");
 const saveRoutes = require("./modules/saves/save.routes");
 const commentRoutes = require("./modules/comments/comment.routes");
 const backgroundRoutes = require("./modules/backgrounds/background.routes");
 const interestsRoutes = require("./modules/interests/interest.routes");
+const jwt = require('jsonwebtoken');
 const moment = require("moment");
 const fileUpload = require("express-fileupload");
 const cors = require("cors");
 const http = require("http");
-const Converstation = require("./modules/conversation/conversation.model")
 const { Server } = require("socket.io");
 
 const ChatModel = require("./modules/chat/chat.model");
@@ -40,6 +39,16 @@ function createApp() {
   });
 
 
+  io.use((socket, next) => {
+    const token = socket.handshake.auth.token;
+    const isVerify = jwt.verify(token, config.get("JWT_PASSWORD"));
+    if (!isVerify) {
+      next(new Error({ message: "authentication failed" }));
+      return;
+    }
+
+    next();
+  });
 
 
   io.on("connection", (socket) => {
@@ -114,7 +123,6 @@ function createApp() {
   app.use("/api/v1/posts/", postRoutes);
   app.use("/api/v1/follow/", followRoutes);
   app.use("/api/v1/chat/", chatRoutes);
-  app.use("/api/v1/converstation/", converstationRoutes);
   app.use("/api/v1/notifications/", notificationRoutes);
   app.use("/api/v1/report/", reportRoutes);
   app.use("/api/v1/save/", saveRoutes);

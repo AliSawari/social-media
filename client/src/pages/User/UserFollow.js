@@ -56,13 +56,13 @@ const UserFollow = ({ user }) => {
 
         <div className="w-full flex justify-center gap-4">
           <div>
-            <h2 className="text-4xl font-main text-white">{getAcceptedFollowsLength(user.followers)}</h2>
-            <span className="text-sm font-main text-violet-200">Followers</span>
+            <h2 className="text-4xl font-main text-gray-500">{getAcceptedFollowsLength(user.followers)}</h2>
+            <span className="text-sm font-main text-gray-700">Followers</span>
           </div>
 
           <div>
-            <h2 className="text-4xl font-main text-white">{getAcceptedFollowsLength(user.followings)}</h2>
-            <span className="text-sm font-main text-violet-200">Followings</span>
+            <h2 className="text-4xl font-main text-gray-500">{getAcceptedFollowsLength(user.followings)}</h2>
+            <span className="text-sm font-main text-gray-700">Followings</span>
           </div>
         </div>
 

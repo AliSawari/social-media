@@ -3,13 +3,13 @@ import { IoIosHeart, IoIosHeartEmpty } from "react-icons/io";
 import { BiCommentDetail } from "react-icons/bi";
 import { BsBookmarkCheck } from "react-icons/bs";
 import { useGetUserId } from '../../../hooks/useGetUserId'
-import { useSocketConnection } from '../../../hooks/useSocketConnection'
 import httpClient from "../../../api/client";
 import { UserContext } from '../../../context/providers/UserProvider'
+import { ChatContext } from "../../../context/providers/ChatProvider";
 const PostOperations = ({ likes, id }) => {
 
-  const socket = useSocketConnection("http://localhost:4000");
   const { state: { data } } = useContext(UserContext);
+  const { socket } = useContext(ChatContext);
   const { id: uid } = useGetUserId();
   const isLiked = likes.find(like => like.user === uid)
   const [state, setState] = useState({ isLiked: isLiked != undefined, count: likes.length });

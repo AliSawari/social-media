@@ -3,7 +3,7 @@ import Modal from "../../../components/Modal/Modal";
 import AddStoryForm from "./AddStoryForm";
 import { Link } from 'react-router-dom';
 import { UserContext } from '../../../context/providers/UserProvider'
-import { AiOutlinePlus, AiFillEye } from "react-icons/ai";
+import { AiOutlinePlus } from "react-icons/ai";
 import { useGetUserId } from "../../../hooks/useGetUserId";
 import { useShowUserProfile } from "../../../hooks/useShowUserProfile";
 const AddStory = ({ userStories }) => {

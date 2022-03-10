@@ -1,4 +1,4 @@
-import { createContext, useEffect, useReducer } from "react";
+import { createContext, useContext, useEffect, useReducer } from "react";
 import notif from '../../assets/audio/notif.wav'
 import { useGetUserId } from "../../hooks/useGetUserId";
 import { io } from "socket.io-client";
@@ -7,6 +7,7 @@ import { ToastContainer, toast } from "react-toastify";
 import reducer from '../reducers/ChatReducer';
 import "react-toastify/dist/ReactToastify.css";
 import { getSetSeenMessage, setNewChat, setNewMessage } from "../actions/ChatActions";
+import { UserContext } from "./UserProvider";
 
 const ChatProvider = ({ children }) => {
 
@@ -14,8 +15,12 @@ const ChatProvider = ({ children }) => {
   const [chats, dispatch] = useReducer(reducer, initialState);
 
   const { id } = useGetUserId();
+  const { state: { user } } = useContext(UserContext);
   let socket = io("http://localhost:4000", {
     transports: ["websocket"],
+    auth: {
+      token: user?.token
+    },
     upgrade: false,
   });
 
