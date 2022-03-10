@@ -72,7 +72,7 @@
 
 ## About The Project
 
-[![Nitrum][screenshot.jpg]](screenshot.jpg)
+![image info](./screenshot.jpg)
 
 Nitrum is a small social network I chose to challenge my skills. In this social network, you have the ability to `post` and `story`, as well as `follow other people` and `chat` with them.
 
