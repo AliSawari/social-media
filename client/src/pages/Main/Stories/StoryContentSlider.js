@@ -60,8 +60,8 @@ const StoryContentSlider = ({ prevUser , nextUser, stories }) => {
 
     return (
         <>
-            <button onClick={handleClickNextStory} className='text-violet-500 absolute top-0 z-40 right-3 bottom-0 m-auto'>
-                <AiOutlineRight fontSize={25} />
+            <button onClick={handleClickNextStory} className='absolute top-0 z-40 right-8 bottom-0 m-auto'>
+                <AiOutlineRight fontSize={22} className="bg-violet-600 text-white rounded-full" />
             </button>
 
 
@@ -71,8 +71,8 @@ const StoryContentSlider = ({ prevUser , nextUser, stories }) => {
                 ))}
             </Slider>
 
-            <button onClick={handleClickPrevStory} className='text-violet-500 absolute top-0 z-40 left-3 bottom-0 m-auto'>
-                <AiOutlineLeft fontSize={25} />
+            <button onClick={handleClickPrevStory} className='absolute top-0 z-40 left-8 bottom-0 m-auto'>
+                <AiOutlineLeft fontSize={22} className="bg-violet-600 text-white rounded-full" />
             </button>
         </>
     )

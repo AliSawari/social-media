@@ -1,8 +1,7 @@
 const express = require("express");
 const { getInterestsList } = require("./interests.controller");
-const authentication = require('../../middlewares/auth');
 const router = express.Router();
 
-router.get("/list", authentication, getInterestsList);
+router.get("/list", getInterestsList);
 
 module.exports = router;
