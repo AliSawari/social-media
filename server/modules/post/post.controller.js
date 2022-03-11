@@ -126,11 +126,10 @@ const deletePost = async (req, res) => {
 
 const getExplorePosts = async (req, res) => {
   try {
-    const { id } = req.params;
+    const { id, skip } = req.params;
     const user = await User.findById(id);
-    const posts = await Post.find({ tags: { $in: user.interests } }).populate("user").sort("-timestamp");
+    const posts = await Post.find({ tags: { $in: user.interests } }).populate("user").skip(skip).limit(3).sort("-timestamp");
     return res.status(200).json(posts);
-    console.log(posts);
   } catch (error) {
     console.log(error);
     res.status(500).json({

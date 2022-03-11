@@ -7,6 +7,6 @@ router.post("/add", authentication, add);
 router.post("/like", authentication, likePost);
 router.post("/delete", authentication, deletePost);
 router.get("/following-posts/:id", authentication, getFollowingPosts);
-router.get("/explore/:id", authentication, getExplorePosts);
+router.get("/explore/:id/:skip", authentication, getExplorePosts);
 
 module.exports = router;
