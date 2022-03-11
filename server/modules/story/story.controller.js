@@ -72,7 +72,7 @@ const getUserStories = async (req, res) => {
     const { id } = req.params;
 
     const timestamp = moment.now();
-    const stories = await StoryModel.find({ user: id, expireTime: { $gt: timestamp } }).populate("user");
+    const stories = await StoryModel.find({ user: id, expireTime: { $gt: timestamp } }).populate("user").populate("views.user");
 
     const user = await UserModel.findById(id);
     return res.status(200).json({ stories, user });
@@ -86,4 +86,18 @@ const getUserStories = async (req, res) => {
 };
 
 
-module.exports = { add, getFollowingStories, getUserStories };
+const addViewStory = async (req, res) => {
+  try {
+    const { user, id } = req.params;
+    await StoryModel.updateOne({ _id: id }, { $push: { views: { user } } });
+    return res.status(200).json({ message: "story seen" });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      message: "internal server error",
+      error,
+    });
+  }
+};
+
+module.exports = { add, getFollowingStories, getUserStories, addViewStory };

@@ -35,7 +35,7 @@ const StoriesModal = ({ users }) => {
             setStories([]);
             setUser(null);
         }
-    }, [id]);
+    }, [id , ]);
 
     const handleNextUserStories = () => {
         if (users.length === 1) {

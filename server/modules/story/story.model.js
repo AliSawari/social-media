@@ -1,4 +1,3 @@
-const { Schema } = require("mongoose");
 const mongoose = require("../../database/connection");
 
 const StorySchema = new mongoose.Schema({
@@ -13,7 +12,7 @@ const StorySchema = new mongoose.Schema({
     required: true
   },
 
-  views: [{ user: { type: Schema.Types.ObjectId } }],
+  views: [{ user: { type: mongoose.Schema.Types.ObjectId, ref: "users", } }],
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "users"

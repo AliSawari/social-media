@@ -5,7 +5,7 @@ import Interests from "../Interests/Interests";
 const LeftSideBar = () => {
   return (
     <div className="w-1/6 relative">
-      <div className="flex w-72 flex-col h-full-vh bg-gray-100 fixed p-2">
+      <div className="flex w-80 flex-col h-full-vh bg-gray-100 fixed p-2">
         <Profile />
         <Navbar />
         <Interests />
