@@ -9,12 +9,15 @@ const ExploreList = () => {
     const [posts, setPosts] = useState([]);
     const [skip, setSkip] = useState(0);
     const [hasMore, setHasMore] = useState(true);
+    const [totalPostsLength, setTotalPostsLength] = useState(0);
     const { id } = useGetUserId();
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const { data: posts } = await httpClient.get(`posts/explore/${id}/0`);
+                const { data: { posts, total } } = await httpClient.get(`posts/explore/${id}/0`);
+                setSkip(skip => skip + 3);
                 setPosts(posts);
+                setTotalPostsLength(total);
             } catch (error) {
                 console.log(error);
             }
@@ -25,19 +28,17 @@ const ExploreList = () => {
 
     const fetchMoreData = async () => {
         try {
-            const { data: posts } = await httpClient.get(`posts/explore/${id}/${skip}`);
+            const { data: { posts } } = await httpClient.get(`posts/explore/${id}/${skip}`);
+            if (totalPostsLength <= skip + 3) {
+                setHasMore(false);
+            }
             setSkip(skip => skip + 3);
             setPosts(prevPosts => [...prevPosts, ...posts]);
-            setHasMore(false);
         } catch (error) {
             console.log(error);
         }
     }
     const renderPosts = () => {
-        if (posts === null) {
-            return <PostLoading />
-        }
-
         return posts.map(post => <PostItem key={post._id} {...post} />);
     }
     return (
@@ -48,7 +49,7 @@ const ExploreList = () => {
             <InfiniteScroll
                 dataLength={posts.length}
                 next={fetchMoreData}
-                hasMore={true}
+                hasMore={hasMore}
                 loader={<PostLoading />}
                 style={{ overflowX: "hidden" }}
             >

@@ -128,8 +128,9 @@ const getExplorePosts = async (req, res) => {
   try {
     const { id, skip } = req.params;
     const user = await User.findById(id);
+    const total = await Post.find({ tags: { $in: user.interests } }).count();
     const posts = await Post.find({ tags: { $in: user.interests } }).populate("user").skip(skip).limit(3).sort("-timestamp");
-    return res.status(200).json(posts);
+    return res.status(200).json({ posts, total });
   } catch (error) {
     console.log(error);
     res.status(500).json({
